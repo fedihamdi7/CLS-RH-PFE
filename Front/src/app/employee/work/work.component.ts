@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 import {MatTableDataSource} from '@angular/material/table';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -39,21 +40,33 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./work.component.css']
 })
 export class WorkComponent implements OnInit {
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  constructor() { }
+
+  constructor(private snackbar: MatSnackBar) { }
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
   }
 
   ngOnInit(): void {
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   clicked(ele:number){
-    alert("clicked"+ele);
+
+    this.snackbar.open('You clicked on '+ele, 'Close',{
+      duration:2000,
+      verticalPosition:'top',
+      panelClass: 'snackbar'
+    });
   }
 }

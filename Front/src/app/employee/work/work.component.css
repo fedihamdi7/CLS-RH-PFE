@@ -9,3 +9,17 @@ mat-form-field{
   width: 80%;
   margin-left: 8.3vw;
 }
+
+::ng-deep snack-bar-container.snackbar{
+  /* background color */
+  background: #24940e94;
+}
+::ng-deep simple-snack-bar span{
+  /* message color  */
+  color: rgb(231, 231, 231);
+
+}
+::ng-deep .mat-simple-snackbar .mat-button-wrapper{
+  /* close text color  */
+  color: rgb(88, 88, 88);
+}
