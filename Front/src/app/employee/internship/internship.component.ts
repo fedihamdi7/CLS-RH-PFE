@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PDFProgressData } from 'ng2-pdf-viewer';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 declare var require: any

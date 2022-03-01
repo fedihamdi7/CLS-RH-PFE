@@ -13,6 +13,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { WorkComponent } from './employee/work/work.component';
 import { InternshipComponent } from './employee/internship/internship.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     EmployeeComponent,
     SidenavComponent,
     WorkComponent,
-    InternshipComponent
+    InternshipComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

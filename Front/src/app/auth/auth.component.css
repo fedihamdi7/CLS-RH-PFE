@@ -1,0 +1,12 @@
+.form{
+  width: 100%;
+  max-width: 500px;
+  margin: 20vh auto;
+  background-color: rgba(61, 60, 60, 0.123);
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5%;
+}
