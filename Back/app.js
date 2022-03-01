@@ -8,7 +8,7 @@ const employeeRouter = require('./routes/employee');
 const pdfRouter = require('./routes/pdf')
 
 //connecting to database
-mongoose.connect('mongodb://localhost:27017/CLS-RH', {
+mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
