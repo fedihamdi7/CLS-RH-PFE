@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+var passport = require('passport')
 
 const employeeRouter = require('./routes/employee');
 const pdfRouter = require('./routes/pdf')
@@ -20,7 +21,9 @@ app.use(bodyParser.json());
 
 // CORS Middleware
 app.use(cors());
-
+app.use(passport.initialize());
+//app.use(passport.session());
+require('./config/passport')(passport)
 app.use('/api/employee', employeeRouter);
 app.use('/api/pdf', pdfRouter);
 
