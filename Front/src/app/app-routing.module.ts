@@ -10,7 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {  path: '',component: AuthComponent},
   {path: 'employee',redirectTo:'employee/work',pathMatch:'full'},
-  {path: 'employee', component: EmployeeComponent , children:[
+  {path: 'employee', component: EmployeeComponent,canActivate: [AuthGuard] , children:[
     {path: 'work', component: WorkComponent},
     {path: 'internship', component: InternshipComponent}
   ]},

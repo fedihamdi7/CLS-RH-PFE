@@ -17,10 +17,12 @@ export class AuthService {
   constructor( private httpClient : HttpClient , private router : Router , private snackbar: MatSnackBar) { }
 
   login(user: { email: string, password: string }) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type','application/json');
-    this.httpClient.post<{status: number,token: any,user: { type: any; }}>('http://localhost:3000/api/auth/login',user,{headers:headers}).subscribe(res => {
-      if(res.status == 200) {
+
+
+    this.httpClient.post<{success : boolean,status: number,token: any,user: { type: any; }}>('http://localhost:3000/api/employee/login',user).subscribe(res => {
+
+
+      if(res.success == true) {
         this.storeUserData(res.token,res.user);
         if(res.user.type == 'admin') {
 
