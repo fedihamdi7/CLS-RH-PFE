@@ -1,1 +1,39 @@
-<p>internship works!</p>
+
+<div class="main">
+
+<div class="form">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Input</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" type="submit">Submit</button>
+
+</form>
+</div>
+
+
+<div class="preview">
+
+    <div  *ngIf="isLoading;else pdfTemplate" class="spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <ng-template #pdfTemplate>
+    <pdf-viewer [src]="pdf"
+                  [render-text]="false"
+                  [original-size]="false"
+                  [show-borders]="true"
+                  [zoom] = "1"
+                  style="width: 700px; height: 890px"
+      ></pdf-viewer>
+    </ng-template>
+      <button mat-raised-button color="primary" (click)="download()">Download</button>
+
+
+</div>
+
+</div>
+
+

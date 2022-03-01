@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 
 const employeeRouter = require('./routes/employee');
-
+const pdfRouter = require('./routes/pdf')
 
 //connecting to database
 mongoose.connect('mongodb://localhost:27017/CLS-RH', {
@@ -22,4 +22,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/employee', employeeRouter);
+app.use('/api/pdf', pdfRouter);
+
 module.exports = app;

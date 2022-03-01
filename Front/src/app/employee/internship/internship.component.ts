@@ -1,5 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PDFProgressData } from 'ng2-pdf-viewer';
 
+
+declare var require: any
+const FileSaver = require('file-saver');
 @Component({
   selector: 'app-internship',
   templateUrl: './internship.component.html',
@@ -7,9 +13,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InternshipComponent implements OnInit {
 
-  constructor() { }
+  isLoading : boolean = true;
+  pdf : string = "../../../assets/pdf/attestation.pdf";
+  form !: FormGroup;
+  constructor( private http:HttpClient) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    },500);
+
+    this.form = new FormGroup({
+      name : new FormControl(null)
+    });
   }
+
+  download(){
+    FileSaver.saveAs(this.pdf, 'attestation.pdf');
+  }
+
+  onSubmit(){
+    this.http.post('http://localhost:3000/api/pdf',{
+      name : this.form.get('name')?.value,
+      cin : "15615531"
+    }).subscribe(res => {
+      console.log(res);
+    });
+  }
+
 
 }

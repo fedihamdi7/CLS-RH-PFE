@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-
+import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 // Angular Material Modules
 import { MaterialModule } from './material/material.module';
 
@@ -11,6 +12,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { WorkComponent } from './employee/work/work.component';
 import { InternshipComponent } from './employee/internship/internship.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +26,10 @@ import { InternshipComponent } from './employee/internship/internship.component'
   imports: [
     BrowserModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    PdfViewerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
