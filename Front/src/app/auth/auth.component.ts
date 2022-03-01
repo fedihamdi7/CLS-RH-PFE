@@ -23,8 +23,6 @@ export class AuthComponent implements OnInit {
 
 
   onSubmit(){
-    // this.authService.login(this.form.value);
-    console.log(this.form.value);
-
+    this.authService.login(this.form.value);
   }
 }
