@@ -129,6 +129,12 @@ router.post('/addRequest', passport.authenticate('jwt', { session: false }),(req
 })
 router.get('/getDocs',docsController.getDocs);
 
-
+router.get('/getRequest', passport.authenticate('jwt', { session: false }), (req, res)=>{
+    user = req.user;
+    Request.find({from:user._id},(err,request)=>{
+        if (err) return res.status(401).json({msg:" you dont have any request"})
+        else res.status(200).json({request,user})
+    })
+})
 module.exports = router;
 
