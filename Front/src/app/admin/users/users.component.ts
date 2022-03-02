@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 
 
 export interface userTable{
+  n:number;
   first_name: string;
   last_name: string;
   job_title: string;
@@ -24,7 +25,7 @@ const ELEMENT_DATA: userTable[] = [];
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['first_name', 'last_name', 'job_title', 'email'];
+  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
@@ -65,8 +66,9 @@ export class UsersComponent implements OnInit {
     this.usersSub = this.usersService.usersUpdateListener().subscribe((users : any) =>{
       console.log(users);
       //for each employee map the data and push in the dataSource
-      this.dataSource.data = users.map((user:any) => {
+      this.dataSource.data = users.map((user:any, index:number) => {
         return {
+          n : index + 1,
           first_name: user.firstName,
           last_name: user.lastName,
           job_title: user.job_title,
