@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
 
 
@@ -14,10 +15,7 @@ export interface userTable{
   email: string;
 }
 
-const ELEMENT_DATA: userTable[] = [
-  {first_name: 'Fedi', last_name: 'Hamdi', job_title: 'Dev', email: 'fedi@gmail'},
-  {first_name: 'amine', last_name: 'ben othmen', job_title: 'ceo', email: 'amine@gmail'},
-];
+const ELEMENT_DATA: userTable[] = [];
 
 @Component({
   selector: 'app-users',
@@ -30,7 +28,7 @@ export class UsersComponent implements OnInit {
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
-
+  private usersSub :Subscription | undefined;
   constructor( private usersService : UsersService ,  private snackBar : MatSnackBar) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,6 +41,8 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsers();
+
     this.form = new FormGroup({
       firstName : new FormControl(null, [Validators.required]),
       lastName : new FormControl(null, [Validators.required]),
@@ -58,13 +58,32 @@ export class UsersComponent implements OnInit {
     });
 
   }
+
+  getUsers(){
+    this.usersService.getUsers();
+    //get users
+    this.usersSub = this.usersService.usersUpdateListener().subscribe((users : any) =>{
+      console.log(users);
+      //for each employee map the data and push in the dataSource
+      this.dataSource.data = users.map((user:any) => {
+        return {
+          first_name: user.firstName,
+          last_name: user.lastName,
+          job_title: user.job_title,
+          email: user.email
+        }
+      });
+
+    });
+  }
   onSubmit(){
     this.usersService.addUser(this.form.value).subscribe((res: any ) =>{
       if (res.success == true){
         this.snackBar.open(res.message, 'close', {
           duration: 2000,
         });
-    this.showAddForm = false;
+        this.getUsers();
+        this.showAddForm = false;
 
         this.form.reset();
       }
