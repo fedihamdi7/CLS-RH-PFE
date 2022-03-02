@@ -42,7 +42,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -83,8 +82,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule,
-    BrowserAnimationsModule
+    MatTableModule
   ],
   exports: [
     MatAutocompleteModule,

@@ -5,21 +5,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 // Angular Material Modules
 import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Components
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { WorkComponent } from './employee/work/work.component';
 import { InternshipComponent } from './employee/internship/internship.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
     SidenavComponent,
     WorkComponent,
     InternshipComponent,
@@ -31,7 +31,9 @@ import { AuthComponent } from './auth/auth.component';
     AppRoutingModule,
     HttpClientModule,
     PdfViewerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
