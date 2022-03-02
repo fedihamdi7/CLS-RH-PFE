@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const RequestSchema = new mongoose.Schema({
-    from: {type : Schema.Types.ObjectId, required: false},
+    from: {type : Schema.Types.ObjectId, required: false,ref:"User"},
     sent_date: {type : Date, required: false,default:Date.now()},
     done_date: {type : String, required: false },
     type: {type : String,enum: ["work", "internship"], required: true},

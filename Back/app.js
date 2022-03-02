@@ -6,6 +6,7 @@ const app = express();
 var passport = require('passport')
 
 const employeeRouter = require('./routes/employee');
+const requestRouter = require('./routes/Request');
 const pdfRouter = require('./routes/pdf')
 
 //connecting to database
@@ -26,5 +27,6 @@ app.use(passport.initialize());
 require('./config/passport')(passport)
 app.use('/api/employee', employeeRouter);
 app.use('/api/pdf', pdfRouter);
+app.use('/api/request',requestRouter);
 
 module.exports = app;
