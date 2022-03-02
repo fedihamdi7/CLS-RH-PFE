@@ -136,5 +136,13 @@ router.get('/getRequest', passport.authenticate('jwt', { session: false }), (req
         else res.status(200).json({request,user})
     })
 })
+//Get  all employees
+router.get('/getEmployees',(req, res, next)=>{
+    User.find({type: 'employee'}, (err, employee)=>{
+        if (err) return res.status(401).json({msg:'no employees yet'})
+        else return res.status(200).json({employee})
+    })
+});
+
 module.exports = router;
 
