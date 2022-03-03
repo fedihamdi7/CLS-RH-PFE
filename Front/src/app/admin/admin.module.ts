@@ -7,6 +7,7 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
 import { RequestsComponent } from './requests/requests.component';
 import { UsersComponent } from './users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ValidateReqComponent } from './requests/validate-req/validate-req.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavAdminComponent,
     RequestsComponent,
     UsersComponent,
+    ValidateReqComponent,
 
   ],
   imports: [

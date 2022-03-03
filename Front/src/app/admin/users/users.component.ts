@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ const ELEMENT_DATA: userTable[] = [];
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
@@ -64,7 +64,6 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers();
     //get users
     this.usersSub = this.usersService.usersUpdateListener().subscribe((users : any) =>{
-      console.log(users);
       //for each employee map the data and push in the dataSource
       this.dataSource.data = users.map((user:any, index:number) => {
         return {
@@ -108,5 +107,11 @@ export class UsersComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+  ngOnDestroy(): void {
+    this.usersSub!.unsubscribe();
+
   }
 }
