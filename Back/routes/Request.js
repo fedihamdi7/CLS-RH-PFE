@@ -1,13 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const docsController = require('../controllers/docs');
-const multer = require('multer');
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const User = require('../models/users');
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
-const ONE_WEEK = 604800; //Token validtity in seconds
 const Request = require('../models/request');
 // Get all requests
 router.get('/getAllRequests',(req, res) =>{

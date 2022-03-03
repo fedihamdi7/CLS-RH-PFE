@@ -8,6 +8,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { UsersComponent } from './users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidateReqComponent } from './requests/validate-req/validate-req.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ValidateReqComponent } from './requests/validate-req/validate-req.compo
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PdfViewerModule
   ]
 })
 export class AdminModule { }

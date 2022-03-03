@@ -1,1 +1,83 @@
-<p> {{id}} </p>
+
+<div class="main">
+
+  <div class="form">
+    <form [formGroup]="form" (submit)="onSubmit()" *ngIf="form">
+      <div class="row">
+        <mat-form-field appearance="fill" class="col">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="First Name...">
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="col">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Last Name...">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="fill" class="col" style="width: 100%;">
+        <mat-label>national ID card</mat-label>
+        <input matInput formControlName="cin" type="number" min="0" placeholder="id...">
+      </mat-form-field>
+
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill" style="width:100%;">
+          <mat-label>Choose a date</mat-label>
+          <input matInput formControlName="date_in" [matDatepicker]="pickerIn">
+          <mat-datepicker-toggle matSuffix [for]="pickerIn"></mat-datepicker-toggle>
+          <mat-datepicker #pickerIn></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill" style="width:100%;">
+          <mat-label>Choose a date</mat-label>
+          <input matInput formControlName="date_out" [matDatepicker]="pickerOut">
+          <mat-datepicker-toggle matSuffix [for]="pickerOut"></mat-datepicker-toggle>
+          <mat-datepicker #pickerOut></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="fill" class="col">
+        <mat-label>Job Title</mat-label>
+        <input formControlName="job_title" matInput placeholder="Job Title...">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="col">
+        <mat-label>Department</mat-label>
+        <input  formControlName="department" matInput placeholder="Department...">
+      </mat-form-field>
+    </div>
+
+    <button class="submit" mat-raised-button [color]="'primary'" type="submit">Validate</button>
+</form>
+  </div>
+
+
+  <div class="preview">
+
+      <div  *ngIf="isLoading;else pdfTemplate" class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <ng-template #pdfTemplate>
+      <pdf-viewer [src]="'../../../../../../Back/assets/certifications/'+pdf"
+                    [render-text]="false"
+                    [original-size]="false"
+                    [show-borders]="true"
+                    [zoom] = "1"
+                    style="width: 700px; height: 890px"
+        ></pdf-viewer>
+      </ng-template>
+        <!-- <button mat-raised-button color="primary" (click)="download()">Download</button> -->
+
+
+  </div>
+
+  </div>
+
+
