@@ -42,7 +42,7 @@ router.post('',async (req,res)=> {
     firstFileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
     //today date 
     //format today dat YYYY-MM-DD
-    var todayFormat = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+    var todayFormat = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
     if (req.body.file != undefined) {
         fileName = saveToPath+req.body.file;
     }
@@ -76,7 +76,8 @@ router.post('',async (req,res)=> {
           indent: 50,
           columns: 1,
           height: 700,
-          ellipsis: true
+          ellipsis: true,
+          lineGap : 10
         }).moveDown()
         .moveDown()
         .moveDown()
