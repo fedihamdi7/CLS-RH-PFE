@@ -23,3 +23,33 @@ mat-form-field{
   /* close text color  */
   color: rgb(88, 88, 88);
 }
+.add-btn{
+  position: absolute;
+  right: 11%;
+  top: 8%;
+}
+
+.model-bg{
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  background-color: #00000034;
+  width: 100vw;
+  height: 100vh;
+}
+.quest{
+  padding: 2% 3%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #00000029;
+  top: 20%;
+  left: 25%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.904);
+}
+.buttons{
+  display: flex;
+  gap: 2%;
+  justify-content: flex-end;
+  margin-right: -8%;
+
+}

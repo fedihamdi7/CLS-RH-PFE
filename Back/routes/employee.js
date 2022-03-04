@@ -11,6 +11,9 @@ const passport = require('passport');
 const ONE_WEEK = 604800; //Token validtity in seconds
 const Request = require('../models/request');
 const { request } = require('../app');
+const moment = require('moment');
+
+
 router.post('/login', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -51,7 +54,7 @@ router.post('/login', (req, res, next) => {
 
             //Generating the token
             const token = jwt.sign({ user }, process.env.SECRET, { expiresIn: ONE_WEEK });
-            console.log(token)
+            // console.log(token)
                 //console.log( jwt.decode(token))
                 //User Is Valid
                 //This object is just used to remove the password from the returned fields
@@ -76,6 +79,7 @@ router.post('/login', (req, res, next) => {
 
 //Registration
 router.post('/register', (req, res, next) => {
+
     let newUser = new User({
         lastName: req.body.lastName,
         firstName: req.body.firstName,
@@ -83,8 +87,8 @@ router.post('/register', (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         cin:req.body.cin,
-        date_in: req.body.date_in,
-        date_out: req.body.date_out||null,
+        date_in: moment(req.body.date_in).format('YYYY-MM-DD[T00:00:00.000Z]'),
+        date_out:  moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]') ? req.body.date_out : "Present",
         job_title:req.body.job_title,
         department: req.body.department,
     });
@@ -133,7 +137,7 @@ router.get('/getRequest', passport.authenticate('jwt', { session: false }), (req
     user = req.user;
     Request.find({from:user._id},(err,request)=>{
         if (err) return res.status(401).json({msg:" you dont have any request"})
-        else res.status(200).json({request,user})
+        else res.status(200).json({request})
     })
 })
 //Get  all employees

@@ -21,16 +21,16 @@
   <!-- last_name Column -->
   <ng-container matColumnDef="sent_date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Sent Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.sent_date | date :'mediumDate'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.sent_date | date:'medium'}} </td>
   </ng-container>
 
   <!-- job_title Column -->
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef > Status </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
     <td mat-cell *matCellDef="let element">
-      <button *ngIf="element.status == 'in progress'" style="width: 32%; cursor: auto;" mat-raised-button color="accent">{{element.status}}</button>
-      <button *ngIf="element.status == 'done'" style="width: 32%; background-color: green; cursor: auto;" mat-raised-button color="primary">{{element.status}}</button>
-      <button *ngIf="element.status == 'declined'" style="width: 32%; background-color: red; cursor: auto;" mat-raised-button color="primary">{{element.status}}</button>
+      <button *ngIf="element.status == 'in progress'" style="width: 100px; cursor: auto;" mat-raised-button color="accent">{{element.status}}</button>
+      <button *ngIf="element.status == 'done'" style="width: 100px; background-color: green; cursor: auto;" mat-raised-button color="primary">{{element.status}}</button>
+      <button *ngIf="element.status == 'declined'" style="width: 100px; background-color: red; cursor: auto;" mat-raised-button color="primary">{{element.status}}</button>
     </td>
   </ng-container>
 

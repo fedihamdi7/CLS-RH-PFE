@@ -14,6 +14,7 @@ export interface userTable{
   last_name: string;
   job_title: string;
   email: string;
+  date_in: Date;
 }
 
 const ELEMENT_DATA: userTable[] = [];
@@ -25,7 +26,7 @@ const ELEMENT_DATA: userTable[] = [];
 })
 export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email'];
+  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
@@ -71,7 +72,8 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
           first_name: user.firstName,
           last_name: user.lastName,
           job_title: user.job_title,
-          email: user.email
+          email: user.email,
+          date_in : user.date_in
         }
       });
 

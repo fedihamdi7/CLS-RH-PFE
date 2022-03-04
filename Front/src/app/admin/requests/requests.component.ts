@@ -44,6 +44,8 @@ export class RequestsComponent implements OnInit, OnDestroy,AfterViewInit {
     this.requestsService.getRequests();
     //get reqs
     this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : any) =>{
+      // console.log(reqs);
+
       //for each employee map the data and push in the dataSource
       this.dataSource.data = reqs.map((reqs:any, index:number) => {
         return {
@@ -52,7 +54,8 @@ export class RequestsComponent implements OnInit, OnDestroy,AfterViewInit {
           from : reqs.from.lastName + " " + reqs.from.firstName,
           sent_date : reqs.sent_date,
           status : reqs.status,
-          type : reqs.type
+          type : reqs.type,
+          file : reqs.file
         }
       });
       console.log(this.dataSource.data);

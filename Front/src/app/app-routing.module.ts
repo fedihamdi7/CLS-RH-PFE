@@ -9,7 +9,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 const routes: Routes = [
   {  path: '',component: AuthComponent},
   {path: 'employee',redirectTo:'employee/work',pathMatch:'full'},
-  {path: 'employee', component: SidenavComponent,canActivate: [AuthGuard] , children:[
+  {path: 'employee', component: SidenavComponent , children:[
     {path: 'work', component: WorkComponent},
     {path: 'internship', component: InternshipComponent}
   ]},

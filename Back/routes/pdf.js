@@ -4,9 +4,13 @@ const router = express.Router();
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
+const Request = require('../models/request');
+const User = require('../models/users');
+const mongoose = require('mongoose');
 
 router.post('',async (req,res)=> {
-
+    // console.log(req.body);
     firstName = req.body.firstName || '##First Name##';
     lastName = req.body.lastName || '##Last Name##';
     cin = req.body.cin || '##CIN##';
@@ -15,19 +19,44 @@ router.post('',async (req,res)=> {
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
 
-  
-    //today date 
+    User.findOneAndUpdate({_id: req.body.user_id}, {
+        lastName: lastName,
+        firstName: firstName,
+        cin: cin,
+        date_in: moment(req.body.date_in).format('YYYY-MM-DD[T00:00:00.000Z]'),
+        date_out: moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]') ? req.body.date_out : "Present",
+        job_title: job_title,
+        department: department
+    }, {new: true}, function(err, doc){});
+
+
+    indate = moment(date_in).format('DD/MM/YYYY');
+    outdate = moment(date_out).format('DD/MM/YYYY');
+    // get first 10 caractere from date_in 
+    date_in = indate;
+    date_out = outdate;
+    //get unique number from date 
     var today = new Date();
+    let unique_number = today.getTime();
+    saveToPath = "../../Front/src/assets/pdf/";
+    firstFileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
+    //today date 
     //format today dat YYYY-MM-DD
     var todayFormat = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-
-    //get unique number from date 
-    let unique_number = today.getTime();
-
-    
+    if (req.body.file != undefined) {
+        fileName = saveToPath+req.body.file;
+    }
+    else{
+      fileName = saveToPath+firstFileName;
+      //add field to request document called "File" where from = req.body.id
+      let query = {from:req.body.id};
+      let update = {$set:{file:firstFileName}};
+      let options = {new:true};
+      await Request.findOneAndUpdate(query,update,options);
+      }
+  
 
     logoPath = path.join(__dirname,'../assets/cls.jfif');
-    fileName = '../assets/certifications/attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
     try{
       var doc = new PDFDocument();
       var pdfFile = path.join(__dirname, fileName);

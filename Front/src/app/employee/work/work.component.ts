@@ -4,41 +4,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: number;
+import { HttpClient } from '@angular/common/http';
+export interface requestTable {
+  n : number
+  sent_date: string;
+  status: string;
 }
 
-const date1 =  Date.parse('2022-03-01T22:50:22.161+00:00');
-const date2 = Date.parse('2010-05-15');
-const date3 = Date.parse('2021-01-30');
-const date4 = Date.parse('1998-11-18');
 
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: date1},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: date2},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: date3},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: date4},
-  // {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  // {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  // {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  // {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  // {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  // {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  // {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  // {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  // {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  // {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  // {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  // {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  // {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+const ELEMENT_DATA: requestTable[] = [];
 
 @Component({
   selector: 'app-work',
@@ -46,11 +20,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./work.component.css']
 })
 export class WorkComponent implements OnInit {
+   //read id_token from local storage
+    id_token = localStorage.getItem('id_token');
+   // put token in header
+    headers = {
+     'Authorization': 'jwt ' + this.id_token
+   };
+  promptDisplay : boolean = false;
+  displayedColumns: string[] = ['n', 'sent_date', 'status'];
+  dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
-  constructor(private snackbar: MatSnackBar) { }
+  constructor(private snackbar: MatSnackBar , private http: HttpClient) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -61,18 +41,63 @@ export class WorkComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getRequests();
+  }
 
+  getRequests(){
+    this.http.get('http://localhost:3000/api/employee/getRequest',{headers:this.headers}).subscribe(
+      (res: any) => {
+        console.log(res.request);
+        this.dataSource.data = res.request.map((res:any,index:number) =>{
+          return {
+            n: index + 1,
+            sent_date: res.sent_date,
+            status: res.status
+          }
+        })
+      }
+    );
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  clicked(ele:number){
 
-    this.snackbar.open('You clicked on '+ele, 'Close',{
-      duration:2000,
-      verticalPosition:'top',
-      panelClass: 'snackbar'
-    });
+
+  sendRequest(){
+
+    this.http.post('http://localhost:3000/api/employee/addRequest',{},{headers: this.headers}).subscribe(
+      (res) => {
+        // console.log(res);
+        this.snackbar.open('Request sent successfully', 'close', {
+          duration: 2000,
+        });
+        this.getRequests();
+        this.promptDisplay = false;
+        //get user from local storage
+        const userLocal = JSON.parse(localStorage.getItem('user'));
+        this.http.post('http://localhost:3000/api/pdf',{
+          id: userLocal._id,
+          firstName : userLocal.firstName,
+          lastName : userLocal.lastName,
+          cin : userLocal.cin,
+          date_in : userLocal.date_in,
+          date_out : userLocal.date_out,
+          job_title : userLocal.job_title,
+          department : userLocal.department,
+        }).subscribe(
+          (res) => {
+            console.log(res);
+          }
+        );
+      }
+    );
+  }
+
+  showPrompt(){
+    this.promptDisplay = true;
+  }
+  onPromptClose(){
+    this.promptDisplay = false;
   }
 }
