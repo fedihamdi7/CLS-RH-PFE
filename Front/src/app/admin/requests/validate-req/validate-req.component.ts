@@ -33,7 +33,7 @@ export class ValidateReqComponent implements OnInit {
 
     this.reqService.getRequest(this.id);
     this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : any) =>{
-      console.log(req[0]);
+      // console.log(req[0]);
       this.pdf =this.path + req[0].file;
       this.file = req[0].file;
       this.isLoading = false;
@@ -41,7 +41,7 @@ export class ValidateReqComponent implements OnInit {
       this.form = new FormGroup({
         firstName : new FormControl(req[0].from.firstName, [Validators.required]),
         lastName : new FormControl(req[0].from.lastName, [Validators.required]),
-        cin : new FormControl(req[0].from.cin, [Validators.required , Validators.minLength(8), Validators.maxLength(8)]),
+        cin : new FormControl(req[0].from.cin, [Validators.required, Validators.pattern('[0-9]{8}')]),
         date_in: new FormControl(req[0].from.date_in, [Validators.required]),
         date_out: new FormControl(req[0].from.date_out),
         job_title : new FormControl(req[0].from.job_title, [Validators.required]),

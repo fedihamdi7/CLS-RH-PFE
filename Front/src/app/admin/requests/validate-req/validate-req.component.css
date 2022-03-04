@@ -27,3 +27,6 @@ form{
 .col{
  width: 50%;
 }
+mat-error , ng-invalid{
+  color: rgb(117, 24, 8);
+}
