@@ -2,15 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const docsController = require('../controllers/docs');
-const multer = require('multer');
-const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
-const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const ONE_WEEK = 604800; //Token validtity in seconds
 const Request = require('../models/request');
-const { request } = require('../app');
 const moment = require('moment');
 
 
@@ -127,6 +122,7 @@ router.post('/addRequest', passport.authenticate('jwt', { session: false }),(req
     query.from=user._id;
     query.done_date=null;
     query.type=type;
+    query.sent_date = Date.now();
     query.save();
     res.json({ success: true, message: 'profile ', query})
 
