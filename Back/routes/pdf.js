@@ -10,12 +10,18 @@ const User = require('../models/users');
 const mongoose = require('mongoose');
 
 router.post('',async (req,res)=> {
-    // console.log(req.body);
+    
+    if(req.body.date_out == null){
+        reqdate_out = "Present";
+    }else{
+      reqdate_out = moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]')
+    }
+
     firstName = req.body.firstName || '##First Name##';
     lastName = req.body.lastName || '##Last Name##';
     cin = req.body.cin || '##CIN##';
     date_in = req.body.date_in || '##Date In##';
-    date_out = req.body.date_out || '##Date Out##';
+    date_out = reqdate_out;
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
 
@@ -24,14 +30,14 @@ router.post('',async (req,res)=> {
         firstName: firstName,
         cin: cin,
         date_in: moment(req.body.date_in).format('YYYY-MM-DD[T00:00:00.000Z]'),
-        date_out: moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]') ? req.body.date_out : "Present",
+        date_out:  reqdate_out,
         job_title: job_title,
         department: department
     }, {new: true}, function(err, doc){});
 
 
     indate = moment(date_in).format('DD/MM/YYYY');
-    outdate = moment(date_out).format('DD/MM/YYYY');
+    outdate = moment(reqdate_out).format('DD/MM/YYYY');
     // get first 10 caractere from date_in 
     date_in = indate;
     date_out = outdate;
