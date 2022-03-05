@@ -12,6 +12,7 @@
 }
 .form{
   width: 46vw;
+  position: relative;
 }
 
 form{
@@ -29,4 +30,10 @@ form{
 }
 mat-error , ng-invalid{
   color: rgb(117, 24, 8);
+}
+.submit{
+  width: 12%;
+  position: absolute;
+  right: 0;
+  top: 37%;
 }

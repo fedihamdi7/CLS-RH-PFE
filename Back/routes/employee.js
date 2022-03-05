@@ -7,6 +7,7 @@ const User = require('../models/users');
 const passport = require('passport');
 const Request = require('../models/request');
 const moment = require('moment');
+const PDFEmployee = require('../pdf/employee');
 
 
 router.post('/login', (req, res, next) => {
@@ -115,7 +116,7 @@ router.post('/register', (req, res, next) => {
 
 });
 
-router.post('/addRequest', passport.authenticate('jwt', { session: false }),(req, res, next)=>{
+router.post('/addRequest', passport.authenticate('jwt', { session: false }),async (req, res, next)=>{
     user = req.user;
     let type = req.body.type || 'work';
     query = new Request();
@@ -123,6 +124,11 @@ router.post('/addRequest', passport.authenticate('jwt', { session: false }),(req
     query.done_date=null;
     query.type=type;
     query.sent_date = Date.now();
+    var today = new Date();
+    let unique_number = today.getTime();
+    fileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
+    await PDFEmployee.create(req,fileName);
+    query.file=fileName;
     query.save();
     res.json({ success: true, message: 'profile ', query})
 

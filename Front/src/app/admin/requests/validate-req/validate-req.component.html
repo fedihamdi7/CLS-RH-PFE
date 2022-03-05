@@ -56,7 +56,8 @@
       </mat-form-field>
     </div>
 
-    <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">Validate</button>
+    <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">Preview</button>
+    <button mat-raised-button [color]="'primary'" type="button" (click)="validate()" [disabled]="!form.valid">Validate</button>
 </form>
   </div>
 

@@ -16,7 +16,6 @@ router.post('',async (req,res)=> {
     }else{
       reqdate_out = moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]')
     }
-
     firstName = req.body.firstName || '##First Name##';
     lastName = req.body.lastName || '##Last Name##';
     cin = req.body.cin || '##CIN##';
@@ -25,6 +24,7 @@ router.post('',async (req,res)=> {
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
 
+    if (req.body.sender == "admin"){
     User.findOneAndUpdate({_id: req.body.user_id}, {
         lastName: lastName,
         firstName: firstName,
@@ -34,7 +34,7 @@ router.post('',async (req,res)=> {
         job_title: job_title,
         department: department
     }, {new: true}, function(err, doc){});
-
+    }
 
     indate = moment(date_in).format('DD/MM/YYYY');
     outdate = moment(reqdate_out).format('DD/MM/YYYY');
@@ -49,10 +49,8 @@ router.post('',async (req,res)=> {
     //today date 
     //format today dat YYYY-MM-DD
     var todayFormat = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-    if (req.body.file != undefined) {
-        fileName = saveToPath+req.body.file;
-    }
-    else{
+    
+    if (req.body.sender == "admin"){
       fileName = saveToPath+firstFileName;
       //add field to request document called "File" where from = req.body.id
       let query = {from:req.body.id};

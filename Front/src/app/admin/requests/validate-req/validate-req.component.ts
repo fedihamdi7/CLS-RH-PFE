@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
@@ -26,7 +27,7 @@ export class ValidateReqComponent implements OnInit {
   pdf : string = null;
   path : string = "../../../../assets/pdf/";
   file : string = null;
-  constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient) { }
+  constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -53,7 +54,7 @@ export class ValidateReqComponent implements OnInit {
   getPDF(){
     //get user_id from local storage and parse it
     let user_id = JSON.parse(localStorage.getItem('user'))._id;
-    this.http.post('http://localhost:3000/api/pdf',{
+    this.http.post('http://localhost:3000/api/request/preview',{
       id : this.id,
       firstName : this.form.get('firstName')?.value,
       lastName : this.form.get('lastName')?.value,
@@ -66,6 +67,17 @@ export class ValidateReqComponent implements OnInit {
       user_id : user_id
     }).subscribe(res => {
 
+    });
+  }
+
+  validate(){
+    console.log(this.id);
+    this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
+      status : "done"
+    }).subscribe(res => {
+      this.snackbar.open("Request updated", "Close", {
+        duration: 3000
+      });
     });
   }
 

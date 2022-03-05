@@ -11,7 +11,8 @@ export interface requestTable {
   status: string;
 }
 
-
+declare var require: any
+const FileSaver = require('file-saver');
 const ELEMENT_DATA: requestTable[] = [];
 
 @Component({
@@ -27,7 +28,7 @@ export class WorkComponent implements OnInit {
      'Authorization': 'jwt ' + this.id_token
    };
   promptDisplay : boolean = false;
-  displayedColumns: string[] = ['n', 'sent_date', 'status'];
+  displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
   dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
 
   constructor(private snackbar: MatSnackBar , private http: HttpClient) { }
@@ -47,12 +48,13 @@ export class WorkComponent implements OnInit {
   getRequests(){
     this.http.get('http://localhost:3000/api/employee/getRequest',{headers:this.headers}).subscribe(
       (res: any) => {
-        console.log(res.request);
+        // console.log(res.request);
         this.dataSource.data = res.request.map((res:any,index:number) =>{
           return {
             n: index + 1,
             sent_date: res.sent_date,
-            status: res.status
+            status: res.status,
+            file : res.file
           }
         })
       }
@@ -66,30 +68,23 @@ export class WorkComponent implements OnInit {
 
   sendRequest(){
 
-    this.http.post('http://localhost:3000/api/employee/addRequest',{},{headers: this.headers}).subscribe(
+    const userLocal = JSON.parse(localStorage.getItem('user'));
+    this.http.post('http://localhost:3000/api/employee/addRequest',{
+        id: userLocal._id,
+        firstName : userLocal.firstName,
+        lastName : userLocal.lastName,
+        cin : userLocal.cin,
+        date_in : userLocal.date_in,
+        date_out : userLocal.date_out,
+        job_title : userLocal.job_title,
+        department : userLocal.department
+    },{headers: this.headers}).subscribe(
       (res) => {
-        // console.log(res);
         this.snackbar.open('Request sent successfully', 'close', {
           duration: 2000,
         });
         this.getRequests();
         this.promptDisplay = false;
-        //get user from local storage
-        const userLocal = JSON.parse(localStorage.getItem('user'));
-        this.http.post('http://localhost:3000/api/pdf',{
-          id: userLocal._id,
-          firstName : userLocal.firstName,
-          lastName : userLocal.lastName,
-          cin : userLocal.cin,
-          date_in : userLocal.date_in,
-          date_out : userLocal.date_out,
-          job_title : userLocal.job_title,
-          department : userLocal.department,
-        }).subscribe(
-          (res) => {
-            console.log(res);
-          }
-        );
       }
     );
   }
@@ -99,5 +94,9 @@ export class WorkComponent implements OnInit {
   }
   onPromptClose(){
     this.promptDisplay = false;
+  }
+
+  download(path: any){
+    FileSaver.saveAs('../../../assets/pdf/'+path, 'attestation.pdf');
   }
 }
