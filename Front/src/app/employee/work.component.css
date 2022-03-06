@@ -53,3 +53,9 @@ mat-form-field{
   margin-right: -8%;
 
 }
+.title{
+  width: 22%;
+    position: absolute;
+    top: 4%;
+    left: 2%;
+}

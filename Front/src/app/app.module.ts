@@ -10,8 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Components
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { WorkComponent } from './employee/work/work.component';
-import { InternshipComponent } from './employee/internship/internship.component';
+import { WorkComponent } from './employee/work.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -22,7 +21,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppComponent,
     SidenavComponent,
     WorkComponent,
-    InternshipComponent,
     AuthComponent
   ],
   imports: [

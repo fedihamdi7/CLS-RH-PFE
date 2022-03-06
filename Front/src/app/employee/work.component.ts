@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { HttpClient } from '@angular/common/http';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { ActivatedRoute } from '@angular/router';
 export interface requestTable {
   n : number
   sent_date: string;
@@ -20,18 +21,13 @@ const ELEMENT_DATA: requestTable[] = [];
   templateUrl: './work.component.html',
   styleUrls: ['./work.component.css']
 })
-export class WorkComponent implements OnInit {
-   //read id_token from local storage
-    id_token = localStorage.getItem('id_token');
-   // put token in header
-    headers = {
-     'Authorization': 'jwt ' + this.id_token
-   };
+export class WorkComponent implements OnInit , AfterViewInit {
+
   promptDisplay : boolean = false;
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
   dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
-
-  constructor(private snackbar: MatSnackBar , private http: HttpClient) { }
+  certifType : string ;
+  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -42,13 +38,17 @@ export class WorkComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRequests();
+    //get route
+    this.route.params.subscribe(params => {
+      this.certifType = params.type;
+      this.getRequests();
+
+    });
   }
 
   getRequests(){
-    this.http.get('http://localhost:3000/api/employee/getRequest',{headers:this.headers}).subscribe(
+    this.employeeService.getRequests(this.certifType).subscribe(
       (res: any) => {
-        // console.log(res.request);
         this.dataSource.data = res.request.map((res:any,index:number) =>{
           return {
             n: index + 1,
@@ -60,25 +60,9 @@ export class WorkComponent implements OnInit {
       }
     );
   }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
 
   sendRequest(){
-
-    const userLocal = JSON.parse(localStorage.getItem('user'));
-    this.http.post('http://localhost:3000/api/employee/addRequest',{
-        id: userLocal._id,
-        firstName : userLocal.firstName,
-        lastName : userLocal.lastName,
-        cin : userLocal.cin,
-        date_in : userLocal.date_in,
-        date_out : userLocal.date_out,
-        job_title : userLocal.job_title,
-        department : userLocal.department
-    },{headers: this.headers}).subscribe(
+    this.employeeService.addRequest(this.certifType).subscribe(
       (res) => {
         this.snackbar.open('Request sent successfully', 'close', {
           duration: 2000,
@@ -89,6 +73,11 @@ export class WorkComponent implements OnInit {
     );
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   showPrompt(){
     this.promptDisplay = true;
   }
@@ -97,6 +86,6 @@ export class WorkComponent implements OnInit {
   }
 
   download(path: any){
-    FileSaver.saveAs('../../../assets/pdf/'+path, 'attestation.pdf');
+    FileSaver.saveAs('../../../assets/pdf/'+path, 'attestation de travail.pdf');
   }
 }

@@ -7,11 +7,10 @@ const PDFAdmin = require('../pdf/adminValidation');
 
 exports.addRequest = (req, res, next) => {
     user = req.user;
-    let type = req.body.type || 'work';
     query = new Request();
     query.from=user._id;
     query.done_date=null;
-    query.type=type;
+    query.type=req.body.type;
     query.sent_date = Date.now();
     var today = new Date();
     let unique_number = today.getTime();
@@ -25,7 +24,7 @@ exports.addRequest = (req, res, next) => {
 
 exports.getRequest = (req, res, next) => {
     user = req.user;
-    Request.find({from:user._id},(err,request)=>{
+    Request.find({from:user._id, type : req.params.type},(err,request)=>{
         if (err) return res.status(401).json({msg:" you dont have any request"})
         else res.status(200).json({request})
     })

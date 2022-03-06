@@ -4,7 +4,7 @@ const RequestController = require('../controllers/requestsController');
 
 
 // Get all requests
-router.get('/getAllRequests',RequestController.getAllRequests);
+router.get('/getAllRequests/',RequestController.getAllRequests);
 // Get request by id
 router.get('/getRequestById/:id', RequestController.getRequestById);
 // Update Status

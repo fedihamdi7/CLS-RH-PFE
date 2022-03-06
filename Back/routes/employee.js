@@ -16,7 +16,7 @@ router.post('/register', AuthController.register);
 //Add Request
 router.post('/addRequest', passport.authenticate('jwt', { session: false }), RequestController.addRequest);
 //Get all requests
-router.get('/getRequest', passport.authenticate('jwt', { session: false }), RequestController.getRequest);
+router.get('/getRequest/:type', passport.authenticate('jwt', { session: false }), RequestController.getRequest);
 //Get  all employees
 router.get('/getEmployees', EmployeeController.getEmployees);
 
