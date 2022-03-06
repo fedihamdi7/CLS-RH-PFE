@@ -16,7 +16,7 @@ exports.sendToAdmin = (req, res, next) => {
       const handlebarOptions = {
           viewEngine: {
           extName: ".hbs",
-          partialsDir: path.resolve('./views'),
+          partialsDir: path.resolve('./mail/views'),
           defaultLayout: false,
           },
           viewPath: path.resolve('./mail/views'),
@@ -27,7 +27,7 @@ exports.sendToAdmin = (req, res, next) => {
   
     let mailOptions = {
             from: 'cls.rh.2022@gmail.com', // TODO: email sender
-            to: 'fedihamdi97@gmail.com', // TODO: email receiver
+            to: 'fedihamdi97@outlook.fr', // TODO: email receiver
             subject: 'New Document Request',
             template: 'index',
             context: {
