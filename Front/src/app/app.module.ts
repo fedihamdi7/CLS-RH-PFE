@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Components
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { WorkComponent } from './employee/work.component';
+import { CertifComponent } from './employee/certif.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,7 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   declarations: [
     AppComponent,
     SidenavComponent,
-    WorkComponent,
+    CertifComponent,
     AuthComponent
   ],
   imports: [

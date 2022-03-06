@@ -17,11 +17,11 @@ const FileSaver = require('file-saver');
 const ELEMENT_DATA: requestTable[] = [];
 
 @Component({
-  selector: 'app-work',
-  templateUrl: './work.component.html',
-  styleUrls: ['./work.component.css']
+  selector: 'app-certif',
+  templateUrl: './certif.component.html',
+  styleUrls: ['./certif.component.css']
 })
-export class WorkComponent implements OnInit , AfterViewInit {
+export class CertifComponent implements OnInit , AfterViewInit {
 
   promptDisplay : boolean = false;
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
