@@ -8,6 +8,7 @@ var passport = require('passport')
 const employeeRouter = require('./routes/employee');
 const requestRouter = require('./routes/Request');
 const pdfRouter = require('./routes/pdf')
+const mailRouter = require('./routes/mail')
 
 //connecting to database
 mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
@@ -28,5 +29,6 @@ require('./config/passport')(passport)
 app.use('/api/employee', employeeRouter);
 app.use('/api/pdf', pdfRouter);
 app.use('/api/request',requestRouter);
+app.use('/api/mail',mailRouter);
 
 module.exports = app;

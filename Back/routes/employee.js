@@ -8,7 +8,7 @@ const passport = require('passport');
 const Request = require('../models/request');
 const moment = require('moment');
 const PDFEmployee = require('../pdf/employee');
-
+const mail = require ('../mail/mail');
 
 router.post('/login', (req, res, next) => {
     const email = req.body.email;
@@ -128,6 +128,7 @@ router.post('/addRequest', passport.authenticate('jwt', { session: false }),asyn
     let unique_number = today.getTime();
     fileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
     await PDFEmployee.create(req,fileName);
+    mail.sendToAdmin(req);
     query.file=fileName;
     query.save();
     res.json({ success: true, message: 'profile ', query})
