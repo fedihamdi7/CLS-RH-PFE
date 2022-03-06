@@ -67,8 +67,8 @@ exports.sendToEmployee = (req, res, next) => {
           let mailOptions = {
             from: "cls.rh.2022@gmail.com", // TODO: email sender
             to: user.email, // TODO: email receiver
-            subject: "Your Certificate is Now Available",
-            template: "index",
+            subject: "Your Request's status has been updated",
+            template: "employee",
             context: {
               name: user.firstName + " " +user.lastName,
             },
