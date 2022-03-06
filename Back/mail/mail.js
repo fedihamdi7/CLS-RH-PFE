@@ -19,7 +19,7 @@ exports.sendToAdmin = (req, res, next) => {
           partialsDir: path.resolve('./views'),
           defaultLayout: false,
           },
-          viewPath: path.resolve('./routes/views'),
+          viewPath: path.resolve('./mail/views'),
           extName: ".hbs",
       }
       transporter.use('compile', hbs(handlebarOptions));
@@ -27,7 +27,7 @@ exports.sendToAdmin = (req, res, next) => {
   
     let mailOptions = {
             from: 'cls.rh.2022@gmail.com', // TODO: email sender
-            to: 'fedihamdi97@outlook.fr', // TODO: email receiver
+            to: 'fedihamdi97@gmail.com', // TODO: email receiver
             subject: 'New Document Request',
             template: 'index',
             context: {
