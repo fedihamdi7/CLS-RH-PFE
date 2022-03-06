@@ -45,9 +45,14 @@ exports.getRequestById = (req, res, next) => {
 }
 
 exports.updateStatus = (req, res, next) => {
+
     Request.findOneAndUpdate({_id:req.params.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
         if(err) return res.status(404).json({message: "Request not found"})
-        else return res.status(200).json({message : "Request updated"})
+        else {
+            mail.sendToEmployee(request.from);
+           // console.log(request)
+            return res.status(200).json({message : "Request updated"})
+        }
     })
 }
 

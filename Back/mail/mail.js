@@ -1,46 +1,86 @@
-const path = require('path');
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
-
+const path = require("path");
+const nodemailer = require("nodemailer");
+const hbs = require("nodemailer-express-handlebars");
+const User = require("../models/users");
 exports.sendToAdmin = (req, res, next) => {
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'cls.rh.2022@gmail.com',
-            pass:  'xfhedkatasyxpmvg'
-        }
-    });
-  
-    //current folder path
-  
-      const handlebarOptions = {
-          viewEngine: {
-          extName: ".hbs",
-          partialsDir: path.resolve('./mail/views'),
-          defaultLayout: false,
-          },
-          viewPath: path.resolve('./mail/views'),
-          extName: ".hbs",
-      }
-      transporter.use('compile', hbs(handlebarOptions));
-  
-  
-    let mailOptions = {
-            from: 'cls.rh.2022@gmail.com', // TODO: email sender
-            to: 'fedihamdi97@outlook.fr', // TODO: email receiver
-            subject: 'New Document Request',
-            template: 'index',
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "cls.rh.2022@gmail.com",
+      pass: "xfhedkatasyxpmvg",
+    },
+  });
+
+  //current folder path
+
+  const handlebarOptions = {
+    viewEngine: {
+      extName: ".hbs",
+      partialsDir: path.resolve("./mail/views"),
+      defaultLayout: false,
+    },
+    viewPath: path.resolve("./mail/views"),
+    extName: ".hbs",
+  };
+  transporter.use("compile", hbs(handlebarOptions));
+
+  let mailOptions = {
+    from: "cls.rh.2022@gmail.com", // TODO: email sender
+    to: "aminos.bo.12@gmail.com", // TODO: email receiver
+    subject: "New Document Request",
+    template: "index",
+    context: {
+      name: req.body.firstName + " " + req.body.lastName,
+    },
+  };
+
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      return console.log("Error occurs : " + err);
+    }
+    return console.log("Email sent!!!");
+  });
+};
+exports.sendToEmployee = (req, res, next) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "cls.rh.2022@gmail.com",
+      pass: "xfhedkatasyxpmvg",
+    },
+  });
+  // get Request Sender
+  User.findOne({ _id: req }, (err, user) => {
+    if (!user) return console.log(err);
+    else {
+        const handlebarOptions = {
+            viewEngine: {
+              extName: ".hbs",
+              partialsDir: path.resolve("./mail/views"),
+              defaultLayout: false,
+            },
+            viewPath: path.resolve("./mail/views"),
+            extName: ".hbs",
+          };
+          transporter.use("compile", hbs(handlebarOptions));
+        
+          let mailOptions = {
+            from: "cls.rh.2022@gmail.com", // TODO: email sender
+            to: user.email, // TODO: email receiver
+            subject: "Your Certificate is Now Available",
+            template: "index",
             context: {
-                name : req.body.firstName + ' ' + req.body.lastName,
+              name: user.firstName + " " +user.lastName,
+            },
+          };
+        
+          transporter.sendMail(mailOptions, (err, data) => {
+            if (err) {
+              return console.log("Error occurs : " + err);
             }
-        };
-  
-        transporter.sendMail(mailOptions, (err, data) => {
-          if (err) {
-              return console.log('Error occurs : '+err);
-  
-          }
-          return console.log('Email sent!!!');
-      });
-      
-}
+            return console.log("Email sent!!!");
+          });
+    }
+  });
+  //current folder path
+};
