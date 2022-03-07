@@ -16,9 +16,10 @@ exports.addRequest = (req, res, next) => {
     let unique_number = today.getTime();
     fileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
     PDFEmployee.create(req,fileName);
-    mail.sendToAdmin(req);
     query.file=fileName;
     query.save();
+    req.body.query=query;
+    mail.sendToAdmin(req);
     res.json({ success: true, message: 'profile ', query})
 }
 
