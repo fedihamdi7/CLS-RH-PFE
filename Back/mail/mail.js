@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const User = require("../models/users");
 exports.sendToAdmin = (req, res, next) => {
+  console.log(req.body)
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -31,6 +32,7 @@ exports.sendToAdmin = (req, res, next) => {
     template: "index",
     context: {
       name: req.body.firstName + " " + req.body.lastName,
+      url:"http://localhost:4200/admin/requests/"+req.body.query._id
     },
   };
 
