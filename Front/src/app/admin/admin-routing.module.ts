@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContractsComponent } from './contracts/contracts.component';
 import { NavAdminComponent } from './nav-admin/nav-admin.component';
 import { RequestsComponent } from './requests/requests.component';
 import { ValidateReqComponent } from './requests/validate-req/validate-req.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
     {path:'requests',component:RequestsComponent},
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},
+    {path:'contracts',component:ContractsComponent},
   ]}
 ];
 

@@ -14,6 +14,7 @@ import { CertifComponent } from './employee/certif.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppComponent,
     SidenavComponent,
     CertifComponent,
-    AuthComponent
+    AuthComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
