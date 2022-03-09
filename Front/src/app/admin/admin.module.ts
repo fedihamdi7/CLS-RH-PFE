@@ -9,7 +9,7 @@ import { UsersComponent } from './users/users.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValidateReqComponent } from './requests/validate-req/validate-req.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { ContractsComponent } from './contracts/contracts.component';
+import { SuppliersComponent } from './suppliers/suppliers.component';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { ContractsComponent } from './contracts/contracts.component';
     RequestsComponent,
     UsersComponent,
     ValidateReqComponent,
-    ContractsComponent,
+    SuppliersComponent,
 
   ],
   imports: [
