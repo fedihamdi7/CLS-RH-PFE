@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {  CanActivate, Router } from '@angular/router';
 
 
@@ -7,7 +8,7 @@ import {  CanActivate, Router } from '@angular/router';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor ( private router : Router){}
+  constructor ( private router : Router , private snackbar : MatSnackBar){}
 
   canActivate(): boolean{
     const token = localStorage.getItem('id_token');
@@ -16,6 +17,9 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.router.navigate(['/']);
+      this.snackbar.open('You are not logged in', 'close', {
+        duration: 3000
+      });
       return false;
     }
   }

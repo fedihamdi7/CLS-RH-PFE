@@ -58,7 +58,6 @@ export class RequestsComponent implements OnInit, OnDestroy,AfterViewInit {
           file : reqs.file
         }
       });
-      console.log(this.dataSource.data);
 
 
     });
