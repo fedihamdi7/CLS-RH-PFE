@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CLS';
+  favIcon: HTMLLinkElement = document.querySelector('#appIcon');
+  constructor() {
+    this.favIcon.href = './../assets/logo-icon.png';
+  }
 }
