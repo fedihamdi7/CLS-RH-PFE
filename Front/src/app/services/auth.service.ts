@@ -3,18 +3,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  authToken:any;
-  user:any;
   private authStatusListener = new Subject<boolean>();
   private typeListener = new Subject<string>();
 
-  constructor( private httpClient : HttpClient , private router : Router , private snackbar: MatSnackBar) { }
+  constructor( private httpClient : HttpClient , private router : Router , private snackbar: MatSnackBar , private sharedService : SharedService) { }
 
   login(user: { email: string, password: string }) {
 
@@ -44,10 +43,8 @@ export class AuthService {
   }
 
   storeUserData(token:string,user:any){
-    this.authToken = token;
-    this.user = user;
-    localStorage.setItem('id_token',token);
-    localStorage.setItem('user',JSON.stringify(user));
+    this.sharedService.putTokenInLocalStorage(token);
+    this.sharedService.putUserInLocalStorage(user);
   }
 
 }

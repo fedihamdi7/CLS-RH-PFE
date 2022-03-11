@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {  CanActivate, Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 
 @Injectable({
@@ -8,10 +9,10 @@ import {  CanActivate, Router } from '@angular/router';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor ( private router : Router , private snackbar : MatSnackBar){}
+  constructor ( private router : Router , private snackbar : MatSnackBar , private sharedService : SharedService){}
 
   canActivate(): boolean{
-    const token = localStorage.getItem('id_token');
+    const token = this.sharedService.getTokenFromLocalStorage();
 
     if (token) {
       return true;
