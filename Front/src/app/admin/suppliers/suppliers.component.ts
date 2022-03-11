@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -5,16 +6,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { SuppliersService } from 'src/app/services/suppliers.service';
 import { UsersService } from 'src/app/services/users.service';
 
 
 export interface SuppliersTable {
   n:number;
-  first_name: string;
-  last_name: string;
-  job_title: string;
+  name: string;
   email: string;
-  date_in: Date;
+  phone: string;
+  address: string;
+  contract_start_date: string;
 }
 const ELEMENT_DATA: SuppliersTable[] = [];
 
@@ -25,12 +27,12 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
   private usersSub :Subscription | undefined;
-  constructor( private usersService : UsersService ,  private snackBar : MatSnackBar) { }
+  constructor( private usersService : UsersService, private suppliersService : SuppliersService ,  private snackBar : MatSnackBar , private http:HttpClient) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -42,55 +44,47 @@ export class SuppliersComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getSuppliers();
 
     this.form = new FormGroup({
-      firstName : new FormControl(null, [Validators.required]),
-      lastName : new FormControl(null, [Validators.required]),
+      name : new FormControl(null, [Validators.required]),
       email : new FormControl(null, [Validators.required , Validators.email] ),
-      password : new FormControl(null, [Validators.required , Validators.minLength(6)]),
-      phone : new FormControl(null, [Validators.required]),
-      cin : new FormControl(null, [Validators.required , Validators.minLength(8), Validators.maxLength(8)]),
-      date_in: new FormControl(null, [Validators.required]),
-      date_out: new FormControl(null),
-      job_title : new FormControl(null, [Validators.required]),
-      department : new FormControl(null, [Validators.required])
+      phone : new FormControl(null, [Validators.required , Validators.pattern('[0-9]{8}')]),
+      address : new FormControl(null, [Validators.required]),
+      contract_start_date: new FormControl(null, [Validators.required]),
+      contract_end_date : new FormControl(null, [Validators.required])
 
     });
 
   }
 
-  getUsers(){
-    this.usersService.getUsers();
-    //get users
-    this.usersSub = this.usersService.usersUpdateListener().subscribe((users : any) =>{
-      //for each employee map the data and push in the dataSource
-      this.dataSource.data = users.map((user:any, index:number) => {
+  getSuppliers(){
+    this.suppliersService.getSuppliers().subscribe((res: any) => {
+      this.dataSource.data = res.suppliers.map((supplier:any, index:number) => {
         return {
           n : index + 1,
-          first_name: user.firstName,
-          last_name: user.lastName,
-          job_title: user.job_title,
-          email: user.email,
-          date_in : user.date_in
+          name: supplier.name,
+          email: supplier.email,
+          phone: supplier.phone,
+          address: supplier.address,
+          contract_start_date : supplier.contract_start_date,
+          contract_end_date : supplier.contract_end_date
         }
       });
-
-    });
+  });
   }
   onSubmit(){
-    this.usersService.addUser(this.form.value).subscribe((res: any ) =>{
+    this.suppliersService.addSupplier(this.form.value).subscribe((res: any ) =>{
       if (res.success == true){
-        this.snackBar.open(res.message, 'close', {
+        this.snackBar.open("Supplier Added Successfully", 'close', {
           duration: 2000,
         });
-        this.getUsers();
+        this.getSuppliers();
         this.showAddForm = false;
-
         this.form.reset();
       }
       else{
-        this.snackBar.open(res.message, 'close', {
+        this.snackBar.open("An error occured ", 'close', {
           duration: 2000,
         });
       }
