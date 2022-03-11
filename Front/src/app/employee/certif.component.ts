@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 export interface requestTable {
   n : number
   sent_date: string;
@@ -27,7 +27,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
   dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
   certifType : string ;
-  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute) { }
+  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute , private router : Router) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -40,9 +40,12 @@ export class CertifComponent implements OnInit , AfterViewInit {
   ngOnInit(): void {
     //get route
     this.route.params.subscribe(params => {
+      if (params.type != "work" && params.type != "internship") {
+        this.router.navigate(['404']);
+      }else{
       this.certifType = params.type;
       this.getRequests();
-
+    }
     });
   }
 
