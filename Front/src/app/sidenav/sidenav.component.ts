@@ -7,11 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-
+  firstName : String;
+  lastName : String;
   panelOpenState = false;
   constructor( private router:Router) { }
 
   ngOnInit(): void {
+    let user = JSON.parse(localStorage.getItem('user'));
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
   }
   logout(){
     localStorage.clear();

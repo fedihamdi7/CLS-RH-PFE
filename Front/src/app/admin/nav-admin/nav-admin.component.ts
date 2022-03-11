@@ -7,10 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-admin.component.css']
 })
 export class NavAdminComponent implements OnInit {
-
+  firstName : String;
+  lastName : String;
   constructor( private router:Router) { }
 
   ngOnInit(): void {
+    //get user name from user json in local storage
+    let user = JSON.parse(localStorage.getItem('user'));
+    this.firstName = user.firstName;
+    this.lastName = user.lastName;
   }
   logout(){
     localStorage.clear();
