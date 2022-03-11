@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 declare var require: any
@@ -27,7 +28,7 @@ export class ValidateReqComponent implements OnInit {
   pdf : string = null;
   path : string = "../../../../assets/pdf/";
   file : string = null;
-  constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar) { }
+  constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -53,7 +54,8 @@ export class ValidateReqComponent implements OnInit {
 
   getPDF(){
     //get user_id from local storage and parse it
-    let user_id = JSON.parse(localStorage.getItem('user'))._id;
+    let user = this.sharedService.getUserFromLocalStorage();
+    let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/preview',{
       id : this.id,
       firstName : this.form.get('firstName')?.value,
