@@ -17,7 +17,8 @@ export class EmployeeService {
     'Authorization': 'jwt ' + this.id_token
   };
 
-  userLocal = JSON.parse(localStorage.getItem('user'));
+  // userLocal = JSON.parse(localStorage.getItem('user'));
+  userLocal :any = this.sharedService.getUserFromLocalStorage();
   data = {
     id: this.userLocal._id,
     firstName : this.userLocal.firstName,

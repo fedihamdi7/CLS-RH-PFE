@@ -52,9 +52,10 @@ export class ValidateReqComponent implements OnInit {
     });
   }
 
+
   getPDF(){
     //get user_id from local storage and parse it
-    let user = this.sharedService.getUserFromLocalStorage();
+    let user:any = this.sharedService.getUserFromLocalStorage();
     let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/preview',{
       id : this.id,
@@ -73,9 +74,20 @@ export class ValidateReqComponent implements OnInit {
   }
 
   validate(){
-    console.log(this.id);
+    let user:any = this.sharedService.getUserFromLocalStorage();
+    let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
-      status : "done"
+      status : "done",
+      id : this.id,
+      firstName : this.form.get('firstName')?.value,
+      lastName : this.form.get('lastName')?.value,
+      cin : this.form.get('cin')?.value,
+      date_in : this.form.get('date_in')?.value,
+      date_out : this.form.get('date_out')?.value,
+      job_title : this.form.get('job_title')?.value,
+      department : this.form.get('department')?.value,
+      file : this.file,
+      user_id : user_id
     }).subscribe(res => {
       this.snackbar.open("Request updated", "Close", {
         duration: 3000

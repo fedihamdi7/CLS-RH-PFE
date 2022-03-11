@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,10 +11,10 @@ export class SidenavComponent implements OnInit {
   firstName : String;
   lastName : String;
   panelOpenState = false;
-  constructor( private router:Router) { }
+  constructor( private router:Router , private sharedService : SharedService) { }
 
   ngOnInit(): void {
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user :any = this.sharedService.getUserFromLocalStorage();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
   }

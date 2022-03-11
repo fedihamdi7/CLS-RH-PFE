@@ -3,6 +3,7 @@ const mail = require ('../mail/mail');
 const Request = require('../models/request');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
+const User = require('../models/users');
 
 
 exports.addRequest = (req, res, next) => {
@@ -47,6 +48,9 @@ exports.getRequestById = (req, res, next) => {
 
 exports.updateStatus = (req, res, next) => {
 
+    User.findOneAndUpdate(req.body.id, req.body, (err, user)=>{
+        PDFAdmin.create(req);
+    });
     Request.findOneAndUpdate({_id:req.params.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
         if(err) return res.status(404).json({message: "Request not found"})
         else {
@@ -58,5 +62,7 @@ exports.updateStatus = (req, res, next) => {
 }
 
 exports.preview = (req, res, next) => {
+    //update user 
     PDFAdmin.create(req);
+    User.findOneAndUpdate(req.body.id, req.body, (err, user)=>{});
 }

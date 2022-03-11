@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-nav-admin',
@@ -9,11 +10,10 @@ import { Router } from '@angular/router';
 export class NavAdminComponent implements OnInit {
   firstName : String;
   lastName : String;
-  constructor( private router:Router) { }
+  constructor( private router:Router, private sharedService : SharedService) { }
 
   ngOnInit(): void {
-    //get user name from user json in local storage
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user :any = this.sharedService.getUserFromLocalStorage();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
   }

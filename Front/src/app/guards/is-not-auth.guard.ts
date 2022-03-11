@@ -11,7 +11,7 @@ export class IsNotAuthGuard implements CanActivate {
 
   canActivate(): boolean{
     // const user = JSON.parse(localStorage.getItem('user'));
-    const user = this.sharedService.getUserFromLocalStorage();
+    const user:any = this.sharedService.getUserFromLocalStorage();
     if (user) {
       this.snackbar.open('You are already logged in', 'close', {
         duration : 3000

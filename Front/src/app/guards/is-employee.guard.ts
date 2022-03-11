@@ -8,7 +8,7 @@ import { SharedService } from '../services/shared.service';
 export class IsEmployeeGuard implements CanActivate {
   constructor (private router: Router , private sharedService:SharedService){}
   //get user from local storage and parse to json object
-  user = this.sharedService.getUserFromLocalStorage();
+  user:any = this.sharedService.getUserFromLocalStorage();
 
   type = this.user.type;
 
