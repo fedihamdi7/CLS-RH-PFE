@@ -25,7 +25,7 @@ const ELEMENT_DATA: SuppliersTable[] = [];
   templateUrl: './suppliers.component.html',
   styleUrls: ['./suppliers.component.css']
 })
-export class SuppliersComponent implements OnInit, OnDestroy, AfterViewInit {
+export class SuppliersComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
@@ -104,10 +104,5 @@ export class SuppliersComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
-  ngOnDestroy(): void {
-    this.usersSub!.unsubscribe();
-
-  }
 }
 
