@@ -31,12 +31,7 @@ export class ContractsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllContracts();
-    let phrase : string = "paid_by_split";
-    //remove _ from phrase and put space between words
-    phrase = phrase.replace(/_/g, " ");
-    console.log(phrase);
-
-  }
+   }
 
   getAllContracts(){
     this.contractsService.getAllContracts().subscribe(
@@ -44,6 +39,7 @@ export class ContractsComponent implements OnInit {
         this.dataSource.data = res.map((contract:any, index : number) => {
           return {
             n: index+1,
+            _id : contract._id,
             supplier: contract.supplier,
             date_signature: contract.date_signature,
             expires_at: contract.expires_at,

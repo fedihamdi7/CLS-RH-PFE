@@ -14,4 +14,8 @@ export class SuppliersService {
   addSupplier(supplier : any){
     return this.http.post('http://localhost:3000/api/supplier/addSupplier',supplier);
   }
+
+  getContractBySupplierId(id: string){
+    return this.http.get('http://localhost:3000/api/contract/getContractBySupplierId/'+id);
+  }
 }

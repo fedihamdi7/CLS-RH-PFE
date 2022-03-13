@@ -1,4 +1,4 @@
-<h2> Contracts </h2>
+<h2> Contracts Of <span style="font-weight: 400;"> {{supplier_name}} </span> </h2>
 <div class="container">
   <mat-form-field appearance="standard" class="filter">
     <mat-label>Filter</mat-label>
@@ -37,7 +37,7 @@
 
   <ng-container matColumnDef="details" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Details </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink="{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink="/admin/contracts/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

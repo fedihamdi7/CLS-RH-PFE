@@ -7,6 +7,8 @@ import { ValidateReqComponent } from './requests/validate-req/validate-req.compo
 import { UsersComponent } from './users/users.component';
 import { AddContractComponent } from './suppliers/add-contract/add-contract.component';
 import { ContractsComponent } from './contracts/contracts.component';
+import { ContractDetailsComponent } from './contracts/contract-details/contract-details.component';
+import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'requests',pathMatch:'full'},
@@ -15,8 +17,10 @@ const routes: Routes = [
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},
     {path:'suppliers',component:SuppliersComponent},
+    {path:'suppliers/:id',component:SupplierDetailsComponent},
     {path:'suppliers/addContract', component:AddContractComponent},
     {path:'contracts',component:ContractsComponent},
+    {path:'contracts/:id',component:ContractDetailsComponent},
 
   ]}
 ];

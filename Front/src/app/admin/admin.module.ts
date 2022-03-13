@@ -12,6 +12,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { AddContractComponent } from './suppliers/add-contract/add-contract.component';
 import { ContractsComponent } from './contracts/contracts.component';
+import { ContractDetailsComponent } from './contracts/contract-details/contract-details.component';
+import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { ContractsComponent } from './contracts/contracts.component';
     SuppliersComponent,
     AddContractComponent,
     ContractsComponent,
+    ContractDetailsComponent,
+    SupplierDetailsComponent,
 
   ],
   imports: [
