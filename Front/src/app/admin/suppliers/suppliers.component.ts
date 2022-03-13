@@ -57,8 +57,9 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   }
 
   getSuppliers(){
-    this.suppliersService.getSuppliers().subscribe((res: any) => {
-      this.dataSource.data = res.suppliers.map((supplier:any, index:number) => {
+    this.suppliersService.getSuppliers();
+    this.suppliersService.suppliersUpdateListener().subscribe((res: any) => {
+      this.dataSource.data = res.map((supplier:any, index:number) => {
         return {
           _id : supplier._id,
           n : index + 1,

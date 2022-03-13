@@ -9,7 +9,7 @@ const ContractSchema = new mongoose.Schema({
     contract_details:{
         payment_date:{type : String,required:paid},
         payment_amount:{type : String,required:paid},
-        method:{type : String, required:true},
+        method:{type : String, required:paid && paid_by_split},
         payment_amount:{type : String,required:paid && not_paid},
         due_date:{type : String,required:not_paid},
         global_amount:{type : String,required:paid_by_split},

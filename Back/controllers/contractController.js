@@ -15,7 +15,7 @@ exports.addContract = (req, res) => {
       newContract.contract_details.method = req.body.method;
       break;
     case "not_paid":
-      newContract.contract_details.method = req.body.method;
+      // newContract.contract_details.method = req.body.method;
       newContract.contract_details.payment_amount = req.body.payment_amount;
       newContract.contract_details.due_date = moment(req.body.due_date).format('YYYY-MM-DD[T00:00:00.000Z]');
       break;
@@ -33,7 +33,7 @@ exports.addContract = (req, res) => {
       console.log(err);
       return res.status(501).json({ message: "error has occurred" });
     }
-    return res.status(200).json(contract);
+    return res.status(200).json({contract, added: true });
   });
 };
 exports.getAllContracts = (req, res) => {

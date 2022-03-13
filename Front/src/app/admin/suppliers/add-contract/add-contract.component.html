@@ -1,6 +1,6 @@
 <p>ID : {{data.id}} </p>
 
-<form [formGroup]="form">
+<form [formGroup]="form" (submit)="onSubmit()">
 
   <div class="row">
     <mat-form-field appearance="fill" class="col">
@@ -25,19 +25,19 @@
       <div class="row tab-element">
         <mat-form-field appearance="fill" class="col">
           <mat-label>Payment Date</mat-label>
-          <input matInput [matDatepicker]="picker_payment_date" formControlName="paymentDate">
+          <input matInput [matDatepicker]="picker_payment_date" formControlName="payment_date">
           <mat-datepicker-toggle matSuffix [for]="picker_payment_date"></mat-datepicker-toggle>
           <mat-datepicker #picker_payment_date></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="col">
           <mat-label>Payment Amount(TND)</mat-label>
-          <input matInput formControlName="amount">
+          <input matInput formControlName="payment_amount">
         </mat-form-field>
       </div>
       <mat-form-field appearance="fill" class="col">
         <mat-label>Payment Methode</mat-label>
-        <mat-select>
+        <mat-select formControlName="method">
           <mat-option value="cash">Cash</mat-option>
           <mat-option value="cheque">Cheque</mat-option>
         </mat-select>
@@ -51,12 +51,12 @@
       <div class="row tab-element">
         <mat-form-field appearance="fill" class="col">
           <mat-label>Payment Amount(TND)</mat-label>
-          <input matInput formControlName="amount">
+          <input matInput formControlName="payment_amount">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="col">
           <mat-label>Due Date</mat-label>
-          <input matInput [matDatepicker]="picker_due_date" formControlName="dueDate">
+          <input matInput [matDatepicker]="picker_due_date" formControlName="due_date">
           <mat-datepicker-toggle matSuffix [for]="picker_due_date"></mat-datepicker-toggle>
           <mat-datepicker #picker_due_date></mat-datepicker>
         </mat-form-field>
@@ -69,11 +69,11 @@
       <div class="tab-element">
         <mat-form-field appearance="fill" class="col">
           <mat-label>Global Amount (TND)</mat-label>
-          <input matInput formControlName="globalAmount">
+          <input matInput formControlName="global_amount">
         </mat-form-field>
         <mat-form-field appearance="fill" class="col">
           <mat-label>Payment Methode</mat-label>
-          <mat-select>
+          <mat-select formControlName="method">
             <mat-option value="cash">Cash</mat-option>
             <mat-option value="cheque">Cheque</mat-option>
           </mat-select>
@@ -85,11 +85,11 @@
         <div class="row">
           <mat-form-field appearance="fill" class="col">
             <mat-label>Number Of Slices</mat-label>
-            <input matInput formControlName="slices">
+            <input matInput formControlName="number_of_slices">
           </mat-form-field>
           <mat-form-field appearance="fill" class="col">
             <mat-label>Payment Each slice</mat-label>
-            <input matInput formControlName="amountEachSlice">
+            <input matInput formControlName="payment_each_slice">
           </mat-form-field>
         </div>
 
