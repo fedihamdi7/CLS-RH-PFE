@@ -3,6 +3,6 @@ const router = express.Router();
 const contractController = require('../controllers/contractController')
 router.post('/addContract',contractController.addContract)
 router.get('/getAllContracts',contractController.getAllContracts)
-router.get('/getContractById:id',contractController.getContractById)
+router.get('/getContractById/:id',contractController.getContractById)
 router.get('/getContractBySupplierId/:id',contractController.getContractBySupplierId)
 module.exports =router;

@@ -11,4 +11,7 @@ export class ContractsService {
   getAllContracts (){
     return this.http.get('http://localhost:3000/api/contract/getAllContracts');
   }
+  getContractById (id : string){
+    return this.http.get('http://localhost:3000/api/contract/getContractById/'+id);
+  }
 }

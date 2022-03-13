@@ -48,7 +48,7 @@ exports.getContractById = (req, res) => {
       if (!contract){
           return res.status(404).json({message:"Contract not found"});
       }
-      return res.status(200).json({contract})
+      return res.status(200).json(contract[0]);
   });
 };
 exports.getContractBySupplierId = (req, res) => {
