@@ -1,11 +1,13 @@
 <h2> Contracts </h2>
 <div class="container">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
   <mat-form-field appearance="standard" class="filter">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Type Name..." #input>
   </mat-form-field>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDisableClear matSortActive="position" matSortDirection="asc">
-
+  <table mat-table [dataSource]="dataSource" class="perso-elevation example-table-container" matSort matSortDisableClear matSortActive="position" matSortDirection="asc">
   <!-- N* -->
   <ng-container matColumnDef="n">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> N. </th>

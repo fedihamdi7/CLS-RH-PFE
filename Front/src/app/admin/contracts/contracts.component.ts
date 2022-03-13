@@ -17,7 +17,7 @@ export class ContractsComponent implements OnInit {
 
   displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
-
+  isLoadingResults = true;
   constructor(private contractsService : ContractsService) { }
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -46,6 +46,7 @@ export class ContractsComponent implements OnInit {
             payment_status: contract.payment_status.replace(/_/g, " ")
           }
         });
+        this.isLoadingResults = false;
       },
       err => {
         console.log(err);
