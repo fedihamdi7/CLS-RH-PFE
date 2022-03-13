@@ -1,0 +1,66 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { ContractsService } from 'src/app/services/contracts.service';
+
+
+
+const ELEMENT_DATA: any[] = [];
+
+@Component({
+  selector: 'app-contracts',
+  templateUrl: './contracts.component.html',
+  styleUrls: ['./contracts.component.css']
+})
+export class ContractsComponent implements OnInit {
+
+  displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status'];
+  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+
+  constructor(private contractsService : ContractsService) { }
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+  }
+
+  ngOnInit(): void {
+    this.getAllContracts();
+    let phrase : string = "paid_by_split";
+    //remove _ from phrase and put space between words
+    phrase = phrase.replace(/_/g, " ");
+    console.log(phrase);
+
+  }
+
+  getAllContracts(){
+    this.contractsService.getAllContracts().subscribe(
+      (res: any) => {
+        this.dataSource.data = res.map((contract:any, index : number) => {
+          return {
+            n: index+1,
+            supplier: contract.supplier,
+            date_signature: contract.date_signature,
+            expires_at: contract.expires_at,
+            payment_status: contract.payment_status.replace(/_/g, " ")
+          }
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+}

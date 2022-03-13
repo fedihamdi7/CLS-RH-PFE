@@ -41,7 +41,7 @@ exports.getAllContracts = (req, res) => {
       console.log(err);
     }
     return res.status(200).json(contracts);
-  });
+  }).populate("supplier");
 };
 exports.getContractById = (req, res) => {
   Contract.find({ _id: req.params.id }, (err, contract) => {

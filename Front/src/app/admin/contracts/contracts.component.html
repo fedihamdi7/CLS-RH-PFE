@@ -1,0 +1,47 @@
+<h2> Contracts </h2>
+<div class="container">
+  <mat-form-field appearance="standard" class="filter">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Type Name..." #input>
+  </mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDisableClear matSortActive="position" matSortDirection="asc">
+
+  <!-- N* -->
+  <ng-container matColumnDef="n">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> N. </th>
+    <td mat-cell *matCellDef="let element "> {{element.n}} </td>
+  </ng-container>
+  <!-- first_name Column -->
+  <ng-container matColumnDef="supplier">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+    <td mat-cell *matCellDef="let element"> {{element.supplier.name}} </td>
+  </ng-container>
+
+  <!-- last_name Column -->
+  <ng-container matColumnDef="date_signature">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Signature Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.date_signature}} </td>
+  </ng-container>
+
+  <!-- job_title Column -->
+  <ng-container matColumnDef="expires_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiration Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.expires_at}} </td>
+  </ng-container>
+
+  <!-- email Column -->
+  <ng-container matColumnDef="payment_status" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Paymen Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.payment_status }} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10]"
+               showFirstLastButtons
+               aria-label="Select page of Users">
+</mat-paginator>
+
+</div>

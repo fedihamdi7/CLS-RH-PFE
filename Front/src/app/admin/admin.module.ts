@@ -11,6 +11,7 @@ import { ValidateReqComponent } from './requests/validate-req/validate-req.compo
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { AddContractComponent } from './suppliers/add-contract/add-contract.component';
+import { ContractsComponent } from './contracts/contracts.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AddContractComponent } from './suppliers/add-contract/add-contract.comp
     ValidateReqComponent,
     SuppliersComponent,
     AddContractComponent,
+    ContractsComponent,
 
   ],
   imports: [
