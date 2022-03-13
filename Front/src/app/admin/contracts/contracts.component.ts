@@ -15,7 +15,7 @@ const ELEMENT_DATA: any[] = [];
 })
 export class ContractsComponent implements OnInit {
 
-  displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status'];
+  displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
   constructor(private contractsService : ContractsService) { }

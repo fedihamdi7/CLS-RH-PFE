@@ -26,7 +26,7 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice', 'details'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
