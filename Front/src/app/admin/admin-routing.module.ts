@@ -5,6 +5,7 @@ import { NavAdminComponent } from './nav-admin/nav-admin.component';
 import { RequestsComponent } from './requests/requests.component';
 import { ValidateReqComponent } from './requests/validate-req/validate-req.component';
 import { UsersComponent } from './users/users.component';
+import { AddContractComponent } from './suppliers/add-contract/add-contract.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'requests',pathMatch:'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},
     {path:'suppliers',component:SuppliersComponent},
+    {path:'suppliers/addContract', component:AddContractComponent}
   ]}
 ];
 

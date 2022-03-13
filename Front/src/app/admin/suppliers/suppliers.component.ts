@@ -1,13 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
 import { SuppliersService } from 'src/app/services/suppliers.service';
-import { UsersService } from 'src/app/services/users.service';
+import { AddContractComponent } from './add-contract/add-contract.component';
 
 
 export interface SuppliersTable {
@@ -27,12 +26,11 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
-  private usersSub :Subscription | undefined;
-  constructor( private usersService : UsersService, private suppliersService : SuppliersService ,  private snackBar : MatSnackBar , private http:HttpClient) { }
+  constructor( private suppliersService : SuppliersService ,  private snackBar : MatSnackBar , public dialog: MatDialog) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -62,6 +60,7 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
     this.suppliersService.getSuppliers().subscribe((res: any) => {
       this.dataSource.data = res.suppliers.map((supplier:any, index:number) => {
         return {
+          _id : supplier._id,
           n : index + 1,
           name: supplier.name,
           email: supplier.email,
@@ -102,6 +101,14 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onAddContract(id : String){
+    let dialogRef = this.dialog.open(AddContractComponent, {
+      width: '700px',
+      height : '60vh',
+      data: {id : id}
+    });
   }
 
 }
