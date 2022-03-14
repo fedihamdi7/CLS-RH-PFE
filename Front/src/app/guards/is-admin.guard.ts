@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivate, Router } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 
@@ -6,7 +7,7 @@ import { SharedService } from '../services/shared.service';
   providedIn: 'root'
 })
 export class IsAdminGuard implements CanActivate {
-  constructor(private router: Router, private sharedService : SharedService) { }
+  constructor(private router: Router, private sharedService : SharedService , private snackBar : MatSnackBar) { }
   //get user from local storage and parse to json object
   // user = JSON.parse(localStorage.getItem('user'));
   user:any = this.sharedService.getUserFromLocalStorage();
@@ -20,6 +21,9 @@ export class IsAdminGuard implements CanActivate {
       //check if connected
       if (this.user) {
         this.router.navigate(['/employee/work']);
+        this.snackBar.open("You don't have the admin privileges ", 'close', {
+          duration: 3000,
+        });
         return false
       } else {
         this.router.navigate(['/']);
