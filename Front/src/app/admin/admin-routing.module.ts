@@ -9,6 +9,8 @@ import { AddContractComponent } from './suppliers/add-contract/add-contract.comp
 import { ContractsComponent } from './contracts/contracts.component';
 import { ContractDetailsComponent } from './contracts/contract-details/contract-details.component';
 import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-details.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'requests',pathMatch:'full'},
@@ -21,6 +23,10 @@ const routes: Routes = [
     {path:'suppliers/addContract', component:AddContractComponent},
     {path:'contracts',component:ContractsComponent},
     {path:'contracts/:id',component:ContractDetailsComponent},
+    {path:'invoices',component:InvoicesComponent},
+    {path:'invoices/:id',component:InvoicesDetailsComponent},
+
+
 
   ]}
 ];

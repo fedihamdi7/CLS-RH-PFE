@@ -14,6 +14,8 @@ import { AddContractComponent } from './suppliers/add-contract/add-contract.comp
 import { ContractsComponent } from './contracts/contracts.component';
 import { ContractDetailsComponent } from './contracts/contract-details/contract-details.component';
 import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-details.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-
     ContractsComponent,
     ContractDetailsComponent,
     SupplierDetailsComponent,
+    InvoicesComponent,
+    InvoicesDetailsComponent,
 
   ],
   imports: [

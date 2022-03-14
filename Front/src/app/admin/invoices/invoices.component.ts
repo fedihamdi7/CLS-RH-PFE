@@ -6,14 +6,13 @@ import { ContractsService } from 'src/app/services/contracts.service';
 
 
 
-
 const ELEMENT_DATA: any[] = [];
 @Component({
-  selector: 'app-contracts',
-  templateUrl: './contracts.component.html',
-  styleUrls: ['./contracts.component.css']
+  selector: 'app-invoices',
+  templateUrl: './invoices.component.html',
+  styleUrls: ['./invoices.component.css']
 })
-export class ContractsComponent implements OnInit {
+export class InvoicesComponent implements OnInit {
 
   displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
@@ -59,5 +58,6 @@ export class ContractsComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
 
 }
