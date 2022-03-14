@@ -18,3 +18,27 @@ exports.addInvoice = (req, res) => {
     return res.status(200).json({invoice, added: true });
   });
 };
+exports.getAllInvoices = (req, res) => {
+    Invoice.find((err, invoices) => {
+      if (!invoices) {
+        console.log(err);
+      }
+      return res.status(200).json(invoices);
+    }).populate("supplier");
+};
+exports.getInvoiceById = (req, res) => {
+    Invoice.find({ _id: req.params.id }, (err, invoice) => {
+        if (!invoice){
+            return res.status(404).json({message:"invoice not found"});
+        }
+        return res.status(200).json(invoice[0]);
+    });
+};
+exports.getInvoiceBySupplierId = (req, res) => {
+    Invoice.find({ supplier: req.params.id }, (err, invoice) => {
+        if (!invoice){
+            return res.status(404).json({message:"invoice not found"});
+        }
+        return res.status(200).json({invoice})
+    }).populate("supplier");
+  };
