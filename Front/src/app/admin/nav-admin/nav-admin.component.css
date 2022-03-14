@@ -41,10 +41,10 @@ mat-panel-title{
   right: 12px;
   color: #7137AC
 }
-.intern_icon{
+.side_nav_icons{
   position: absolute;
-  right: 12px;
-  color: #AC3737
+  right: 6%;
+  top: 26%;
 }
 a{
   text-decoration: none;
@@ -64,7 +64,6 @@ a{
   border-radius: 10px 10px 0px 0px;
 }
 .user{
-  /* margin: 10px; */
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -85,5 +84,20 @@ span{
 
 
 .active{
-  background-color: #9f9f9f87;
+  background-color: #30b4b493;
+}
+
+.side{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.side button:hover{
+  background-color: rgba(66, 66, 66, 0.336);
+}
+.side button{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2% 5%;
 }
