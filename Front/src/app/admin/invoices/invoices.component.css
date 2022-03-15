@@ -78,7 +78,7 @@ table,mat-paginator {
 
 .example-table-container {
   position: relative;
-  min-height: 200px;
+  min-height: 100px;
   max-height: 400px;
   overflow: auto;
 }

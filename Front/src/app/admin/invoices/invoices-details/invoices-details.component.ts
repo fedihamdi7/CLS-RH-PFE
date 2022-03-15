@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { InvoicesService } from 'src/app/services/invoices.service';
 
 @Component({
   selector: 'app-invoices-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoicesDetailsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private invoiceService : InvoicesService , private route : ActivatedRoute) { }
+  invoice : any;
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.invoiceService.getInvoiceById(params.id).subscribe((invoice : any)=>{
+        this.invoice = invoice;
+      });
+    })
   }
 
 }

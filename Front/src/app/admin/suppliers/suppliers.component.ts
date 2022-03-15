@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { AddContractComponent } from './add-contract/add-contract.component';
+import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
 
 
 export interface SuppliersTable {
@@ -26,7 +27,7 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice', 'details'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice', 'all_contracts', 'all_invoices'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
@@ -105,7 +106,15 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   }
 
   onAddContract(id : String){
-    let dialogRef = this.dialog.open(AddContractComponent, {
+    this.dialog.open(AddContractComponent, {
+      width: '700px',
+      height : '60vh',
+      data: {id : id}
+    });
+  }
+
+  onAddInvoice(id : String){
+    this.dialog.open(AddInvoiceComponent, {
       width: '700px',
       height : '60vh',
       data: {id : id}

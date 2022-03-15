@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ContractsService } from 'src/app/services/contracts.service';
+import { InvoicesService } from 'src/app/services/invoices.service';
 
 
 
@@ -14,10 +14,10 @@ const ELEMENT_DATA: any[] = [];
 })
 export class InvoicesComponent implements OnInit {
 
-  displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
+  displayedColumns: string[] = ['n','supplier', 'payment_method', 'payment_status','date','amount', 'details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   isLoadingResults = true;
-  constructor(private contractsService : ContractsService) { }
+  constructor(private invoicesService : InvoicesService) { }
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,20 +29,24 @@ export class InvoicesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllContracts();
+    this.getAllInvoices();
    }
 
-  getAllContracts(){
-    this.contractsService.getAllContracts().subscribe(
+  getAllInvoices(){
+    this.invoicesService.invoiceUpdateListener().subscribe(
       (res: any) => {
-        this.dataSource.data = res.map((contract:any, index : number) => {
+        this.dataSource.data = res.map((invoice:any, index : number) => {
+          console.log(res);
+          
           return {
             n: index+1,
-            _id : contract._id,
-            supplier: contract.supplier,
-            date_signature: contract.date_signature,
-            expires_at: contract.expires_at,
-            payment_status: contract.payment_status.replace(/_/g, " ")
+            _id : invoice._id,
+            supplier: invoice.supplier,
+            payment_method: invoice.payment_method,
+            payment_status: invoice.payment_status.replace(/_/g, " "),
+            date: invoice.date,
+            amount : invoice.amount
+            
           }
         });
         this.isLoadingResults = false;

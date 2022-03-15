@@ -54,12 +54,16 @@
   <!-- add_invoice Column -->
   <ng-container matColumnDef="add_invoice" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Add Invoice </th>
-    <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="accent"><mat-icon>add</mat-icon></button> </td>
+    <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="accent" (click)="onAddInvoice(element._id)"><mat-icon>add</mat-icon></button> </td>
   </ng-container>
 
-  <ng-container matColumnDef="details" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Details </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink="{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
+  <ng-container matColumnDef="all_contracts" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> All contracts </th>
+    <td mat-cell *matCellDef="let element"> <a routerLink="contracts/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
+  </ng-container>
+  <ng-container matColumnDef="all_invoices" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> All Invoices </th>
+    <td mat-cell *matCellDef="let element"> <a routerLink="invoices/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

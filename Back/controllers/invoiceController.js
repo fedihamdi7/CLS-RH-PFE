@@ -39,6 +39,6 @@ exports.getInvoiceBySupplierId = (req, res) => {
         if (!invoice){
             return res.status(404).json({message:"invoice not found"});
         }
-        return res.status(200).json({invoice})
+        return res.status(200).json(invoice)
     }).populate("supplier");
   };

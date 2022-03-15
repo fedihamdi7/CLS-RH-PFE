@@ -6,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 
 @Component({
-  selector: 'app-supplier-details',
-  templateUrl: './supplier-details.component.html',
-  styleUrls: ['./supplier-details.component.css']
+  selector: 'app-supplier-contracts',
+  templateUrl: './supplier-contracts.component.html',
+  styleUrls: ['./supplier-contracts.component.css']
 })
-export class SupplierDetailsComponent implements OnInit {
+export class SupplierContractsComponent implements OnInit {
   ELEMENT_DATA: any[] = [];
   displayedColumns: string[] = ['n', 'supplier', 'date_signature', 'expires_at', 'payment_status', 'details'];
   dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
