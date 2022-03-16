@@ -71,3 +71,7 @@ exports.getContractBySupplierId = (req, res) => {
   }).populate("supplier");
 };
 
+
+exports.notifyMe = (req, res) => {
+return res.json({ message: "hello notification" });
+};
