@@ -86,3 +86,41 @@ exports.sendToEmployee = (req, res, next) => {
   });
   //current folder path
 };
+
+exports.sendAfterRegister = (req, res, next) => {
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "cls.rh.2022@gmail.com",
+      pass: "xfhedkatasyxpmvg",
+    },
+  });
+  const handlebarOptions = {
+    viewEngine: {
+      extName: ".hbs",
+      partialsDir: path.resolve("./mail/views"),
+      defaultLayout: false,
+    },
+    viewPath: path.resolve("./mail/views"),
+    extName: ".hbs",
+  };
+  transporter.use("compile", hbs(handlebarOptions));
+
+  let mailOptions = {
+    from: "cls.rh.2022@gmail.com", //email sender
+    to: req.body.email, //email receiver
+    subject: "Welcome To CLS-RH",
+    template: "afterRegister",
+    context: {
+      name: req.body.firstName + " " +req.body.lastName,
+      password : req.body.password
+    },
+  };
+
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      return console.log("Error occurs : " + err);
+    }
+    return console.log("Email sent!!!");
+  });
+}

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 const moment = require('moment');
-
+const mail = require('../mail/mail');
 
 exports.login = (req, res, next) => {
     const email = req.body.email;
@@ -94,12 +94,14 @@ exports.register = (req, res, next) => {
                         success: false,
                         message: 'Failed to save the user'
                     });
-                }
+                }else{
                 res.send({
                     success: true,
                     message: 'User Saved',
                     user
                 });
+                mail.sendAfterRegister(req, res, next);
+            }
             });
         }
     });
