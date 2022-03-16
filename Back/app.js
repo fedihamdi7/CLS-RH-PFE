@@ -10,7 +10,6 @@ const requestRouter = require('./routes/Request');
 const supplierRouter = require('./routes/supplier');
 const contractRouter = require('./routes/contract');
 const invoiceRouter = require('./routes/invoice');
-const notifyMe = require('./routes/notification');
 
 //connecting to database
 mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
