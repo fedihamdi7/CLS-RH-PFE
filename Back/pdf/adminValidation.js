@@ -3,7 +3,7 @@ const moment = require('moment');
 // const fs = require('fs');
 const User = require('../models/users');
 const path = require('path');
-const workTemplate = require('./templates');
+const pdfTemplates = require('./templates');
 
 
 exports.create = (req) =>{
@@ -28,7 +28,7 @@ exports.create = (req) =>{
     saveToPath = "../../Front/src/assets/pdf/";
     try{
         var pdfFile = path.join(__dirname, saveToPath+req.body.file);
-        workTemplate.workTemplate(firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile);
+        pdfTemplates.workTemplate(firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile);
       }catch(err){
         console.error('MakePDF ERROR: ' + err.message);
       }
