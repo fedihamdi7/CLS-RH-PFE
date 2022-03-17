@@ -98,6 +98,6 @@ export class CertifComponent implements OnInit , AfterViewInit {
   }
 
   download(path: any){
-    FileSaver.saveAs('../../../assets/pdf/'+path, 'attestation de travail.pdf');
+    FileSaver.saveAs('http://localhost:3000/assets/certifications/'+path, `${this.certifType} certification.pdf`);
   }
 }

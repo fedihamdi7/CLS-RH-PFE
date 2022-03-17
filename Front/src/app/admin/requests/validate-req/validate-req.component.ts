@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SharedService } from 'src/app/services/shared.service';
-
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -21,21 +20,23 @@ const FileSaver = require('file-saver');
 })
 export class ValidateReqComponent implements OnInit {
   isLoading : boolean = true;
-  id: string;
+  id: string = this.route.snapshot.paramMap.get('id');;
   reqSub : Subscription;
   data : any;
   form : FormGroup;
   pdf : string = null;
-  path : string = "../../../../assets/pdf/";
+  path : string = "http://localhost:3000/assets/certifications/";
   file : string = null;
   constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
-
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.initializeView();
+  }
+
+  initializeView(){
+    // this.id = this.route.snapshot.paramMap.get('id');
 
     this.reqService.getRequest(this.id);
     this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : any) =>{
-      // console.log(req[0]);
       this.pdf =this.path + req[0].file;
       this.file = req[0].file;
       this.isLoading = false;
@@ -52,9 +53,9 @@ export class ValidateReqComponent implements OnInit {
     });
   }
 
-
   getPDF(){
     //get user_id from local storage and parse it
+    this.isLoading = true;
     let user:any = this.sharedService.getUserFromLocalStorage();
     let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/preview',{
@@ -68,12 +69,14 @@ export class ValidateReqComponent implements OnInit {
       department : this.form.get('department')?.value,
       file : this.file,
       user_id : user_id
-    }).subscribe(res => {
-
+    }).subscribe((res : any) => {  
+      this.pdf= this.path + res;
+      this.isLoading = false;
     });
   }
 
   validate(){
+    this.isLoading = true;
     let user:any = this.sharedService.getUserFromLocalStorage();
     let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
@@ -88,7 +91,9 @@ export class ValidateReqComponent implements OnInit {
       department : this.form.get('department')?.value,
       file : this.file,
       user_id : user_id
-    }).subscribe(res => {
+    }).subscribe((res:any) => {
+      this.pdf= this.path + res.file;
+      this.isLoading = false;
       this.snackbar.open("Request updated", "Close", {
         duration: 3000
       });

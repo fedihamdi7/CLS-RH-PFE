@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.WebsocketService.listen("test event").subscribe((data) => {
-      console.log(data)
+      // console.log(data)
     })
     this.socket.on('test event', data => {
       this.data = data;

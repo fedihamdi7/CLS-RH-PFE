@@ -54,7 +54,7 @@ exports.updateStatus = (req, res, next) => {
         else {
             mail.sendToEmployee(request.from);
            // console.log(request)
-            return res.status(200).json({message : "Request updated"})
+            return res.status(200).json({message : "Request updated" , file : req.body.file})
         }
     })
 }
