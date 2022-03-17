@@ -7,7 +7,7 @@ exports.create = (req, fileName, res) =>{
     lastName = req.body.lastName || '##Last Name##';
     cin = req.body.cin || '##CIN##';
     date_in = moment(req.body.date_in).format('DD/MM/YYYY') || '##Date In##';
-    date_out = req.body.date_out == null ? "Present" : moment(req.body.date_out).format('DD/MM/YYYY');
+    date_out = req.body.date_out == "Present" ? "Present" : moment(req.body.date_out).format('DD/MM/YYYY');
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
 

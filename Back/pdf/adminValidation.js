@@ -12,7 +12,7 @@ exports.create = (req) =>{
       firstName: req.body.firstName,
       cin: req.body.cin,
       date_in: moment(req.body.date_in).format('YYYY-MM-DD[T00:00:00.000Z]'),
-      date_out: moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]'),
+      date_out: req.body.date_out == null ? "Present" : moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]'),
       job_title: req.body.job_title,
       department: req.body.department,
   }, (err, user)=>{});
