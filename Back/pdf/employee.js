@@ -23,7 +23,7 @@ exports.create = (req, fileName, res) =>{
     saveToPath = "../../Front/src/assets/pdf/";
     var todayFormat = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
     logoPath = path.join(__dirname,'../assets/cls.jfif');
-
+    signature = path.join(__dirname,'../assets/signature.jpg');
     try{
         var doc = new PDFDocument();
         var pdfFile = path.join(__dirname, saveToPath+fileName);
@@ -52,7 +52,7 @@ exports.create = (req, fileName, res) =>{
           .moveDown()
           .text('Prénom et nom de l’intermédiaire')
           .text('Signature et cachet');
-  
+          doc.image(signature,240,550,{width : 400})
         doc.pipe(pdfStream);
         doc.pipe(fs.createWriteStream(pdfFile));
   
