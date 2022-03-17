@@ -19,6 +19,7 @@ router.post('/addRequest', passport.authenticate('jwt', { session: false }), Req
 router.get('/getRequest/:type', passport.authenticate('jwt', { session: false }), RequestController.getRequest);
 //Get  all employees
 router.get('/getEmployees', EmployeeController.getEmployees);
-
+//Get  employee by id
+router.get('/getEmployeeById/:id', EmployeeController.getEmployeeById);
 module.exports = router;
 

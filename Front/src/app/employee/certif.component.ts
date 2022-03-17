@@ -65,15 +65,24 @@ export class CertifComponent implements OnInit , AfterViewInit {
   }
 
   sendRequest(){
-    this.employeeService.addRequest(this.certifType).subscribe(
-      (res) => {
-        this.snackbar.open('Request sent successfully', 'close', {
-          duration: 2000,
-        });
-        this.getRequests();
-        this.promptDisplay = false;
-      }
-    );
+    this.employeeService.getEmployeeById().subscribe((res : any) =>{
+      //add type to res
+      res.type = this.certifType;
+      console.log(res);
+      
+      this.employeeService.addRequest(res).subscribe(
+        (res) => {
+          this.snackbar.open('Request sent successfully', 'close', {
+            duration: 2000,
+          });
+          this.getRequests();
+          this.promptDisplay = false;
+        }
+      );
+    });
+
+
+    
   }
 
   applyFilter(event: Event) {

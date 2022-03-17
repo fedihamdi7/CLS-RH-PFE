@@ -15,7 +15,7 @@ exports.addRequest = (req, res, next) => {
     query.sent_date = Date.now();
     var today = new Date();
     let unique_number = today.getTime();
-    fileName = 'attestation'+'-'+unique_number+'-'+req.body.id+'.pdf';
+    fileName = 'attestation'+'-'+unique_number+'-'+req.body._id+'.pdf';
     PDFEmployee.create(req,fileName);
     query.file=fileName;
     query.save();
