@@ -25,7 +25,8 @@ exports.create = (req) =>{
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
 
-    saveToPath = "../../Front/src/assets/pdf/";
+    saveToPath = "../assets/certifications/";
+
     try{
         var pdfFile = path.join(__dirname, saveToPath+req.body.file);
         pdfTemplates.workTemplate(firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile);

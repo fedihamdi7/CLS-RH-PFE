@@ -12,9 +12,9 @@ exports.create = (req, fileName, res) =>{
     department = req.body.department || '##Department##';
 
     
-    saveToPath = "../../Front/src/assets/pdf/";
+    saveToPath = "../assets/certifications/";
+    //delete file if exist
     try{
-        
         var pdfFile = path.join(__dirname, saveToPath+fileName);
         pdfTemplates.workTemplate(firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile);
     

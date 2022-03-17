@@ -3,7 +3,7 @@ const mail = require ('../mail/mail');
 const Request = require('../models/request');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
-const User = require('../models/users');
+
 
 
 exports.addRequest = (req, res, next) => {
@@ -61,4 +61,5 @@ exports.updateStatus = (req, res, next) => {
 
 exports.preview = (req, res, next) => {
     PDFAdmin.create(req);
+    return res.status(200).json(req.body.file)
 }
