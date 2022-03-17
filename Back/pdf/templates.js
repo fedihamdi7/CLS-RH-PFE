@@ -1,32 +1,17 @@
-const moment = require('moment');
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
 
-exports.create = (req, fileName, res) =>{
-    if(req.body.date_out == null){
-        reqdate_out = "Present";
-    }else{     
-      reqdate_out = moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]')
-    }
-
-    firstName = req.body.firstName || '##First Name##';
-    lastName = req.body.lastName || '##Last Name##';
-    cin = req.body.cin || '##CIN##';
-    date_in = moment(req.body.date_in).format('DD/MM/YYYY') || '##Date In##';
-    date_out = moment(reqdate_out).format('DD/MM/YYYY');
-    job_title = req.body.job_title || '##Job Title##';
-    department = req.body.department || '##Department##';
-
+exports.workTemplate = (firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile) => {
+    
     var today = new Date();
-    saveToPath = "../../Front/src/assets/pdf/";
     var todayFormat = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
     logoPath = path.join(__dirname,'../assets/cls.jfif');
     signature = path.join(__dirname,'../assets/signature.jpg');
-    try{
-        var doc = new PDFDocument();
-        var pdfFile = path.join(__dirname, saveToPath+fileName);
-        var pdfStream = fs.createWriteStream(pdfFile);
+    
+    
+    var doc = new PDFDocument();
+    var pdfStream = fs.createWriteStream(pdfFile);
   
         doc.fontSize(25).text('ATTESTATION DE TRAVAIL', 150, 80);
           
@@ -51,12 +36,9 @@ exports.create = (req, fileName, res) =>{
           .moveDown()
           .text('Prénom et nom de l’intermédiaire')
           .text('Signature et cachet');
-          doc.image(signature,240,600,{width : 400})
+          doc.image(signature,240,600,{width : 400});
         doc.pipe(pdfStream);
         doc.pipe(fs.createWriteStream(pdfFile));
   
         doc.end();
-      }catch(err){
-        console.error('MakePDF ERROR: ' + err.message);
-      }
 }
