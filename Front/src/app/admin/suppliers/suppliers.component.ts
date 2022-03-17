@@ -116,7 +116,7 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   onAddInvoice(id : String){
     this.dialog.open(AddInvoiceComponent, {
       width: '700px',
-      height : '60vh',
+      height : '50vh',
       data: {id : id}
     });
   }
