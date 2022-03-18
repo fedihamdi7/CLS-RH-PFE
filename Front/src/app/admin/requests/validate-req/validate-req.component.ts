@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -27,7 +27,7 @@ export class ValidateReqComponent implements OnInit {
   pdf : string = null;
   path : string = "http://localhost:3000/assets/certifications/";
   file : string = null;
-  constructor( private route: ActivatedRoute , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
+  constructor( private route: ActivatedRoute,private router : Router , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
   ngOnInit(): void {
     this.initializeView();
   }
@@ -76,7 +76,7 @@ export class ValidateReqComponent implements OnInit {
   }
 
   validate(){
-    this.isLoading = true;
+    // this.isLoading = true;
     let user:any = this.sharedService.getUserFromLocalStorage();
     let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
@@ -93,10 +93,11 @@ export class ValidateReqComponent implements OnInit {
       user_id : user_id
     }).subscribe((res:any) => {
       this.pdf= this.path + res.file;
-      this.isLoading = false;
+      // this.isLoading = false;
       this.snackbar.open("Request updated", "Close", {
         duration: 3000
       });
+      this.router.navigate(['/admin/requests']);
     });
   }
 
