@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SharedService } from './shared.service';
 
 @Injectable({
@@ -19,6 +20,8 @@ export class EmployeeService {
 
   userLocal :any = this.sharedService.getUserFromLocalStorage();
 
+  user= new Subject<string>();
+
   getRequests(type : string){
     return this.http.get('http://localhost:3000/api/employee/getRequest/'+type,{headers:this.headers});
   }
@@ -30,5 +33,21 @@ export class EmployeeService {
 
   addRequest(data :any){
     return this.http.post('http://localhost:3000/api/employee/addRequest',data,{headers:this.headers});    
+  }
+
+  updateProfile(data :any){
+    return this.http.post('http://localhost:3000/api/employee/updateEmployeeProfile/'+this.userLocal._id,data,{headers:this.headers});    
+  }
+
+
+  getUserName(){
+    this.getEmployeeById().subscribe( (data:any) =>{
+      this.user.next(data.firstName + ' ' + data.lastName);
+    });
+  }
+
+  userUpdateListener(){
+    this.getUserName();
+    return this.user.asObservable();
   }
 }

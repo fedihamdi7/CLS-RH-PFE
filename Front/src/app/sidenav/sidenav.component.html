@@ -36,8 +36,8 @@
     </mat-accordion> -->
 
     <div class="bottom_nav">
-      <img src="../../assets/avatar.png" alt="" class="user">
-      <span> {{ firstName }} {{lastName}} </span>
+      <a routerLink="profile" matTooltip="View Profile"><img src="../../assets/avatar.png" alt="" class="user"> </a>
+       <span> {{ firstName }} {{lastName}} </span>
       <button (click)="logout()"><mat-icon class="logout">exit_to_app</mat-icon></button>
     </div>
 

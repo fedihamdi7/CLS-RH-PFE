@@ -13,3 +13,10 @@ exports.getEmployeeById = (req, res, next) => {
         else return res.status(200).json(employee)
     })
 }
+
+exports.updateEmployeeProfile = (req, res, next) => {
+    User.findByIdAndUpdate(req.params.id, req.body, (err, employee)=>{
+        if (err) return res.status(401).json({update : false})
+        else return res.status(200).json({updated : true})
+    })
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from '../services/shared.service';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,13 +11,15 @@ export class SidenavComponent implements OnInit {
   firstName : String;
   lastName : String;
   panelOpenState = false;
-  constructor( private router:Router , private sharedService : SharedService) { }
+  constructor( private router:Router ,  private employeeService :EmployeeService) { }
 
   ngOnInit(): void {
-    let user :any = this.sharedService.getUserFromLocalStorage();
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.employeeService.userUpdateListener().subscribe( (data:any) =>{
+      this.firstName = data;
+    });
   }
+
+
   logout(){
     localStorage.clear();
     this.router.navigate(['/']);

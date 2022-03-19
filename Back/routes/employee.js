@@ -21,5 +21,7 @@ router.get('/getRequest/:type', passport.authenticate('jwt', { session: false })
 router.get('/getEmployees', EmployeeController.getEmployees);
 //Get  employee by id
 router.get('/getEmployeeById/:id', EmployeeController.getEmployeeById);
+// update employee profile
+router.post('/updateEmployeeProfile/:id', EmployeeController.updateEmployeeProfile);
 module.exports = router;
 
