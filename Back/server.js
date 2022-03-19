@@ -61,6 +61,6 @@ var io = require("socket.io")(server, {
 server.listen(port);
 
 io.on("connection",  function (socket)  {
-  // console.log("socket connected");
+   console.log("socket connected");
   socket.emit("test event", testNotif());
 });
