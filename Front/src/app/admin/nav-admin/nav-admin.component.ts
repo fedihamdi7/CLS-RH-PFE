@@ -21,9 +21,15 @@ export class NavAdminComponent implements OnInit,OnDestroy {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.requestService.getRequestsNotifications();
-    this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
+      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
       this.notification = data;      
     });
+    setInterval(()=>{
+      this.requestService.getRequestsNotifications();
+      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
+      this.notification = data;      
+    });
+    },3000);
   }
   logout(){
     localStorage.clear();
