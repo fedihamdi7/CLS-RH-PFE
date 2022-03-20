@@ -1,6 +1,8 @@
 const http = require("http");
 const app = require("./app");
 const Contract = require("./models/contract");
+// const notify = require("./routes/notification");
+const moment = require("moment");
 const testNotif = require("./routes/notification");
 require("dotenv").config();
 
@@ -50,7 +52,48 @@ server.on("listening", () => {
   const address = server.address();
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
+
+  notify();
+  setInterval(() => {
+    notify();
+  }, 300000);
 });
+
+function notify (){
+  let currentDate = new Date();
+  Contract.find({}, (err, contracts) => {
+    // console.log(contracts.length);
+    for (let contract of contracts){
+      let ContractExpires_at = moment(contract["expires_at"]).format("YYYY-MM-DD");
+      if (new Date(ContractExpires_at).getFullYear()-currentDate.getFullYear() == 0)
+      {
+        if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
+          console.log("email sent!!");
+          
+        }
+      }
+    }
+    console.log('------');
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var io = require("socket.io")(server, {
   cors: {
     origin: "*",
