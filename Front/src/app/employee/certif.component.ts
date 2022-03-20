@@ -45,7 +45,6 @@ export class CertifComponent implements OnInit , AfterViewInit {
         this.router.navigate(['404']);
       }else{
       this.certifType = params.type;
-      this.getRequests();
     }
     });
   }
@@ -79,10 +78,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
           this.requestService.getRequestsNotifications();
         }
       );
-    });
-
-
-    
+    });    
   }
 
   applyFilter(event: Event) {
