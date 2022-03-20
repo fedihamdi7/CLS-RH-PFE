@@ -50,17 +50,46 @@ server.on("listening", () => {
   const address = server.address();
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
-});
-var io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
+  // var io = require("socket.io")(server, {
+  //   cors: {
+  //     origin: "*",
+  //   },
+  // });
+  
+  // io.on("connection",  function (socket)  {
+  //    console.log("socket connected");
+  //   socket.emit("test event", testNotif());
+  // });
+  testNotiff()
+setInterval(() => {
+  testNotiff()
+},5000 );
 });
 
 // make server listen on port
 server.listen(port);
 
-io.on("connection",  function (socket)  {
-   console.log("socket connected");
-  socket.emit("test event", testNotif());
-});
+let Arr =[];
+async function testNotiff(){
+  const moment = require("moment");
+  const Contract = require("./models/contract");
+  let currentDate = new Date();
+  Contract.find({},async (err, contracts) =>  {
+   Arr= contracts
+ });
+ let i =0;
+ for (let contract of Arr){
+   let ContractExpires_at = moment(contract["expires_at"]).format("YYYY-MM-DD");
+   if (new Date(ContractExpires_at).getFullYear()-currentDate.getFullYear() == 0)
+   {
+     if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
+       i++;
+       console.log(i)
+        console.log("sending notification")
+        Arr.splice(contract)
+         //mail.sendNotification(contract);
+     }
+   }
+ }
+ 
+}

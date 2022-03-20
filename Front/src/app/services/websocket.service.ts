@@ -8,7 +8,7 @@ export class WebsocketService {
   socket: any;
   readonly uri:string="http://localhost:3000/";
   constructor() {
-    this.socket=io.connect(this.uri);
+    //this.socket=io.connect(this.uri);
   }
   listen(eventName:string){
     return new Observable((observer) => {

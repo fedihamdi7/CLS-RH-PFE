@@ -124,3 +124,45 @@ exports.sendAfterRegister = (req, res, next) => {
     return console.log("Email sent!!!");
   });
 }
+
+exports.sendNotification = (req, res, next) => {
+  console.log(req)
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "cls.rh.2022@gmail.com",
+      pass: "xfhedkatasyxpmvg",
+    },
+  });
+
+  //current folder path
+
+  const handlebarOptions = {
+    viewEngine: {
+      extName: ".hbs",
+      partialsDir: path.resolve("./mail/views"),
+      defaultLayout: false,
+    },
+    viewPath: path.resolve("./mail/views"),
+    extName: ".hbs",
+  };
+  transporter.use("compile", hbs(handlebarOptions));
+
+  let mailOptions = {
+    from: "cls.rh.2022@gmail.com", // TODO: email sender
+    to: "aminos.bo.12@gmail.com", // TODO: email receiver
+    subject: "New Document Request",
+    template: "index",
+    context: {
+      name: req.body,
+      url:"http://localhost:4200/admin/contracts/"+req._id
+    },
+  };
+
+  transporter.sendMail(mailOptions, (err, data) => {
+    if (err) {
+      return console.log("Error occurs : " + err);
+    }
+    return console.log("Email sent!!!");
+  });
+};
