@@ -20,7 +20,7 @@ const ELEMENT_DATA: userTable[] = [];
   templateUrl: './requests.component.html',
   styleUrls: ['./requests.component.css']
 })
-export class RequestsComponent implements OnInit, OnDestroy,AfterViewInit {
+export class RequestsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['n','sender', 'sent_date', 'status', 'type','action'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   private requestsSub :Subscription | undefined;
@@ -69,12 +69,6 @@ export class RequestsComponent implements OnInit, OnDestroy,AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-
-  ngOnDestroy(): void {
-    this.requestsSub!.unsubscribe();
-
   }
 
 }
