@@ -27,7 +27,7 @@ function notify() {
     }
   }
   result=[...new Set(notifArr)];
-  console.log(result)
+  // console.log(result)
   return result;
 }
 module.exports = notify;

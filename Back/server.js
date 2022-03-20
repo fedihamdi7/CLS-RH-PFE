@@ -80,16 +80,30 @@ function notify (){
 
 
 
-// var io = require("socket.io")(server, {
-//   cors: {
-//     origin: "*",
-//   },
-// });
 
-// // make server listen on port
-// server.listen(port);
 
-// io.on("connection",  function (socket)  {
-//    console.log("socket connected");
-//   socket.emit("test event", testNotif());
-// });
+
+
+
+
+
+
+
+
+
+
+
+
+var io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+// make server listen on port
+server.listen(port);
+
+io.on("connection",  function (socket)  {
+   console.log("socket connected");
+  socket.emit("test event", testNotif());
+});
