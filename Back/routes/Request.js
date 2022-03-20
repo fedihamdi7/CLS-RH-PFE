@@ -11,6 +11,7 @@ router.get('/getRequestById/:id', RequestController.getRequestById);
 router.post('/updateStatus/:id', RequestController.updateStatus);
 // Previw PDF 
 router.post('/preview/', RequestController.preview);
-
+// get requests still in porgress
+router.get('/getRequestsInProgress', RequestController.getRequestsInProgress);
 
 module.exports = router;

@@ -63,3 +63,12 @@ exports.preview = (req, res, next) => {
     PDFAdmin.create(req);
     return res.status(200).json(req.body.file)
 }
+
+
+exports.getRequestsInProgress = (req, res, next) => {
+    //get count of request in progress
+    Request.countDocuments({status: "in progress"}, (err, count)=>{
+        if(err) return res.status(404).json({message: "Request not found"})
+        else return res.status(200).json({count})
+    })
+}

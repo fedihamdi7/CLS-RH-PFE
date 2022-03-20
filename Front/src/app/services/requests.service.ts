@@ -12,6 +12,7 @@ export class RequestsService {
   requests = new Subject<any>();
   oneReq = new Subject<any>();
 
+  notification = new Subject<any>();
   ///////////// ALL REQUESTS ///////////////
   getRequests(){
     this.http.get('http://localhost:3000/api/request/getAllRequests').subscribe(
@@ -34,5 +35,13 @@ export class RequestsService {
   }
   oneReqUpdateListener(){
     return this.oneReq.asObservable();
+  }
+  getRequestsNotifications(){
+    this.http.get('http://localhost:3000/api/request/getRequestsInProgress').subscribe((data : any) => {
+      this.notification.next(data.count);
+    });
+  }
+  notificationUpdateListener(){
+    return this.notification.asObservable();
   }
 }

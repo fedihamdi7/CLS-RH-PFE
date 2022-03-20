@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RequestsService } from '../services/requests.service';
 export interface requestTable {
   n : number
   sent_date: string;
@@ -27,7 +28,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
   dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
   certifType : string ;
-  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute , private router : Router) { }
+  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute, private requestService : RequestsService , private router : Router) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -67,9 +68,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
   sendRequest(){
     this.employeeService.getEmployeeById().subscribe((res : any) =>{
       //add type to res
-      res.type = this.certifType;
-      console.log(res);
-      
+      res.type = this.certifType;     
       this.employeeService.addRequest(res).subscribe(
         (res) => {
           this.snackbar.open('Request sent successfully', 'close', {
@@ -77,6 +76,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
           });
           this.getRequests();
           this.promptDisplay = false;
+          this.requestService.getRequestsNotifications();
         }
       );
     });
