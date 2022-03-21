@@ -44,8 +44,9 @@ export class CertifComponent implements OnInit , AfterViewInit {
       if (params.type != "work" && params.type != "internship") {
         this.router.navigate(['404']);
       }else{
-      this.certifType = params.type;
-    }
+        this.certifType = params.type;
+        this.getRequests();
+      }
     });
   }
 

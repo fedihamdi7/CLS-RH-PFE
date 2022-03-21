@@ -63,6 +63,9 @@
     "in progress" : "en cours",
     "done" : "terminé",
     "declined" : "refusé",
-    "Phone should be 8 digits" : "Le Telephone doit être composé de 8 chiffres"
+    "Phone should be 8 digits" : "Le Telephone doit être composé de 8 chiffres",
+    "internship Certifications" : "Certifications de stage",
+    "work Certifications" : "Certifications de travail",
+    "Download" : "Télécharger"
 
 }

@@ -36,6 +36,12 @@ mat-expansion-panel{
 mat-panel-title{
   user-select: none;
 }
+
+.work_icon{
+  position: absolute;
+  right: 12px;
+  color: #7137AC
+}
 .side_nav_icons{
   position: absolute;
   right: 6%;

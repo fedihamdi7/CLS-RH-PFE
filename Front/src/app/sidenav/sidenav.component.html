@@ -10,8 +10,20 @@
     <img id="logo" src="../../assets/logo.jfif" alt="">
 
     <div class="side">
-      <button mat-raised-button routerLinkActive="active" routerLink="/employee/work" >Work Certifications<mat-icon class="side_nav_icons" style="color: #7137AC;">text_snippet</mat-icon></button>
-      <button mat-raised-button routerLinkActive="active" routerLink="/employee/internship" >Internship Certifications<mat-icon class="side_nav_icons" style="color: #AC3737">text_snippet</mat-icon> </button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/employee/work" >{{ "Work Certifications" | translate}}<mat-icon class="side_nav_icons" style="color: #7137AC;">text_snippet</mat-icon></button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/employee/internship" >{{ "Internship Certifications" | translate}}<mat-icon class="side_nav_icons" style="color: #AC3737">text_snippet</mat-icon> </button>
+    
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ "Change Language" | translate}} <mat-icon class="work_icon">language</mat-icon>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+           <button mat-button style="margin: 10px;" (click)="changeLanguage('en-US')">English</button> 
+          <button mat-button style="margin: 10px;" (click)="changeLanguage('fr-FR')">French</button>
+        </mat-expansion-panel>
+      </mat-accordion> 
     </div>
 
 
