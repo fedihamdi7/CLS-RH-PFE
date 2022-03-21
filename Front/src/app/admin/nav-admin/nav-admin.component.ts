@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -14,7 +15,7 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   lastName : String;
   notification : string;
   private subsription_notification : Subscription; 
-  constructor( private router:Router, private sharedService : SharedService, private requestService : RequestsService) { }
+  constructor( private router:Router, private sharedService : SharedService, private requestService : RequestsService , private translateService : TranslateService) { }
 
   ngOnInit(): void {
     let user :any = this.sharedService.getUserFromLocalStorage();
@@ -30,6 +31,11 @@ export class NavAdminComponent implements OnInit,OnDestroy {
       this.notification = data;      
     });
     },3000);
+  }
+
+
+  changeLanguage(lang: string) {
+    this.translateService.use(lang);
   }
   logout(){
     localStorage.clear();

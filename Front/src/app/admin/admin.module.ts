@@ -18,6 +18,14 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-details.component';
 import { SupplierInvoicesComponent } from './suppliers/supplier-invoices/supplier-invoices.component';
 import { AddInvoiceComponent } from './suppliers/add-invoice/add-invoice.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -41,8 +49,17 @@ import { AddInvoiceComponent } from './suppliers/add-invoice/add-invoice.compone
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    PdfViewerModule
+    PdfViewerModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en-US',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ]
 })
 export class AdminModule { }
