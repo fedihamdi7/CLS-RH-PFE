@@ -35,9 +35,7 @@ export class InvoicesComponent implements OnInit {
   getAllInvoices(){
     this.invoicesService.invoiceUpdateListener().subscribe(
       (res: any) => {
-        this.dataSource.data = res.map((invoice:any, index : number) => {
-          console.log(res);
-          
+        this.dataSource.data = res.map((invoice:any, index : number) => {    
           return {
             n: index+1,
             _id : invoice._id,
