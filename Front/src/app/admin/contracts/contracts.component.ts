@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TranslateService } from '@ngx-translate/core';
 import { ContractsService } from 'src/app/services/contracts.service';
 
 
@@ -18,7 +19,7 @@ export class ContractsComponent implements OnInit {
   displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   isLoadingResults = true;
-  constructor(private contractsService : ContractsService) { }
+  constructor(private contractsService : ContractsService , private translateService : TranslateService) { }
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

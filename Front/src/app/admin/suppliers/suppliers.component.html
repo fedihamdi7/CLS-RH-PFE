@@ -1,5 +1,5 @@
-<h2> Suppliers </h2>
-<button mat-raised-button color="accent" class="add-btn" (click)="showForm()"> Add Supplier</button>
+<h2> {{ "Suppliers" | translate}} </h2>
+<button mat-raised-button color="accent" class="add-btn" (click)="showForm()"> {{ "Add Suppliers" | translate}}</button>
 
 <div class="container">
   <mat-form-field appearance="standard" class="filter">
@@ -15,54 +15,54 @@
   </ng-container>
   <!-- name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Name" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
   <!-- email Column -->
   <ng-container matColumnDef="email" >
-    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <th mat-header-cell *matHeaderCellDef> {{ "Email" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.email }} </td>
   </ng-container>
   <!-- phone Column -->
   <ng-container matColumnDef="phone">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Phone" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
   </ng-container>
 
   <!-- address Column -->
   <ng-container matColumnDef="address">
-    <th mat-header-cell *matHeaderCellDef> Address </th>
+    <th mat-header-cell *matHeaderCellDef> {{ "Address" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.address}} </td>
   </ng-container>
 
   <!-- contract_start_date Column -->
   <ng-container matColumnDef="contract_start_date" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Contract start date </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Contract start date" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.contract_start_date | date: 'mediumDate' }} </td>
   </ng-container>
   <!-- contract_end_date Column -->
   <ng-container matColumnDef="contract_end_date" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Contract end date </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Contract end date" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.contract_end_date | date: 'mediumDate' }} </td>
   </ng-container>
   <!-- add_contract Column -->
   <ng-container matColumnDef="add_contract" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Add contract </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Add Contract" | translate}} </th>
     <td mat-cell *matCellDef="let element">  <button mat-mini-fab color="warn" (click)="onAddContract(element._id)"><mat-icon>add</mat-icon></button></td>
   </ng-container>
   <!-- add_invoice Column -->
   <ng-container matColumnDef="add_invoice" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Add Invoice </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Add Invoice" | translate}} </th>
     <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="accent" (click)="onAddInvoice(element._id)"><mat-icon>add</mat-icon></button> </td>
   </ng-container>
 
   <ng-container matColumnDef="all_contracts" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> All contracts </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "All Contract" | translate}} </th>
     <td mat-cell *matCellDef="let element"> <a routerLink="contracts/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
   <ng-container matColumnDef="all_invoices" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> All Invoices </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "All Invoices" | translate}} </th>
     <td mat-cell *matCellDef="let element"> <a routerLink="invoices/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
 
@@ -83,7 +83,7 @@
   <form [formGroup]="form" (submit)="onSubmit()">
 
           <mat-form-field appearance="fill" style="width: 100%;">
-            <mat-label>Name</mat-label>
+            <mat-label>{{ "Name" | translate}}</mat-label>
             <input matInput formControlName="name" placeholder="Name...">
 
           </mat-form-field>
@@ -91,19 +91,19 @@
 
 
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-label>Email</mat-label>
+          <mat-label>{{ "Email" | translate}}</mat-label>
           <input matInput formControlName="email" type="email" placeholder="email...">
         </mat-form-field>
 
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-label>Phone</mat-label>
+          <mat-label>{{ "Phone" | translate}}</mat-label>
           <input matInput formControlName="phone" type="number" placeholder="Phone...">
           <mat-error *ngIf="form.get('phone').errors">
-            ID should be 8 digits
+            {{ "Phone should be 8 digits" | translate}}
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-label>Address</mat-label>
+          <mat-label>{{ "Address" | translate}}</mat-label>
           <input matInput formControlName="address" type="text" placeholder="Address...">
         </mat-form-field>
 
@@ -111,7 +111,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field appearance="fill" style="width:100%;">
-            <mat-label>Choose a date</mat-label>
+            <mat-label>{{ "Contract start date" | translate}}</mat-label>
             <input matInput formControlName="contract_start_date" [matDatepicker]="pickerIn">
             <mat-datepicker-toggle matSuffix [for]="pickerIn"></mat-datepicker-toggle>
             <mat-datepicker #pickerIn></mat-datepicker>
@@ -119,7 +119,7 @@
         </div>
         <div class="col">
           <mat-form-field appearance="fill" style="width:100%;">
-            <mat-label>Choose a date</mat-label>
+            <mat-label>{{ "Contract end date" | translate}}</mat-label>
             <input matInput formControlName="contract_end_date" [matDatepicker]="pickerOut">
             <mat-datepicker-toggle matSuffix [for]="pickerOut"></mat-datepicker-toggle>
             <mat-datepicker #pickerOut></mat-datepicker>
@@ -128,6 +128,6 @@
       </div>
 
 
-      <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">Add Supplier</button>
+      <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">{{ "Add Supplier" | translate}}</button>
   </form>
 </div>

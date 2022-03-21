@@ -36,6 +36,7 @@ export class NavAdminComponent implements OnInit,OnDestroy {
 
   changeLanguage(lang: string) {
     this.translateService.use(lang);
+    this.translateService.setDefaultLang(lang);    
   }
   logout(){
     localStorage.clear();

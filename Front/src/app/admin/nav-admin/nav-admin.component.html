@@ -9,10 +9,10 @@
   <mat-drawer #drawer  mode="side" opened class="drawer">
     <img id="logo" src="../../assets/logo.jfif" alt="">
     <div class="side">
-      <button mat-raised-button routerLinkActive="active" routerLink="/admin/requests" >Documents Requests <mat-icon matBadge="{{notification}}" class="side_nav_icons" style="color: rgb(97, 27, 211);">text_snippet</mat-icon></button>
-      <button mat-raised-button routerLinkActive="active" routerLink="/admin/users" >Users <mat-icon class="side_nav_icons" style="color: rgb(32, 40, 151);">supervised_user_circle</mat-icon> </button>
-      <button mat-raised-button routerLinkActive="active" routerLink="/admin/suppliers" >Suppliers <mat-icon class="side_nav_icons" style="color: rgb(13, 109, 21);">local_shipping</mat-icon> </button>
-      <button mat-raised-button routerLinkActive="active" routerLink="/admin/contracts" >Contracts <mat-icon class="side_nav_icons" style="color: rgb(107, 11, 35);">bookmark</mat-icon> </button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/admin/requests" >{{ "Documents Requests" | translate}} <mat-icon matBadge="{{notification}}" class="side_nav_icons" style="color: rgb(97, 27, 211);">text_snippet</mat-icon></button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/admin/users" >{{ "Users" | translate}} <mat-icon class="side_nav_icons" style="color: rgb(32, 40, 151);">supervised_user_circle</mat-icon> </button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/admin/suppliers" >{{ "Suppliers" | translate}} <mat-icon class="side_nav_icons" style="color: rgb(13, 109, 21);">local_shipping</mat-icon> </button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/admin/contracts" >{{ "Contracts" | translate}} <mat-icon class="side_nav_icons" style="color: rgb(107, 11, 35);">bookmark</mat-icon> </button>
       <button mat-raised-button routerLinkActive="active" routerLink="/admin/invoices" >{{'Invoices' | translate }} <mat-icon class="side_nav_icons" style="color: rgb(118, 126, 15);">receipt</mat-icon> </button>
       
       
@@ -20,7 +20,7 @@
         <mat-expansion-panel hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-            Change Language <mat-icon class="work_icon">language</mat-icon>
+              {{ "Change Language" | translate}} <mat-icon class="work_icon">language</mat-icon>
             </mat-panel-title>
           </mat-expansion-panel-header>
            <button mat-button style="margin: 10px;" (click)="changeLanguage('en-US')">English</button> 
