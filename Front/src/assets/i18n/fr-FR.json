@@ -6,7 +6,7 @@
     "Contracts" : "Contrats",
     "Invoices" : "Facture",
     "Change Language" : "Changer la langue",
-    "Filter" : "Filtre",
+    "Filter" : "Rechercher",
     "Sender" : "Expéditeur",
     "Sent Date" : "Date d'envoi",
     "Status" : "Statut",
@@ -66,6 +66,13 @@
     "Phone should be 8 digits" : "Le Telephone doit être composé de 8 chiffres",
     "internship Certifications" : "Certifications de stage",
     "work Certifications" : "Certifications de travail",
-    "Download" : "Télécharger"
+    "Internship Certifications" : "Certifications de stage",
+    "Work Certifications" : "Certifications de travail",
+    "Download" : "Télécharger",
+    "Send work Certification Request" : "Envoyer une demande de certification de travail",
+    "Send internship Certification Request" : "Envoyer une demande de certification de stage",
+    "Are you sure ?" : "Êtes-vous sûr ?",
+    "Send" : "Envoyer",
+    "Cancel" : "Annuler"
 
 }

@@ -3,7 +3,7 @@
 <h2 class="title"> {{certifType +' Certifications'|translate}} </h2>
 <div class="container">
   <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
+    <mat-label>{{"Filter" | translate}}</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Type Name..." #input>
   </mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDisableClear matSortActive="position" matSortDirection="asc">
@@ -51,11 +51,11 @@
 
 <div class="model-bg" *ngIf="promptDisplay">
   <div class="quest">
-    <h3>Send Work Certification Request </h3>
-    <p>Are you sure ?</p>
+    <h3>{{"Send "+certifType+" Certification Request" | translate}} </h3>
+    <p>{{"Are you sure ?" | translate }}</p>
     <div class="buttons">
-      <button mat-raised-button style="background-color: green; color: white;" (click)="sendRequest()">Send</button>
-      <button mat-raised-button style="background-color: rgb(126, 10, 10); color: white;" (click)="onPromptClose()">Cancel</button>
+      <button mat-raised-button style="background-color: green; color: white;" (click)="sendRequest()">{{"Send" | translate}}</button>
+      <button mat-raised-button style="background-color: rgb(126, 10, 10); color: white;" (click)="onPromptClose()">{{"Cancel" | translate}}</button>
     </div>
   </div>
 </div>
