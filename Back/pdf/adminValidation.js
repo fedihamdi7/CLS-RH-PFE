@@ -7,7 +7,7 @@ const pdfTemplates = require('./templates');
 
 
 exports.create = (req) =>{
-    User.findOneAndUpdate(req.body.id, {
+    User.findOneAndUpdate({_id : req.body.user_id}, {
       lastName: req.body.lastName,
       firstName: req.body.firstName,
       cin: req.body.cin,

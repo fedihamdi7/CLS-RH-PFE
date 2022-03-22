@@ -27,6 +27,7 @@ export class ValidateReqComponent implements OnInit {
   pdf : string = null;
   path : string = "http://localhost:3000/assets/certifications/";
   file : string = null;
+  sender : string = null;
   constructor( private route: ActivatedRoute,private router : Router , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
   ngOnInit(): void {
     this.initializeView();
@@ -37,6 +38,7 @@ export class ValidateReqComponent implements OnInit {
 
     this.reqService.getRequest(this.id);
     this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : any) =>{
+      this.sender= req[0].from._id;      
       this.pdf =this.path + req[0].file;
       this.file = req[0].file;
       this.isLoading = false;
@@ -56,8 +58,6 @@ export class ValidateReqComponent implements OnInit {
   getPDF(){
     //get user_id from local storage and parse it
     this.isLoading = true;
-    let user:any = this.sharedService.getUserFromLocalStorage();
-    let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/preview',{
       id : this.id,
       firstName : this.form.get('firstName')?.value,
@@ -68,7 +68,7 @@ export class ValidateReqComponent implements OnInit {
       job_title : this.form.get('job_title')?.value,
       department : this.form.get('department')?.value,
       file : this.file,
-      user_id : user_id
+      user_id : this.sender
     }).subscribe((res : any) => {  
       this.pdf= this.path + res;
       this.isLoading = false;

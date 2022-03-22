@@ -60,6 +60,7 @@ exports.updateStatus = (req, res, next) => {
 }
 
 exports.preview = (req, res, next) => {
+    // console.log(req.body);
     PDFAdmin.create(req);
     return res.status(200).json(req.body.file)
 }
