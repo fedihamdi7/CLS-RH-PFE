@@ -13,7 +13,7 @@ import { SharedService } from 'src/app/services/shared.service';
 export class NavAdminComponent implements OnInit,OnDestroy {
   firstName : String;
   lastName : String;
-  notification : string;
+  notification : number;
   private subsription_notification : Subscription; 
   constructor( private router:Router, private sharedService : SharedService, private requestService : RequestsService , private translateService : TranslateService) { }
 
@@ -24,6 +24,11 @@ export class NavAdminComponent implements OnInit,OnDestroy {
     this.requestService.getRequestsNotifications();
       this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
       this.notification = data;      
+    });
+
+    this.requestService.getRequestsNotifications();
+      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
+      this.notification = data;  
     });
     setInterval(()=>{
       this.requestService.getRequestsNotifications();

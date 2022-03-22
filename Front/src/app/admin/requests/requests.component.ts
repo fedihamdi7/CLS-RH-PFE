@@ -36,6 +36,7 @@ export class RequestsComponent implements OnInit, AfterViewInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
   }
   ngOnInit(): void {
+    this.getReqs();
     setInterval(()=>{
       this.getReqs();
     },3000);
