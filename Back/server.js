@@ -1,11 +1,9 @@
 const http = require("http");
 const app = require("./app");
 const Contract = require("./models/contract");
-// const notify = require("./routes/notification");
+const notify = require("./routes/notification");
 const moment = require("moment");
-const testNotif = require("./routes/notification");
 require("dotenv").config();
-
 // set the application port
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
@@ -59,51 +57,6 @@ server.on("listening", () => {
   }, 300000);
 });
 
-function notify (){
-  let currentDate = new Date();
-  Contract.find({}, (err, contracts) => {
-    // console.log(contracts.length);
-    for (let contract of contracts){
-      let ContractExpires_at = moment(contract["expires_at"]).format("YYYY-MM-DD");
-      if (new Date(ContractExpires_at).getFullYear()-currentDate.getFullYear() == 0)
-      {
-        if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
-          console.log("email sent!!");
-          
-        }
-      }
-    }
-    console.log('------');
-  });
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-
 // make server listen on port
 server.listen(port);
 
-io.on("connection",  function (socket)  {
-   console.log("socket connected");
-  socket.emit("test event", testNotif());
-});
