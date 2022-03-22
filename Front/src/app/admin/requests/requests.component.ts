@@ -37,13 +37,14 @@ export class RequestsComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.getReqs();
-    setInterval(()=>{
-      this.getReqs();
-    },3000);
+    // setInterval(()=>{
+    //   this.getReqs();
+    // },3000);
   }
 
 
   getReqs(){
+    this.requestsService.getRequestsNotifications();
     this.requestsService.getRequests();
     //get reqs
     this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : any) =>{
