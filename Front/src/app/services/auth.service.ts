@@ -18,9 +18,10 @@ export class AuthService {
   login(user: { email: string, password: string }) {
 
 
-    this.httpClient.post<{success : boolean,status: number,token: any,user: { type: any; }}>('http://localhost:3000/api/employee/login',user).subscribe(res => {
+    this.httpClient.post<{success : boolean,status: number,token: any,user: { type: any; }}>('http://localhost:3000/api/employee/login',user).subscribe((res : any) => {
 
-
+    console.log(res);
+    
       if(res.success == true) {
         this.storeUserData(res.token,res.user);
         if(res.user.type == 'admin') {
@@ -33,6 +34,9 @@ export class AuthService {
         this.authStatusListener.next(true);
         this.typeListener.next(res.user.type);
       }else{
+        this.snackbar.open(res.message,'close',{
+          duration: 2000,
+        });
         this.authStatusListener.next(false);
       }
     },err => {
