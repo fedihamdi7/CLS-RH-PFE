@@ -6,7 +6,7 @@ import ls from 'localstorage-slim';
 export class SharedService {
 
   constructor() { }
-
+  lang = "en-US";
 
   putTokenInLocalStorage(token : string){
     // localStorage.setItem('id_token',token);
@@ -24,5 +24,9 @@ export class SharedService {
   getUserFromLocalStorage(){
     // return JSON.parse(localStorage.getItem('user'));
     return ls.get('user', { decrypt: true });
+  }
+
+  getLanguageFromLocalStorage(){
+    return localStorage.getItem('lang');
   }
 }

@@ -21,11 +21,16 @@ export class SidenavComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
+    // console.log(lang);
+    
     this.translateService.use(lang);
-    this.translateService.setDefaultLang(lang);    
+    this.translateService.setDefaultLang(lang);
+    localStorage.setItem('lang', lang);    
   }
   logout(){
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 }
