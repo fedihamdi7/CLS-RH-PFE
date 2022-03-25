@@ -21,6 +21,7 @@ import { AddInvoiceComponent } from './suppliers/add-invoice/add-invoice.compone
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedService } from '../services/shared.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     })
-  ]
+  ],
+  providers: [SharedService],
 })
 export class AdminModule { }

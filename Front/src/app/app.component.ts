@@ -11,15 +11,10 @@ import { SharedService } from './services/shared.service';
 export class AppComponent implements OnInit{
   title = 'CLS';
   favIcon: HTMLLinkElement = document.querySelector('#appIcon');
-  constructor(private translateService : TranslateService , private sharedService : SharedService) {
+  constructor(private sharedService : SharedService) {
     this.favIcon.href = './../assets/logo-icon.png';
   }
   ngOnInit(): void {
-    let lang = this.sharedService.getLanguageFromLocalStorage();
-    if (lang){
-    this.translateService.setDefaultLang(lang);
-    }else{
-      this.translateService.setDefaultLang('en-US');
-    }
+    this.sharedService.initializeAppLanguage();
   }
 }

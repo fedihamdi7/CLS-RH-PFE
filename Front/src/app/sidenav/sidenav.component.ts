@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { EmployeeService } from '../services/employee.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,7 +13,7 @@ export class SidenavComponent implements OnInit {
   firstName : String;
   lastName : String;
   panelOpenState = false;
-  constructor( private router:Router ,  private employeeService :EmployeeService , private translateService : TranslateService) { }
+  constructor( private sharedService:SharedService ,  private employeeService :EmployeeService , private translateService : TranslateService) { }
 
   ngOnInit(): void {
     this.employeeService.userUpdateListener().subscribe( (data:any) =>{
@@ -20,17 +21,10 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  changeLanguage(lang: string) {
-    // console.log(lang);
-    
-    this.translateService.use(lang);
-    this.translateService.setDefaultLang(lang);
-    localStorage.setItem('lang', lang);    
+  changeLanguage(lang: string) { 
+    this.sharedService.changeLanguage(lang);
   }
   logout(){
-    // localStorage.clear();
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
+    this.sharedService.logout();
   }
 }

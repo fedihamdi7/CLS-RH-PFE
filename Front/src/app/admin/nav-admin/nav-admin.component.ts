@@ -15,16 +15,10 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   lastName : String;
   notification : number;
   private subsription_notification : Subscription; 
-  constructor( private router:Router, private sharedService : SharedService, private requestService : RequestsService , private translateService : TranslateService) { }
+  constructor(private sharedService : SharedService, private requestService : RequestsService , private translateService : TranslateService) { }
 
   ngOnInit(): void {
-    let lang = this.sharedService.getLanguageFromLocalStorage();
-    if (lang){
-    this.translateService.setDefaultLang(lang);
-    }else{
-      this.translateService.setDefaultLang('en-US');
-    }
-
+    this.sharedService.initializeAppLanguage();
     let user :any = this.sharedService.getUserFromLocalStorage();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
@@ -36,17 +30,10 @@ export class NavAdminComponent implements OnInit,OnDestroy {
 
 
   changeLanguage(lang: string) {
-    this.translateService.use(lang);
-    this.translateService.setDefaultLang(lang);   
-    localStorage.setItem('lang', lang);    
-    
-    
+    this.sharedService.changeLanguage(lang);
   }
   logout(){
-    // localStorage.clear();
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
+    this.sharedService.logout();
   }
 
   ngOnDestroy(){
