@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { InvoicesService } from 'src/app/services/invoices.service';
+import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
 
 const ELEMENT_DATA: any[] = [];
 
@@ -17,8 +19,8 @@ export class SupplierInvoicesComponent implements OnInit {
   displayedColumns: string[] = ['n', 'supplier', 'payment_method', 'payment_status', 'date', 'amount', 'details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   isLoadingResults = true;
-  constructor(private invoicesService: InvoicesService, private route: ActivatedRoute) { }
-
+  constructor(private invoicesService: InvoicesService, private route: ActivatedRoute , private dialog:MatDialog) { }
+  id : string;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -34,6 +36,7 @@ export class SupplierInvoicesComponent implements OnInit {
 
   getInvoice() {
     this.route.params.subscribe(params => {
+      this.id = params.id;
       this.invoicesService.getInvoicesBySupplierId(params.id).subscribe(
         (res: any) => {
           console.log(res);
@@ -59,6 +62,19 @@ export class SupplierInvoicesComponent implements OnInit {
       );
     }
     );
+  }
+
+  onAddInvoice(id : String){
+    this.dialog.open(AddInvoiceComponent, {
+      width: '700px',
+      height : '50vh',
+      data: {id : id}
+    });
+
+    //after closing dialog
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getInvoice();
+    });
   }
 
   applyFilter(event: Event) {

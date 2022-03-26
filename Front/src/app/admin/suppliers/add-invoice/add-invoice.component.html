@@ -4,7 +4,7 @@
 
   <div class="row">
     <mat-form-field appearance="fill" class="col">
-      <mat-label>Date</mat-label>
+      <mat-label>{{ "Date" | translate}}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -12,31 +12,31 @@
 
     
     <mat-form-field appearance="fill" class="col">
-      <mat-label>Payment Status</mat-label>
+      <mat-label>{{ "Payment Status" | translate}}</mat-label>
       <mat-select formControlName="payment_status">
-        <mat-option value="paid">Paid</mat-option>
-        <mat-option value="not_paid">Not Paid</mat-option>
-        <mat-option value="paid_by_split">Paid by Split</mat-option>
+        <mat-option value="paid">{{ "Paid" | translate}}</mat-option>
+        <mat-option value="not_paid">{{ "Not Paid" | translate}}</mat-option>
+        <mat-option value="paid_by_split">{{ "Paid By Split" | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col">
-      <mat-label>Payment Methode</mat-label>
+      <mat-label>{{ "Payment Methode" | translate}}</mat-label>
       <mat-select formControlName="payment_method">
-        <mat-option value="cash">Cash</mat-option>
-        <mat-option value="cheque">Cheque</mat-option>
+        <mat-option value="cash">{{ "Cash" | translate}}</mat-option>
+        <mat-option value="cheque">{{ "Cheque" | translate}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col">
-      <mat-label>Payment Amount(TND)</mat-label>
+      <mat-label>{{ "Payment Amount" | translate}}</mat-label>
       <input matInput formControlName="amount">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="col">
-      <mat-label>Amount Exluding Taxes</mat-label>
+      <mat-label>{{ "Amount Excluding Taxes" | translate}}</mat-label>
       <input matInput formControlName="Amount_excluding_taxes">
     </mat-form-field>
   </div>
-  <button mat-raised-button color="primary" class="submit">Submit</button>
+  <button mat-raised-button color="primary" class="submit">{{ "Submit" | translate}}</button>
 </form>

@@ -47,15 +47,15 @@
     <td mat-cell *matCellDef="let element"> {{element.contract_end_date | date: 'mediumDate' }} </td>
   </ng-container>
   <!-- add_contract Column -->
-  <ng-container matColumnDef="add_contract" >
+  <!-- <ng-container matColumnDef="add_contract" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Add Contract" | translate}} </th>
     <td mat-cell *matCellDef="let element">  <button mat-mini-fab color="warn" (click)="onAddContract(element._id)"><mat-icon>add</mat-icon></button></td>
-  </ng-container>
+  </ng-container> -->
   <!-- add_invoice Column -->
-  <ng-container matColumnDef="add_invoice" >
+  <!-- <ng-container matColumnDef="add_invoice" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Add Invoice" | translate}} </th>
     <td mat-cell *matCellDef="let element"> <button mat-mini-fab color="accent" (click)="onAddInvoice(element._id)"><mat-icon>add</mat-icon></button> </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="all_contracts" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "All Contract" | translate}} </th>

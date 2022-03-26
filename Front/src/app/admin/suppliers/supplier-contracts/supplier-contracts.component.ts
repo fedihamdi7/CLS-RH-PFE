@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { SuppliersService } from 'src/app/services/suppliers.service';
+import { AddContractComponent } from '../add-contract/add-contract.component';
 
 @Component({
   selector: 'app-supplier-contracts',
@@ -15,8 +17,8 @@ export class SupplierContractsComponent implements OnInit {
   displayedColumns: string[] = ['n', 'supplier', 'date_signature', 'expires_at', 'payment_status', 'details'];
   dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
   supplier_name : string;
-  constructor(private route: ActivatedRoute, private suppliersService: SuppliersService) { }
-
+  constructor(private route: ActivatedRoute, private suppliersService: SuppliersService , public dialog: MatDialog) { }
+  id : String;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -33,6 +35,7 @@ export class SupplierContractsComponent implements OnInit {
 
   getContracts() {
     this.suppliersService.getContractBySupplierId(this.route.snapshot.params.id).subscribe((data: any) => {
+      this.id = this.route.snapshot.params.id;
       this.supplier_name = data.contract[0].supplier.name;
       this.dataSource.data = data.contract.map((contract: any, index: number) => {
         return {
@@ -47,6 +50,18 @@ export class SupplierContractsComponent implements OnInit {
       });
     });
 
+  }
+
+  onAddContract(id : String){
+    this.dialog.open(AddContractComponent, {
+      width: '700px',
+      height : '60vh',
+      data: {id : id}
+    });
+    //on close dialog
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getContracts();
+    });
   }
 
   applyFilter(event: Event) {

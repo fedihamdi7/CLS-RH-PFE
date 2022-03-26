@@ -1,4 +1,6 @@
 <h2> Invoices </h2>
+<button mat-raised-button color="accent" class="add-btn" (click)="onAddInvoice(id)"> {{ "Add Invoice" | translate}}</button>
+
 <div class="container">
   <div class="example-loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
@@ -15,7 +17,7 @@
   </ng-container>
   <!-- first_name Column -->
   <ng-container matColumnDef="supplier">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplier </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Supplier" | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.supplier.name}} </td>
   </ng-container>
 

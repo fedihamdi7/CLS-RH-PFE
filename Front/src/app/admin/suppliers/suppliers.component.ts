@@ -27,7 +27,7 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date','add_contract','add_invoice', 'all_contracts', 'all_invoices'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date', 'all_contracts', 'all_invoices'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   form !: FormGroup;
@@ -105,21 +105,21 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onAddContract(id : String){
-    this.dialog.open(AddContractComponent, {
-      width: '700px',
-      height : '60vh',
-      data: {id : id}
-    });
-  }
+  // onAddContract(id : String){
+  //   this.dialog.open(AddContractComponent, {
+  //     width: '700px',
+  //     height : '60vh',
+  //     data: {id : id}
+  //   });
+  // }
 
-  onAddInvoice(id : String){
-    this.dialog.open(AddInvoiceComponent, {
-      width: '700px',
-      height : '50vh',
-      data: {id : id}
-    });
-  }
+  // onAddInvoice(id : String){
+  //   this.dialog.open(AddInvoiceComponent, {
+  //     width: '700px',
+  //     height : '50vh',
+  //     data: {id : id}
+  //   });
+  // }
 
 }
 
