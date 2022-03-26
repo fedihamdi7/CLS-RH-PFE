@@ -31,7 +31,7 @@
     "Address" : "Adresse",
     "Contract start date" : "Date de début du contrat",
     "Contract end date" : "Date de fin du contrat",
-    "Add contract" : "Ajouter un contrat",
+    "Add Contract" : "Ajouter un contrat",
     "Add Invoice" : "Ajouter une facture",
     "All contracts" : "Tous les contrats",
     "All invoices" : "Toutes les factures",
@@ -39,10 +39,15 @@
     "Expiration Date" : "Date d'expiration",
     "Payment Status" : "Statut de paiement",
     "Details" : "Détails",
-    "paid" : "payé",
+    "Payment Methode" : "Méthode de paiement",
+    "paid" : "Payé",
+    "Paid" : "Payé",
     "not paid" : "non payé",
+    "Not Paid" : "non payé",
     "paid by split" : "payé par tranche",
+    "Paid By Split" : "payé par tranche",
     "Expires At" : "Expire le",
+    "Amount Excluding Taxes" : "Montant HT",
     "Payment Date" : "Date de paiement",
     "Payment Amount" : "Montant du paiement",
     "Payment Method" : "Méthode de paiement",
@@ -73,6 +78,7 @@
     "Send internship Certification Request" : "Envoyer une demande de certification de stage",
     "Are you sure ?" : "Êtes-vous sûr ?",
     "Send" : "Envoyer",
-    "Cancel" : "Annuler"
+    "Cancel" : "Annuler",
+    "Contracts Of" : "Contrats de"
 
 }
