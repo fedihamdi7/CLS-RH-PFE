@@ -1,13 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SuppliersService } from 'src/app/services/suppliers.service';
-import { AddContractComponent } from './add-contract/add-contract.component';
-import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
+import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 
 
 export interface SuppliersTable {
@@ -29,9 +26,8 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date', 'all_contracts', 'all_invoices'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
-  showAddForm : boolean = false;
-  form !: FormGroup;
-  constructor( private suppliersService : SuppliersService ,  private snackBar : MatSnackBar , public dialog: MatDialog) { }
+
+  constructor( private suppliersService : SuppliersService , public dialog: MatDialog) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,17 +40,6 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getSuppliers();
-
-    this.form = new FormGroup({
-      name : new FormControl(null, [Validators.required]),
-      email : new FormControl(null, [Validators.required , Validators.email] ),
-      phone : new FormControl(null, [Validators.required , Validators.pattern('[0-9]{8}')]),
-      address : new FormControl(null, [Validators.required]),
-      contract_start_date: new FormControl(null, [Validators.required]),
-      contract_end_date : new FormControl(null, [Validators.required])
-
-    });
-
   }
 
   getSuppliers(){
@@ -74,52 +59,22 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
       });
   });
   }
-  onSubmit(){
-    this.suppliersService.addSupplier(this.form.value).subscribe((res: any ) =>{
-      if (res.success == true){
-        this.snackBar.open("Supplier Added Successfully", 'close', {
-          duration: 2000,
-        });
-        this.getSuppliers();
-        this.showAddForm = false;
-        this.form.reset();
-      }
-      else{
-        this.snackBar.open("An error occured ", 'close', {
-          duration: 2000,
-        });
-      }
-    });
-
-  }
+  
 
   showForm(){
-    this.showAddForm = true;
+    this.dialog.open(AddSupplierComponent,{
+      width: '700px',
+      height : 'auto',
+    });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getSuppliers();
+    });
   }
-  onClickCloseForm(){
-    this.showAddForm = false;
-  }
-
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-  // onAddContract(id : String){
-  //   this.dialog.open(AddContractComponent, {
-  //     width: '700px',
-  //     height : '60vh',
-  //     data: {id : id}
-  //   });
-  // }
-
-  // onAddInvoice(id : String){
-  //   this.dialog.open(AddInvoiceComponent, {
-  //     width: '700px',
-  //     height : '50vh',
-  //     data: {id : id}
-  //   });
-  // }
 
 }
 

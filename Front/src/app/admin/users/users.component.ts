@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   private usersSub :Subscription | undefined;
-  constructor( private usersService : UsersService ,  private snackBar : MatSnackBar , private dialog : MatDialog) { }
+  constructor( private usersService : UsersService , private dialog : MatDialog) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
