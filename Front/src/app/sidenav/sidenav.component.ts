@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { EmployeeService } from '../services/employee.service';
 import { SharedService } from '../services/shared.service';
 
@@ -13,7 +11,7 @@ export class SidenavComponent implements OnInit {
   firstName : String;
   lastName : String;
   panelOpenState = false;
-  constructor( private sharedService:SharedService ,  private employeeService :EmployeeService , private translateService : TranslateService) { }
+  constructor( private sharedService:SharedService ,  private employeeService :EmployeeService ) { }
 
   ngOnInit(): void {
     this.employeeService.userUpdateListener().subscribe( (data:any) =>{

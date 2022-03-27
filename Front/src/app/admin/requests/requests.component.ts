@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -25,7 +24,7 @@ export class RequestsComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   private requestsSub :Subscription | undefined;
 
-  constructor( private requestsService : RequestsService ,  private snackBar : MatSnackBar) { }
+  constructor( private requestsService : RequestsService) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -37,19 +36,14 @@ export class RequestsComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.getReqs();
-    // setInterval(()=>{
-    //   this.getReqs();
-    // },3000);
   }
 
 
   getReqs(){
     this.requestsService.getRequestsNotifications();
     this.requestsService.getRequests();
-    //get reqs
-    this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : any) =>{
-      // console.log(reqs);
 
+    this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : any) =>{
       //for each employee map the data and push in the dataSource
       this.dataSource.data = reqs.map((reqs:any, index:number) => {
         return {

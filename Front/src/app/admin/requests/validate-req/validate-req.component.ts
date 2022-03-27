@@ -28,7 +28,13 @@ export class ValidateReqComponent implements OnInit {
   path : string = "http://localhost:3000/assets/certifications/";
   file : string = null;
   sender : string = null;
-  constructor( private route: ActivatedRoute,private router : Router , private reqService : RequestsService, private http:HttpClient, private snackbar: MatSnackBar , private sharedService: SharedService) { }
+  constructor(  private route: ActivatedRoute,
+                private router : Router , 
+                private reqService : RequestsService, 
+                private http:HttpClient, 
+                private snackbar: MatSnackBar , 
+                private sharedService: SharedService
+              ) { }
   ngOnInit(): void {
     this.initializeView();
   }

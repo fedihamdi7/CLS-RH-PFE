@@ -19,7 +19,7 @@ export class ContractsComponent implements OnInit {
   displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   isLoadingResults = true;
-  constructor(private contractsService : ContractsService , private translateService : TranslateService) { }
+  constructor(private contractsService : ContractsService) { }
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

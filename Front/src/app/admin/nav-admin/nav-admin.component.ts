@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { RequestsService } from 'src/app/services/requests.service';
@@ -15,7 +14,7 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   lastName : String;
   notification : number;
   private subsription_notification : Subscription; 
-  constructor(private sharedService : SharedService, private requestService : RequestsService , private translateService : TranslateService) { }
+  constructor(private sharedService : SharedService, private requestService : RequestsService) { }
 
   ngOnInit(): void {
     this.sharedService.initializeAppLanguage();

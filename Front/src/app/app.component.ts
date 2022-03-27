@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import * as io from 'socket.io-client';
 import { SharedService } from './services/shared.service';
 
 @Component({
