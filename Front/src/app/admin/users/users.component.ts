@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
+import { AddUserComponent } from './add-user/add-user.component';
 
 
 export interface userTable{
@@ -29,9 +31,8 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
-  form !: FormGroup;
   private usersSub :Subscription | undefined;
-  constructor( private usersService : UsersService ,  private snackBar : MatSnackBar) { }
+  constructor( private usersService : UsersService ,  private snackBar : MatSnackBar , private dialog : MatDialog) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -44,21 +45,6 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.getUsers();
-
-    this.form = new FormGroup({
-      firstName : new FormControl(null, [Validators.required]),
-      lastName : new FormControl(null, [Validators.required]),
-      email : new FormControl(null, [Validators.required , Validators.email] ),
-      password : new FormControl(null, [Validators.required , Validators.minLength(6)]),
-      phone : new FormControl(null, [Validators.required]),
-      cin : new FormControl(null, [Validators.required , Validators.minLength(8), Validators.maxLength(8)]),
-      date_in: new FormControl(null, [Validators.required]),
-      date_out: new FormControl(null),
-      job_title : new FormControl(null, [Validators.required]),
-      department : new FormControl(null, [Validators.required])
-
-    });
-
   }
 
   getUsers(){
@@ -80,27 +66,19 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   onSubmit(){
-    this.usersService.addUser(this.form.value).subscribe((res: any ) =>{
-      if (res.success == true){
-        this.snackBar.open(res.message, 'close', {
-          duration: 2000,
-        });
-        this.getUsers();
-        this.showAddForm = false;
-
-        this.form.reset();
-      }
-      else{
-        this.snackBar.open(res.message, 'close', {
-          duration: 2000,
-        });
-      }
-    });
+    
 
   }
 
   showForm(){
-    this.showAddForm = true;
+    // this.showAddForm = true;
+    this.dialog.open(AddUserComponent,{
+      width: '700px',
+      height : 'auto',
+    });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getUsers();
+    });
   }
   onClickCloseForm(){
     this.showAddForm = false;

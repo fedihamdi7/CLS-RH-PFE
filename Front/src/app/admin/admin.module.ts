@@ -22,6 +22,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedService } from '../services/shared.service';
+import { AddUserComponent } from './users/add-user/add-user.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,6 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     InvoicesDetailsComponent,
     SupplierInvoicesComponent,
     AddInvoiceComponent,
+    AddUserComponent,
 
   ],
   imports: [

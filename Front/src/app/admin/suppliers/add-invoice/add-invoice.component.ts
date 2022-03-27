@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InvoicesService } from 'src/app/services/invoices.service';
-import { AddContractComponent } from '../add-contract/add-contract.component';
 
 @Component({
   selector: 'app-add-invoice',
@@ -14,7 +13,7 @@ export class AddInvoiceComponent implements OnInit {
 
    //Variables
    form : FormGroup;
-   constructor(@Inject(MAT_DIALOG_DATA) public data : {id:string} ,public dialogRef: MatDialogRef<AddContractComponent>, private invoiceService : InvoicesService, private matSnack: MatSnackBar) { }
+   constructor(@Inject(MAT_DIALOG_DATA) public data : {id:string} ,public dialogRef: MatDialogRef<AddInvoiceComponent>, private invoiceService : InvoicesService, private matSnack: MatSnackBar) { }
  
    ngOnInit(): void {
      this.form = new FormGroup({
