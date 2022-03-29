@@ -79,6 +79,8 @@
     "Are you sure ?" : "Êtes-vous sûr ?",
     "Send" : "Envoyer",
     "Cancel" : "Annuler",
-    "Contracts Of" : "Contrats de"
+    "Contracts Of" : "Contrats de",
+    "Invoice N° : " : "Facture N° : ",
+    "Update" : "Mettre à jour"
 
 }

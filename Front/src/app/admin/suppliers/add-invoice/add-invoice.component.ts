@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InvoicesService } from 'src/app/services/invoices.service';
@@ -17,17 +17,18 @@ export class AddInvoiceComponent implements OnInit {
  
    ngOnInit(): void {
      this.form = new FormGroup({
-       date : new FormControl(null),
-       payment_status : new FormControl(null),
-       payment_method : new FormControl(null),
-       amount : new FormControl(null),
-       Amount_excluding_taxes : new FormControl(null),
+      date : new FormControl(null,Validators.required),
+      payment_status : new FormControl(null,Validators.required),
+      payment_method : new FormControl(null , Validators.required),
+      amount : new FormControl(null , [Validators.required, Validators.pattern("^[0-9]*$")]),
+      Amount_excluding_taxes : new FormControl(null,[Validators.required, Validators.pattern("^[0-9]*$")]),
+      pdf : new FormControl(null,Validators.required),
      });
    }
  
    onSubmit(){
      let data = this.form.value;
-     data.supplier = this.data.id;
+     data.supplier = this.data.id;     
      this.invoiceService.addInvoice(data).subscribe(
        (res :any) => {
          if(res.added){
@@ -37,7 +38,15 @@ export class AddInvoiceComponent implements OnInit {
          }
        }
      );
- 
+   }
+
+   onImagePicked(event: Event){
+      const file = (event.target as HTMLInputElement).files[0];
+      this.form.patchValue({pdf: file});
+      this.form.get('pdf').updateValueAndValidity();
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
    }
 
 

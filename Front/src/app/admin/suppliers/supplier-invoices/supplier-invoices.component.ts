@@ -38,9 +38,7 @@ export class SupplierInvoicesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params.id;
       this.invoicesService.getInvoicesBySupplierId(params.id).subscribe(
-        (res: any) => {
-          console.log(res);
-          
+        (res: any) => { 
           this.dataSource.data = res.map((invoice: any, index: number) => {
 
             return {

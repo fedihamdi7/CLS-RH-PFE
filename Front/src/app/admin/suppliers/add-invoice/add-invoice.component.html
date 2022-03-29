@@ -38,8 +38,8 @@
       <input matInput formControlName="Amount_excluding_taxes">
     </mat-form-field>
 
-    <input type="file" matTooltip="Choose Contract file" title>
+    <input type="file" (change)="onImagePicked($event)" matTooltip="Choose Contract file">
 
   </div>
-  <button mat-raised-button color="primary" class="submit">{{ "Submit" | translate}}</button>
+  <button mat-raised-button color="primary" class="submit" [disabled]="!form.valid">{{ "Submit" | translate}}</button>
 </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { InvoicesService } from 'src/app/services/invoices.service';
 
@@ -10,11 +11,22 @@ import { InvoicesService } from 'src/app/services/invoices.service';
 export class InvoicesDetailsComponent implements OnInit {
 
   constructor(private invoiceService : InvoicesService , private route : ActivatedRoute) { }
-  invoice : any;
+  invoice_id : number;
+  path : string = "http://localhost:3000/assets/invoices/";
+  pdf : string;
+  form : FormGroup;
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.invoiceService.getInvoiceById(params.id).subscribe((invoice : any)=>{
-        this.invoice = invoice;
+      this.invoiceService.getInvoiceById(params.id).subscribe((invoice : any)=>{     
+        this.invoice_id = invoice._id;   
+        this.pdf = this.path + invoice.file;
+        this.form = new FormGroup({
+          date : new FormControl(invoice.date , [Validators.required]),
+          payment_status : new FormControl(invoice.payment_status , [Validators.required]),
+          payment_method : new FormControl(invoice.payment_method , [Validators.required]),
+          amount : new FormControl(invoice.amount , [Validators.required , Validators.pattern("^[0-9]*$")]),
+          Amount_excluding_taxes : new FormControl(invoice.Amount_excluding_taxes , [Validators.required , Validators.pattern("^[0-9]*$")]),
+        });
       });
     })
   }

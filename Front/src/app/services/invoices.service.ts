@@ -36,6 +36,18 @@ export class InvoicesService {
   }
 
   addInvoice(invoice : any){
-    return this.http.post('http://localhost:3000/api/invoice/addInvoice', invoice);
+    
+    const data  = new FormData();
+    data.append('pdf', invoice.pdf);
+    data.append('date', invoice.date);
+    data.append('supplier', invoice.supplier);
+    data.append('payment_status', invoice.payment_status);
+    data.append('payment_method', invoice.payment_method);
+    data.append('amount', invoice.amount);
+    data.append('Amount_excluding_taxes', invoice.Amount_excluding_taxes);
+    // log data 
+    console.log(data.get('pdf'));    
+    
+    return this.http.post('http://localhost:3000/api/invoice/addInvoice', data);
   }
 }
