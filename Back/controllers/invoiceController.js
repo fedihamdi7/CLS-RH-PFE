@@ -9,13 +9,13 @@ exports.addInvoice = (req, res) => {
   newInvoice.payment_method = req.body.payment_method;
   newInvoice.amount = req.body.amount;
   newInvoice.Amount_excluding_taxes = req.body.Amount_excluding_taxes;
-
+  newInvoice.file = req.file.filename;
   newInvoice.save((err, invoice) => {
-    if (!invoice) {
+      if (!invoice) {
       console.log(err);
       return res.status(501).json({ message: "error has occurred" });
-    }
-    return res.status(200).json({invoice, added: true });
+      }
+      return res.status(200).json({invoice, added: true });
   });
 };
 exports.getAllInvoices = (req, res) => {
