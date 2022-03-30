@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Invoice } from 'src/app/models/invoice.model';
 import { InvoicesService } from 'src/app/services/invoices.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class AddInvoiceComponent implements OnInit {
      let data = this.form.value;
      data.supplier = this.data.id;     
      this.invoiceService.addInvoice(data).subscribe(
-       (res :any) => {
+       (res :{contract :Invoice , added : boolean}) => {
          if(res.added){
            this.matSnack.open("Invoice Added", "close", {duration: 2000});
            //close dialog

@@ -3,18 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Supplier } from 'src/app/models/supplier.model';
+import { SuppliersTable } from 'src/app/models/tables.model';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 
 
-export interface SuppliersTable {
-  n:number;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  contract_start_date: string;
-}
+
 const ELEMENT_DATA: SuppliersTable[] = [];
 
 @Component({
@@ -44,8 +39,8 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
 
   getSuppliers(){
     this.suppliersService.getSuppliers();
-    this.suppliersService.suppliersUpdateListener().subscribe((res: any) => {
-      this.dataSource.data = res.map((supplier:any, index:number) => {
+    this.suppliersService.suppliersUpdateListener().subscribe((res: Supplier[]) => {
+      this.dataSource.data = res.map((supplier:Supplier, index:number) => {
         return {
           _id : supplier._id,
           n : index + 1,

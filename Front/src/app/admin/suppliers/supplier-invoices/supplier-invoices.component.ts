@@ -4,10 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Invoice } from 'src/app/models/invoice.model';
+import { InvoicesTable } from 'src/app/models/tables.model';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
 
-const ELEMENT_DATA: any[] = [];
+const ELEMENT_DATA: InvoicesTable[] = [];
 
 @Component({
   selector: 'app-supplier-invoices',
@@ -17,7 +19,7 @@ const ELEMENT_DATA: any[] = [];
 export class SupplierInvoicesComponent implements OnInit {
 
   displayedColumns: string[] = ['n', 'supplier', 'payment_method', 'payment_status', 'date', 'amount', 'details'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<InvoicesTable>(ELEMENT_DATA);
   isLoadingResults = true;
   constructor(private invoicesService: InvoicesService, private route: ActivatedRoute , private dialog:MatDialog) { }
   id : string;
@@ -38,8 +40,8 @@ export class SupplierInvoicesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params.id;
       this.invoicesService.getInvoicesBySupplierId(params.id).subscribe(
-        (res: any) => { 
-          this.dataSource.data = res.map((invoice: any, index: number) => {
+        (res: Invoice[]) => { 
+          this.dataSource.data = res.map((invoice: Invoice, index: number) => {
 
             return {
               n: index + 1,

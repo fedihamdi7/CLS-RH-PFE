@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { User } from '../models/user.model';
 import { SharedService } from './shared.service';
 
 @Injectable({
@@ -11,14 +12,14 @@ export class EmployeeService {
   constructor(private http:HttpClient , private sharedService : SharedService) { }
 
   //read id_token from local storage
-  id_token = this.sharedService.getTokenFromLocalStorage();
+  id_token : String = this.sharedService.getTokenFromLocalStorage();
 
   // put token in header
    headers = {
     'Authorization': 'jwt ' + this.id_token
   };
 
-  userLocal :any = this.sharedService.getUserFromLocalStorage();
+  userLocal :User = this.sharedService.getUserFromLocalStorage();
 
   user= new Subject<string>();
 
@@ -41,7 +42,7 @@ export class EmployeeService {
 
 
   getUserName(){
-    this.getEmployeeById().subscribe( (data:any) =>{
+    this.getEmployeeById().subscribe( (data:User) =>{
       this.user.next(data.firstName + ' ' + data.lastName);
     });
   }

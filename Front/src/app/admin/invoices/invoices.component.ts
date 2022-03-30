@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Invoice } from 'src/app/models/invoice.model';
 import { InvoicesService } from 'src/app/services/invoices.service';
 
 
@@ -34,8 +35,8 @@ export class InvoicesComponent implements OnInit {
 
   getAllInvoices(){
     this.invoicesService.invoiceUpdateListener().subscribe(
-      (res: any) => {
-        this.dataSource.data = res.map((invoice:any, index : number) => {    
+      (res: Invoice[]) => {
+        this.dataSource.data = res.map((invoice:Invoice, index : number) => {    
           return {
             n: index+1,
             _id : invoice._id,

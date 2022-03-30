@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Contract } from 'src/app/models/contract.model';
 import { ContractsService } from 'src/app/services/contracts.service';
 
 @Component({
@@ -50,7 +51,7 @@ export class AddContractComponent implements OnInit {
     data.payment_status = status;
     data.supplier = this.data.id;
     this.contractsService.addContract(data).subscribe(
-      (res :any) => {
+      (res :{contract :Contract , added : boolean}) => {
         if(res.added){
           this.matSnack.open("Contract Added", "close", {duration: 2000});
           //close dialog

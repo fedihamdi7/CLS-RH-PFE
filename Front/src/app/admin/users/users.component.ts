@@ -4,18 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { userTable } from 'src/app/models/tables.model';
+import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { AddUserComponent } from './add-user/add-user.component';
 
 
-export interface userTable{
-  n:number;
-  first_name: string;
-  last_name: string;
-  job_title: string;
-  email: string;
-  date_in: Date;
-}
+
 
 const ELEMENT_DATA: userTable[] = [];
 
@@ -48,9 +43,9 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
   getUsers(){
     this.usersService.getUsers();
     //get users
-    this.usersSub = this.usersService.usersUpdateListener().subscribe((users : any) =>{
+    this.usersSub = this.usersService.usersUpdateListener().subscribe((users : User[]) =>{
       //for each employee map the data and push in the dataSource
-      this.dataSource.data = users.map((user:any, index:number) => {
+      this.dataSource.data = users.map((user:User, index:number) => {
         return {
           n : index + 1,
           first_name: user.firstName,

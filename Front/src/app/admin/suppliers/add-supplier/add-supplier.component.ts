@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Supplier } from 'src/app/models/supplier.model';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class AddSupplierComponent implements OnInit {
   }
 
   onSubmit(){
-    this.suppliersService.addSupplier(this.form.value).subscribe((res: any ) =>{
+    this.suppliersService.addSupplier(this.form.value).subscribe((res: {success: boolean , query : Supplier} ) =>{
       if (res.success == true){
         this.snackBar.open("Supplier Added Successfully", 'close', {
           duration: 2000,

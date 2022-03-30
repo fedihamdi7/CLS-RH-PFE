@@ -5,6 +5,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
+import { Request } from 'src/app/models/request.model';
+import { User } from 'src/app/models/user.model';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -22,7 +24,6 @@ export class ValidateReqComponent implements OnInit {
   isLoading : boolean = true;
   id: string = this.route.snapshot.paramMap.get('id');;
   reqSub : Subscription;
-  data : any;
   form : FormGroup;
   pdf : string = null;
   path : string = "http://localhost:3000/assets/certifications/";
@@ -40,15 +41,12 @@ export class ValidateReqComponent implements OnInit {
   }
 
   initializeView(){
-    // this.id = this.route.snapshot.paramMap.get('id');
-
     this.reqService.getRequest(this.id);
-    this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : any) =>{
+    this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : Request) =>{
       this.sender= req[0].from._id;      
       this.pdf =this.path + req[0].file;
       this.file = req[0].file;
       this.isLoading = false;
-      // this.data = req[0];
       this.form = new FormGroup({
         firstName : new FormControl(req[0].from.firstName, [Validators.required]),
         lastName : new FormControl(req[0].from.lastName, [Validators.required]),
@@ -62,7 +60,6 @@ export class ValidateReqComponent implements OnInit {
   }
 
   getPDF(){
-    //get user_id from local storage and parse it
     this.isLoading = true;
     this.http.post('http://localhost:3000/api/request/preview',{
       id : this.id,
@@ -75,15 +72,14 @@ export class ValidateReqComponent implements OnInit {
       department : this.form.get('department')?.value,
       file : this.file,
       user_id : this.sender
-    }).subscribe((res : any) => {  
+    }).subscribe((res : string) => {  
       this.pdf= this.path + res;
       this.isLoading = false;
     });
   }
 
   validate(){
-    // this.isLoading = true;
-    let user:any = this.sharedService.getUserFromLocalStorage();
+    let user:User = this.sharedService.getUserFromLocalStorage();
     let user_id = user._id;
     this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
       status : "done",
@@ -97,9 +93,8 @@ export class ValidateReqComponent implements OnInit {
       department : this.form.get('department')?.value,
       file : this.file,
       user_id : user_id
-    }).subscribe((res:any) => {
+    }).subscribe((res: {message : String , file : string}) => {
       this.pdf= this.path + res.file;
-      // this.isLoading = false;
       this.snackbar.open("Request updated", "Close", {
         duration: 3000
       });

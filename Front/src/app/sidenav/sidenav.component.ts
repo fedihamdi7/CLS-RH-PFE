@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
   constructor( private sharedService:SharedService ,  private employeeService :EmployeeService ) { }
 
   ngOnInit(): void {
-    this.employeeService.userUpdateListener().subscribe( (data:any) =>{
+    this.employeeService.userUpdateListener().subscribe( (data:string) =>{
       this.firstName = data;
     });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit(){
-    this.usersService.addUser(this.form.value).subscribe((res: any ) =>{
+    this.usersService.addUser(this.form.value).subscribe((res: {success : boolean,message : string , user : User} ) =>{
       if (res.success == true){
         this.snackBar.open(res.message, 'close', {
           duration: 2000,
