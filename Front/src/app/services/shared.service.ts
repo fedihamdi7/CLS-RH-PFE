@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import ls from 'localstorage-slim';
+import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +14,14 @@ export class SharedService {
   putTokenInLocalStorage(token : string){
     ls.set('id_token', token, { encrypt: true });
   }
-  getTokenFromLocalStorage(){
+  getTokenFromLocalStorage() : string{
     return ls.get('id_token', { decrypt: true });
   }
 
   putUserInLocalStorage(user: any){
     ls.set('user', user,  { encrypt: true });
   }
-  getUserFromLocalStorage(){
+  getUserFromLocalStorage() : User{
     return ls.get('user', { decrypt: true });
   }
 

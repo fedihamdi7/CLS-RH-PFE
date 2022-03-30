@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Contract } from 'src/app/models/contract.model';
+import { ContractsTable } from 'src/app/models/tables.model';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import { AddContractComponent } from '../add-contract/add-contract.component';
 
@@ -13,9 +15,9 @@ import { AddContractComponent } from '../add-contract/add-contract.component';
   styleUrls: ['./supplier-contracts.component.css']
 })
 export class SupplierContractsComponent implements OnInit {
-  ELEMENT_DATA: any[] = [];
+  ELEMENT_DATA: ContractsTable[] = [];
   displayedColumns: string[] = ['n', 'supplier', 'date_signature', 'expires_at', 'payment_status', 'details'];
-  dataSource = new MatTableDataSource<any>(this.ELEMENT_DATA);
+  dataSource = new MatTableDataSource<ContractsTable>(this.ELEMENT_DATA);
   supplier_name : string;
   constructor(private route: ActivatedRoute, private suppliersService: SuppliersService , public dialog: MatDialog) { }
   id : String;
@@ -34,10 +36,10 @@ export class SupplierContractsComponent implements OnInit {
   }
 
   getContracts() {
-    this.suppliersService.getContractBySupplierId(this.route.snapshot.params.id).subscribe((data: any) => {
+    this.suppliersService.getContractBySupplierId(this.route.snapshot.params.id).subscribe((data: {contract : Contract[]}) => {
       this.id = this.route.snapshot.params.id;
       this.supplier_name = data.contract[0].supplier.name;
-      this.dataSource.data = data.contract.map((contract: any, index: number) => {
+      this.dataSource.data = data.contract.map((contract: Contract, index: number) => {
         return {
           _id : contract._id,
           n: index + 1,

@@ -2,13 +2,14 @@ const Invoice = require("../models/invoice");
 const moment = require('moment');
 
 exports.addInvoice = (req, res) => {
+    console.log(req.body);
   let newInvoice = new Invoice();
   newInvoice.supplier = req.body.supplier;
   newInvoice.date = moment(req.body.date).format('YYYY-MM-DD[T00:00:00.000Z]');
   newInvoice.payment_status = req.body.payment_status;
   newInvoice.payment_method = req.body.payment_method;
   newInvoice.amount = req.body.amount;
-  newInvoice.Amount_excluding_taxes = req.body.Amount_excluding_taxes;
+  newInvoice.amount_excluding_taxes = req.body.Amount_excluding_taxes;
   newInvoice.file = req.file.filename;
   newInvoice.save((err, invoice) => {
       if (!invoice) {

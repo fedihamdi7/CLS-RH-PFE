@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Contract } from 'src/app/models/contract.model';
 import { ContractsService } from 'src/app/services/contracts.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class ContractDetailsComponent implements OnInit {
 
   getContractById(){
     this.contractService.getContractById(this.contract_id).subscribe(
-      (res: any) => {
+      (res: Contract) => {
         console.log(res);
       });
   }

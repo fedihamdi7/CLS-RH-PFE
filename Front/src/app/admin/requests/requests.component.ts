@@ -3,16 +3,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { Request } from 'src/app/models/request.model';
+import { RequestsTable } from 'src/app/models/tables.model';
 import { RequestsService } from 'src/app/services/requests.service';
 
 
-export interface userTable{
-  from : string;
-  sent_date : Date;
-  status : string;
-  type : string;
-}
-const ELEMENT_DATA: userTable[] = [];
+
+const ELEMENT_DATA: RequestsTable[] = [];
 
 @Component({
   selector: 'app-requests',
@@ -21,7 +18,7 @@ const ELEMENT_DATA: userTable[] = [];
 })
 export class RequestsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['n','sender', 'sent_date', 'status', 'type','action'];
-  dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<RequestsTable>(ELEMENT_DATA);
   private requestsSub :Subscription | undefined;
 
   constructor( private requestsService : RequestsService) { }
@@ -43,9 +40,9 @@ export class RequestsComponent implements OnInit, AfterViewInit {
     this.requestsService.getRequestsNotifications();
     this.requestsService.getRequests();
 
-    this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : any) =>{
+    this.requestsSub = this.requestsService.requestsUpdateListener().subscribe((reqs : Request[]) =>{
       //for each employee map the data and push in the dataSource
-      this.dataSource.data = reqs.map((reqs:any, index:number) => {
+      this.dataSource.data = reqs.map((reqs:Request, index:number) => {
         return {
           id : reqs._id,
           n : index + 1,

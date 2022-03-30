@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    this.employeeService.updateProfile(this.form.value).subscribe( (data:any) =>{
+    this.employeeService.updateProfile(this.form.value).subscribe( (data:{updated:Boolean}) =>{
       if (data.updated){
         this.employeeService.user.next(this.form.value.firstName + ' ' + this.form.value.lastName);
         this.matSnackbar.open('Profile Updated Successfully','close',{duration:2000});

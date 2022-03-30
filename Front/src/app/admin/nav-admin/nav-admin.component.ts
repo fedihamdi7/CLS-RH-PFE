@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { RequestsService } from 'src/app/services/requests.service';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -18,11 +19,11 @@ export class NavAdminComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.sharedService.initializeAppLanguage();
-    let user :any = this.sharedService.getUserFromLocalStorage();
+    let user :User = this.sharedService.getUserFromLocalStorage();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.requestService.getRequestsNotifications();
-      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : any) => {      
+      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : number) => {      
       this.notification = data;         
     });
   }

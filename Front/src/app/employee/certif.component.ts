@@ -7,15 +7,13 @@ import { MatSort } from '@angular/material/sort';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
-export interface requestTable {
-  n : number
-  sent_date: string;
-  status: string;
-}
+import { Request, Requests } from '../models/request.model';
+import { Employee } from '../models/employee.model';
+import { requestTableEmployee } from '../models/tables.model';
+import * as file from 'file-saver';
 
-declare var require: any
-const FileSaver = require('file-saver');
-const ELEMENT_DATA: requestTable[] = [];
+
+const ELEMENT_DATA: requestTableEmployee[] = [];
 
 @Component({
   selector: 'app-certif',
@@ -26,7 +24,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
 
   promptDisplay : boolean = false;
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
-  dataSource = new MatTableDataSource<requestTable>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<requestTableEmployee>(ELEMENT_DATA);
   certifType : string ;
   constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute, private requestService : RequestsService , private router : Router) { }
   @ViewChild(MatSort) sort!: MatSort;
@@ -52,8 +50,8 @@ export class CertifComponent implements OnInit , AfterViewInit {
 
   getRequests(){
     this.employeeService.getRequests(this.certifType).subscribe(
-      (res: any) => {
-        this.dataSource.data = res.request.map((res:any,index:number) =>{
+      (res: Requests) => {
+        this.dataSource.data = res.request.map((res:Request,index:number) =>{
           return {
             n: index + 1,
             sent_date: res.sent_date,
@@ -66,7 +64,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
   }
 
   sendRequest(){
-    this.employeeService.getEmployeeById().subscribe((res : any) =>{
+    this.employeeService.getEmployeeById().subscribe((res : Employee) =>{
       //add type to res
       res.type = this.certifType;     
       this.employeeService.addRequest(res).subscribe(
@@ -94,7 +92,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
     this.promptDisplay = false;
   }
 
-  download(path: any){
-    FileSaver.saveAs('http://localhost:3000/assets/certifications/'+path, `${this.certifType} certification.pdf`);
+  download(path: string){
+    file.saveAs('http://localhost:3000/assets/certifications/'+path, `${this.certifType} certification.pdf`);
   }
 }

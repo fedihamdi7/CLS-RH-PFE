@@ -3,12 +3,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
+import { Contract } from 'src/app/models/contract.model';
+import { ContractsTable } from 'src/app/models/tables.model';
 import { ContractsService } from 'src/app/services/contracts.service';
 
 
 
 
-const ELEMENT_DATA: any[] = [];
+const ELEMENT_DATA: ContractsTable[] = [];
 @Component({
   selector: 'app-contracts',
   templateUrl: './contracts.component.html',
@@ -17,7 +19,7 @@ const ELEMENT_DATA: any[] = [];
 export class ContractsComponent implements OnInit {
 
   displayedColumns: string[] = ['n','supplier', 'date_signature', 'expires_at', 'payment_status','details'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<ContractsTable>(ELEMENT_DATA);
   isLoadingResults = true;
   constructor(private contractsService : ContractsService) { }
 
@@ -36,8 +38,8 @@ export class ContractsComponent implements OnInit {
 
   getAllContracts(){
     this.contractsService.getAllContracts().subscribe(
-      (res: any) => {
-        this.dataSource.data = res.map((contract:any, index : number) => {
+      (res: Contract[]) => {
+        this.dataSource.data = res.map((contract:Contract, index : number) => {
           return {
             n: index+1,
             _id : contract._id,

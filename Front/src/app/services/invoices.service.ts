@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Invoice } from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,11 @@ export class InvoicesService {
 
   constructor(private http:HttpClient) { }
 
-  invoices = new Subject<any>();
+  invoices = new Subject<Invoice[]>();
 
   getInvoices(){
     this.http.get('http://localhost:3000/api/invoice/getAllInvoices').subscribe(
-      (res:any) => {
+      (res:Invoice[]) => {
         this.invoices.next(res);
       },
       err => {
