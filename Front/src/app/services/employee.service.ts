@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { User } from '../models/user.model';
 import { SharedService } from './shared.service';
 
@@ -8,6 +9,7 @@ import { SharedService } from './shared.service';
   providedIn: 'root'
 })
 export class EmployeeService {
+  private url : string = environment.api_URL+"/api/employee/"; 
 
   constructor(private http:HttpClient , private sharedService : SharedService) { }
 
@@ -24,20 +26,20 @@ export class EmployeeService {
   user= new Subject<string>();
 
   getRequests(type : string){
-    return this.http.get('http://localhost:3000/api/employee/getRequest/'+type,{headers:this.headers});
+    return this.http.get(`${this.url}getRequest/${type}`,{headers:this.headers});
   }
 
   getEmployeeById(){
-    return this.http.get('http://localhost:3000/api/employee/getEmployeeById/'+this.userLocal._id,{headers:this.headers});
+    return this.http.get(`${this.url}getEmployeeById/${this.userLocal._id}`,{headers:this.headers});
       
   }
 
   addRequest(data :any){
-    return this.http.post('http://localhost:3000/api/employee/addRequest',data,{headers:this.headers});    
+    return this.http.post(`${this.url}addRequest`,data,{headers:this.headers});    
   }
 
   updateProfile(data :any){
-    return this.http.post('http://localhost:3000/api/employee/updateEmployeeProfile/'+this.userLocal._id,data,{headers:this.headers});    
+    return this.http.post(`${this.url}updateEmployeeProfile/${this.userLocal._id}`,data,{headers:this.headers});    
   }
 
 

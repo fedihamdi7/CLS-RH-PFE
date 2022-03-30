@@ -18,7 +18,7 @@ export class SharedService {
     return ls.get('id_token', { decrypt: true });
   }
 
-  putUserInLocalStorage(user: any){
+  putUserInLocalStorage(user: User){
     ls.set('user', user,  { encrypt: true });
   }
   getUserFromLocalStorage() : User{

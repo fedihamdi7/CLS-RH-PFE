@@ -1,19 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { Invoice } from '../models/invoice.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoicesService {
+  private url : string = environment.api_URL+"/api/invoice/"; 
 
   constructor(private http:HttpClient) { }
 
   invoices = new Subject<Invoice[]>();
 
   getInvoices(){
-    this.http.get('http://localhost:3000/api/invoice/getAllInvoices').subscribe(
+    this.http.get(`${this.url}getAllInvoices`).subscribe(
       (res:Invoice[]) => {
         this.invoices.next(res);
       },
@@ -29,11 +31,11 @@ export class InvoicesService {
   }
 
   getInvoiceById(id){
-    return this.http.get(`http://localhost:3000/api/invoice/getInvoiceById/${id}`);
+    return this.http.get(`${this.url}getInvoiceById/${id}`);
   }
 
   getInvoicesBySupplierId(id){
-    return this.http.get(`http://localhost:3000/api/invoice/getInvoiceBySupplierId/${id}`);
+    return this.http.get(`${this.url}getInvoiceBySupplierId/${id}`);
   }
 
   addInvoice(invoice : any){
@@ -49,6 +51,6 @@ export class InvoicesService {
     // log data 
     console.log(data.get('pdf'));    
     
-    return this.http.post('http://localhost:3000/api/invoice/addInvoice', data);
+    return this.http.post(`${this.url}addInvoice`, data);
   }
 }

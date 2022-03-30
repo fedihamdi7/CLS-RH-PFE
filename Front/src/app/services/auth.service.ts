@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SharedService } from './shared.service';
 import { Login } from '../models/user.model';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private typeListener = new Subject<string>();
 
+  private url : string = environment.api_URL; 
   constructor(private httpClient: HttpClient, private router: Router, private snackbar: MatSnackBar, private sharedService: SharedService) { }
-
   login(user: { email: string, password: string }) {
 
 
-    this.httpClient.post('http://localhost:3000/api/employee/login', user).subscribe((res: Login) => {
+    this.httpClient.post(`${this.url}/api/employee/login`, user).subscribe((res: Login) => {
 
       if (res.success == true) {
         this.storeUserData(res.token, res.user);
