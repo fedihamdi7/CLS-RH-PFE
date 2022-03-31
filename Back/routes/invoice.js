@@ -23,5 +23,5 @@ router.post('/addInvoice',multer({storage:storage}).single("pdf"),(req,res,next)
 router.get('/getAllInvoices',invoiceController.getAllInvoices)
 router.get('/getInvoiceById/:id',invoiceController.getInvoiceById)
 router.get('/getInvoiceBySupplierId/:id',invoiceController.getInvoiceBySupplierId)
-
+router.get('/InvoicesStatistiques',invoiceController.InvoicesStatistiques)
 module.exports =router;
