@@ -12,10 +12,12 @@ import { SupplierContractsComponent } from './suppliers/supplier-contracts/suppl
 import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-details.component';
 import { SupplierInvoicesComponent } from './suppliers/supplier-invoices/supplier-invoices.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'requests',pathMatch:'full'},
+  {path:'',redirectTo:'dashboard',pathMatch:'full'},
   {path: '', component: NavAdminComponent, children:[
+    {path:'dashboard',component:DashboardComponent},
     {path:'requests',component:RequestsComponent},
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},

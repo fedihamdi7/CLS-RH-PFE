@@ -1,0 +1,10 @@
+.chart{
+    background-color: #ffffff;
+    padding: 2%;
+    /* border-radius: 28px; */
+    /* box-shadow: 12px 15px 20px 10px rgb(5 5 5 / 35%); */
+}
+
+mat-tab-group{
+    width: 70%;
+}
