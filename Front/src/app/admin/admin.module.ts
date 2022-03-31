@@ -24,6 +24,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedService } from '../services/shared.service';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { AddSupplierComponent } from './suppliers/add-supplier/add-supplier.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,9 +50,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddInvoiceComponent,
     AddUserComponent,
     AddSupplierComponent,
+    DashboardComponent,
 
   ],
   imports: [
+    NgxChartsModule,
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
