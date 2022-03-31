@@ -5,8 +5,8 @@ const InvoiceSchema = new mongoose.Schema({
     date: {type : String,required: true},
     payment_method:{type : String,required: true},
     payment_status:{type : String,required: true},
-    amount:{type : String,required: true},
-    amount_excluding_taxes:{type : String,required: true},
+    amount:{type : Number,required: true},
+    amount_excluding_taxes:{type : Number,required: true},
     file: { type: String}
 });
 

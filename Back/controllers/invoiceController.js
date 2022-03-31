@@ -57,7 +57,6 @@ exports.getInvoiceBySupplierId = (req, res) => {
     }).populate("supplier");
 };
 exports.InvoicesStatistiques = (req, res) => {
-    let statsInvoice = [];
     Invoice.aggregate([{
             $group: {
                 _id: "$supplier",
@@ -88,3 +87,82 @@ exports.InvoicesStatistiques = (req, res) => {
         return res.status(200).json(invoices);
     });
 };
+exports.InvoicesStatistiquesByDateRange = (req, res) => {
+    Invoice.aggregate([
+        // {
+        //     $match: {
+        //         date: {$lte:'2022-12-31',  $gte:'2015-12-31'}
+        //     }
+        // },
+        {
+            $match: {
+                $and:[{date:{$gte:req.body.minDate}},{date:{$lte:req.body.maxDate}}]
+            }
+        },
+        {
+            $group: {
+                _id: "$supplier",
+                value: {
+                    $sum: "$amount"
+                }
+            }
+        },
+        {
+            $project: {
+                supplier: '$_id',
+                value: 1
+            }
+        },
+
+        {
+            $lookup: {
+                from: "suppliers",
+                localField: "supplier",
+                foreignField: "_id",
+                as: "supplier"
+            },
+        }
+    ]).exec((err, invoices) => {
+        if (!invoices) {
+            console.log(err);
+        }
+        return res.status(200).json(invoices);
+    });
+}
+exports.InvoicesStatistiquesByYear = (req, res) => {
+    Invoice.aggregate([
+        {
+            $match: {
+                date:{$gte:req.params.year+'-01-01',  $lte:req.params.year+'-12-31'}
+            }
+        },
+        {
+            $group: {
+                _id: "$supplier",
+                value: {
+                    $sum: "$amount"
+                }
+            }
+        },
+        {
+            $project: {
+                supplier: '$_id',
+                value: 1
+            }
+        },
+
+        {
+            $lookup: {
+                from: "suppliers",
+                localField: "supplier",
+                foreignField: "_id",
+                as: "supplier"
+            },
+        }
+    ]).exec((err, invoices) => {
+        if (!invoices) {
+            console.log(err);
+        }
+        return res.status(200).json(invoices);
+    });
+}
