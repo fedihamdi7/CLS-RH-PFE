@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,14 +18,23 @@ export class DashboardComponent implements OnInit {
   ];
 
   years =[]
+  year : number;
   constructor() { }
-
+  form : FormGroup;
   ngOnInit(): void {
     // get 15 last years from current year
     let currentYear = new Date().getFullYear();
     for(let i = 0; i < 15; i++){
       this.years.push(currentYear - i);
     }
+
+    this.form = new FormGroup({
+      year : new FormControl(currentYear),
+    });
+  }
+
+  onSelectYear(){
+    console.log(this.form.get("year").value);
   }
 
 }
