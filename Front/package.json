@@ -26,6 +26,7 @@
     "file-saver": "^2.0.5",
     "fileservice": "0.0.4",
     "localstorage-slim": "^2.2.0",
+    "moment": "^2.29.1",
     "ng2-pdf-viewer": "^8.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

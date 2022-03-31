@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,33 +10,82 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
 
-  data = [
-    {"name" : "supp1" , "value" : 1200},
-    {"name" : "supp2" , "value" : 2000},
-    {"name" : "supp3" , "value" : 4500},
-    {"name" : "supp4" , "value" : 1700},
-    {"name" : "supp5" , "value" : 1000},
-    {"name" : "supp6" , "value" : 900},
-  ];
-
+  dataByYear = [];
+  dataByRange = [];
+  formByYear : FormGroup;
+  formByRange : FormGroup;
   years =[]
   year : number;
-  constructor() { }
-  form : FormGroup;
+  dataTotal =[];
+
+  constructor(private dashboardService : DashboardService , private snackbar: MatSnackBar) { }
+  
   ngOnInit(): void {
     // get 15 last years from current year
     let currentYear = new Date().getFullYear();
     for(let i = 0; i < 15; i++){
       this.years.push(currentYear - i);
     }
+    this.formByRange = new FormGroup({
+      start: new FormControl(),
+      end: new FormControl(),
+    });
 
-    this.form = new FormGroup({
+    this.formByYear = new FormGroup({
       year : new FormControl(currentYear),
     });
+    this.InvoicesStatistiquesByYear(currentYear);
+    this.dashboardService.InvoicesStatistiques().subscribe(
+      (res : any) => {
+          this.dataTotal = res.map((item : any) => {
+            return {
+              name : item.supplier[0].name,
+              value : item.value
+            }
+          });
+      });
   }
 
   onSelectYear(){
-    console.log(this.form.get("year").value);
+    this.InvoicesStatistiquesByYear(this.formByYear.get("year").value);
+  }
+
+  InvoicesStatistiquesByYear(year : number){
+    this.dashboardService.InvoicesStatistiquesByYear(year).subscribe(
+      (res : any) => {      
+        if (res.length == 0){
+          this.snackbar.open("No data found for this year", "close", {duration : 4000});
+        }
+        if (res){
+          this.dataByYear = res.map((item : any) => {
+            return {
+              name : item.supplier[0].name,
+              value : item.value
+            }
+          });
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  rangeChanged(){
+    this.dashboardService.InvoicesStatistiquesByDateRange(this.formByRange.get("start").value, this.formByRange.get("end").value).subscribe(
+      (res : any) => {
+        if (res){
+          this.dataByRange = res.map((item : any) => {
+            return {
+              name : item.supplier[0].name,
+              value : item.value
+            }
+          });
+        }
+      },
+      err => {
+        console.log(err);
+      });    
   }
 
 }

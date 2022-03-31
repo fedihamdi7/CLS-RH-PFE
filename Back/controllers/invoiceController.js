@@ -96,7 +96,7 @@ exports.InvoicesStatistiquesByDateRange = (req, res) => {
         // },
         {
             $match: {
-                $and:[{date:{$gte:req.body.minDate}},{date:{$lte:req.body.maxDate}}]
+                $and:[{date:{$gte:req.params.minDate}},{date:{$lte:req.params.maxDate}}]
             }
         },
         {
