@@ -26,4 +26,5 @@ router.get('/getInvoiceBySupplierId/:id',invoiceController.getInvoiceBySupplierI
 router.get('/InvoicesStatistiques',invoiceController.InvoicesStatistiques)
 router.get('/InvoicesStatistiquesByDateRange/:minDate/:maxDate',invoiceController.InvoicesStatistiquesByDateRange)
 router.get('/InvoicesStatistiquesByYear/:year',invoiceController.InvoicesStatistiquesByYear)
+router.get('/StatsBySupplier/:id',invoiceController.StatsBySupplier)
 module.exports =router;

@@ -14,7 +14,7 @@
       </div>
     </div>
   </mat-tab>
-  
+
   <mat-tab label="{{'By Year' | translate}}">
     <div class="chart">
       <div class="col-md-12">
@@ -59,6 +59,31 @@
               <button mat-raised-button color="primary" class="sumbit">{{"Submit" | translate}} </button>
             </form>
             <ngx-charts-advanced-pie-chart [results]="dataByRange" [gradient]="false" [scheme]="'cool'"
+              [view]="[1000,200]">
+            </ngx-charts-advanced-pie-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="{{'By Supplier' | translate}}">
+    <div class="chart">
+      <div class="col-md-12">
+        <div class="card text-left">
+          <div class="card-body">
+            <h4 class="card-title border-bottom">{{"Pie Chart By Supplier " | translate}}</h4>
+            <form [formGroup]="formBySupplier" *ngIf="formBySupplier">
+              <mat-form-field appearance="fill">
+                <mat-label>{{"Select Supplier" | translate}}</mat-label>
+                <mat-select (selectionChange)="onSelectSupplier()" formControlName="suppControl">
+                  <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+                    {{supplier.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+            <ngx-charts-advanced-pie-chart [results]="dataBySupplier" [gradient]="false" [scheme]="'cool'"
               [view]="[1000,200]">
             </ngx-charts-advanced-pie-chart>
           </div>

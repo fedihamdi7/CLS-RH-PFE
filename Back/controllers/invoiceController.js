@@ -1,6 +1,7 @@
 const Invoice = require("../models/invoice");
 const moment = require('moment');
 const Supplier = require("../models/supplier");
+const { default: mongoose } = require("mongoose");
 exports.addInvoice = (req, res) => {
     console.log(req.body);
     let newInvoice = new Invoice();
@@ -134,6 +135,47 @@ exports.InvoicesStatistiquesByYear = (req, res) => {
         {
             $match: {
                 date:{$gte:req.params.year+'-01-01',  $lte:req.params.year+'-12-31'}
+            }
+        },
+        {
+            $group: {
+                _id: "$supplier",
+                value: {
+                    $sum: "$amount"
+                }
+            }
+        },
+        {
+            $project: {
+                supplier: '$_id',
+                value: 1
+            }
+        },
+
+        {
+            $lookup: {
+                from: "suppliers",
+                localField: "supplier",
+                foreignField: "_id",
+                as: "supplier"
+            },
+        }
+    ]).exec((err, invoices) => {
+        if (!invoices) {
+            console.log(err);
+        }
+        return res.status(200).json(invoices);
+    });
+}
+
+exports.StatsBySupplier = (req, res) => {
+    //convert req.params.id to ObjectId
+    let id = req.params.id;
+    let o_id = new mongoose.Types.ObjectId(id);
+    Invoice.aggregate([
+        {
+            $match: {
+                supplier: o_id
             }
         },
         {

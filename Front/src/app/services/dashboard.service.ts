@@ -24,4 +24,8 @@ export class DashboardService {
   InvoicesStatistiquesByYear(year : number){
     return this.http.get("http://localhost:3000/api/invoice/InvoicesStatistiquesByYear/"+year);
   }
+
+  StatsBySupplier(supplierId : string){
+    return this.http.get("http://localhost:3000/api/invoice/StatsBySupplier/"+supplierId);
+  }
 }
