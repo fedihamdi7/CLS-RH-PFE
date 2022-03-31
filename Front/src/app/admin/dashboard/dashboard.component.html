@@ -2,14 +2,16 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="{{'By Year' | translate}}">
     <div class="chart">
-      <mat-form-field appearance="fill">
+      <form [formGroup]="form" *ngIf="form">
+      <mat-form-field appearance="fill" >
         <mat-label>{{"Select Year" | translate}}</mat-label>
-        <mat-select>
+        <mat-select (selectionChange)="onSelectYear()" formControlName="year">
           <mat-option *ngFor="let year of years" [value]="year">
             {{year}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </form>
       <div class="col-md-12">
         <div class="card text-left">
           <div class="card-body">
@@ -26,12 +28,12 @@
     <div class="chart">
       <mat-form-field appearance="fill">
         <mat-label>{{'Enter a date range' | translate}}</mat-label>
-        <mat-date-range-input  [rangePicker]="picker">
+        <mat-date-range-input  [rangePicker]="picker" disabled>
           <input matStartDate  placeholder="Start date">
           <input matEndDate  placeholder="End date">
         </mat-date-range-input>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
+        <mat-datepicker-toggle matSuffix [for]="picker" disabled="false"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
       </mat-form-field>
 
       <div class="col-md-12">
