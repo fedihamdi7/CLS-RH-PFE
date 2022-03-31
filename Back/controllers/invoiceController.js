@@ -1,6 +1,6 @@
 const Invoice = require("../models/invoice");
 const moment = require('moment');
-
+const Supplier = require("../models/supplier");
 exports.addInvoice = (req, res) => {
     console.log(req.body);
     let newInvoice = new Invoice();
@@ -57,17 +57,34 @@ exports.getInvoiceBySupplierId = (req, res) => {
     }).populate("supplier");
 };
 exports.InvoicesStatistiques = (req, res) => {
+    let statsInvoice = [];
     Invoice.aggregate([{
-        $group: {
-            _id: "$supplier",
-            total: {
-                $sum: "$amount"
+            $group: {
+                _id: "$supplier",
+                value: {
+                    $sum: "$amount"
+                }
             }
+        },
+        {
+            $project: {
+                supplier: '$_id',
+                value: 1
+            }
+        },
+
+        {
+            $lookup: {
+                from: "suppliers",
+                localField: "supplier",
+                foreignField: "_id",
+                as: "supplier"
+            },
         }
-    }]).exec((err, invoices) => {
+    ]).exec((err, invoices) => {
         if (!invoices) {
             console.log(err);
         }
         return res.status(200).json(invoices);
     });
-}
+};
