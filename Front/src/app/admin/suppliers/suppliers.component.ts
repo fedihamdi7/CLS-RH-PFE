@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Supplier } from 'src/app/models/supplier.model';
 import { SuppliersTable } from 'src/app/models/tables.model';
 import { SuppliersService } from 'src/app/services/suppliers.service';
+import { AddContractComponent } from './add-contract/add-contract.component';
+import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
 import { AddSupplierComponent } from './add-supplier/add-supplier.component';
 
 
@@ -19,10 +22,10 @@ const ELEMENT_DATA: SuppliersTable[] = [];
 })
 export class SuppliersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date', 'all_contracts', 'all_invoices'];
+  displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date', 'all_contracts', 'all_invoices','actions'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
 
-  constructor( private suppliersService : SuppliersService , public dialog: MatDialog) { }
+  constructor( private suppliersService : SuppliersService , public dialog: MatDialog , private snackBar : MatSnackBar) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -64,6 +67,29 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
     this.dialog.afterAllClosed.subscribe(() => {
       this.getSuppliers();
     });
+  }
+
+  onAddContract(id : String){
+    this.dialog.open(AddContractComponent, {
+      width: '700px',
+      height : '60vh',
+      data: {id : id}
+    });
+    //on close dialog
+    // this.dialog.afterAllClosed.subscribe(() => {
+    //   this.snackBar.open('Contract added successfully', 'close', {duration: 3000});
+    // });
+  }
+  onAddInvoice(id : String){
+    this.dialog.open(AddInvoiceComponent, {
+      width: '700px',
+      height : '50vh',
+      data: {id : id}
+    });
+    //on close dialog
+    // this.dialog.afterAllClosed.subscribe(() => {
+    //   this.snackBar.open('Contract added successfully', 'close', {duration: 3000});
+    // });
   }
  
   applyFilter(event: Event) {
