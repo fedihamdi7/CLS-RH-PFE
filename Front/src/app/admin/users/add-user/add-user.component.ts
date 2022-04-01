@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -11,8 +12,10 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-
-  constructor(private usersService : UsersService, private snackBar:MatSnackBar, public dialogRef : MatDialogRef<AddUserComponent>) { }
+  error_msg : string;
+  constructor(private usersService : UsersService, private snackBar:MatSnackBar, public dialogRef : MatDialogRef<AddUserComponent> , private translate : TranslateService) {
+    this.error_msg = this.translate.instant('Please fill all the fields');
+   }
   form !: FormGroup;
 
   ngOnInit(): void {
@@ -33,19 +36,27 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit(){
-    this.usersService.addUser(this.form.value).subscribe((res: {success : boolean,message : string , user : User} ) =>{
-      if (res.success == true){
-        this.snackBar.open(res.message, 'close', {
-          duration: 2000,
-        });
-        this.dialogRef.close();
-      }
-      else{
-        this.snackBar.open(res.message, 'close', {
-          duration: 2000,
-        });
-      }
-    });
+    // check if form is empty
+    if (!this.form.invalid) {
+      this.usersService.addUser(this.form.value).subscribe((res: {success : boolean,message : string , user : User} ) =>{
+        if (res.success == true){
+          this.snackBar.open(res.message, 'close', {
+            duration: 2000,
+          });
+          this.dialogRef.close();
+        }
+        else{
+          this.snackBar.open(res.message, 'close', {
+            duration: 2000,
+          });
+        }
+      });
+    }
+    else{
+      this.snackBar.open(this.error_msg, 'close', {
+        duration: 4000,
+      });
+    }
   }
 
 }
