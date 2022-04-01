@@ -1,24 +1,62 @@
-<div class="form">
-  <form [formGroup]="form" (submit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email">
-      <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="form.get('email')?.errors?.required">
-        Email is required
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="password">
-      <mat-error *ngIf="form.get('password')?.errors?.required">
-        Please enter password
-      </mat-error>
-    </mat-form-field>
+<!-- <div class="hero">
+  <div class="form">
+    <img src="../../assets/CLS RH LOGO.png" alt="">
+      <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field appearance="standard">
+          <mat-label>{{"Email"|translate}}</mat-label>
+          <input type="email" matInput formControlName="email">
+          <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            {{"Please enter a valid email"|translate}}
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.errors?.required">
+            {{"Email is required"|translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>{{"Password"|translate}}</mat-label>
+          <input type="password" matInput formControlName="password">
+          <mat-error *ngIf="form.get('password')?.errors?.required">
+            {{"Please enter password"|translate}}
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" >{{"LOGIN" | translate}} </button>
+      </form>
+  </div>
+</div> -->
+<div class="hero">
+  <img src="../../assets/Auth_blob.png" alt="">
+  <div class="container">
+    <div class="logo_illustration">
+      <img class="logo" src="../../assets/CLS RH LOGO.png" alt="">
+      <img class="illustration" src="../../assets/illustration.png" alt="">
+    </div>
+    
+    <div class="login">
+      <div class="title">
+        <h1>{{"Welcome Back!"|translate}}🖐</h1>
+        <p>{{"Please login to access your account"|translate}}</p>
+      </div>
+      <form [formGroup]="form" (submit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>{{"Email"|translate}}</mat-label>
+          <input type="email" matInput formControlName="email">
+          <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            {{"Please enter a valid email"|translate}}
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.errors?.required">
+            {{"Email is required"|translate}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{"Password"|translate}}</mat-label>
+          <input type="password" matInput formControlName="password">
+          <mat-error *ngIf="form.get('password')?.errors?.required">
+            {{"Please enter password"|translate}}
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button class="Submit_button" type="submit">{{"LOGIN" | translate}} </button>
+      </form>
 
-    <button mat-raised-button color="accent" type="submit" [disabled]="!form.valid">Submit</button>
-
-  </form>
+    </div>
+  </div>
 </div>

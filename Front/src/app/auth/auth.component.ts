@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AuthComponent implements OnInit {
   form !: FormGroup;
 
 
-  constructor( private authService: AuthService) { }
+  constructor( private authService: AuthService , private snackbar : MatSnackBar) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -23,6 +24,14 @@ export class AuthComponent implements OnInit {
 
 
   onSubmit(){
-    this.authService.login(this.form.value);
+    // check if form is empty
+
+    if (!this.form.invalid) {
+      this.authService.login(this.form.value);
+    }else{
+      this.snackbar.open('Please fill all the fields', 'close', {
+        duration: 4000,
+      });
+    }
   }
 }
