@@ -82,6 +82,13 @@
     "Contracts Of" : "Contrats de",
     "Invoice N° : " : "Facture N° : ",
     "Update" : "Mettre à jour",
-    "Please fill all the fields" : "Veuillez remplir tous les champs"
+    "Please fill all the fields" : "Veuillez remplir tous les champs",
+    "Please enter a valid email" : "Veuillez entrer un email valide",
+    "Email is required" : "L'email est requis",
+    "Please enter password" : "Veuillez entrer un mot de passe",
+    "Please login to access your account" : "Veuillez vous connecter pour accéder à votre compte",
+    "Welcome Back!" : "Bienvenue !",
+    "LOGIN" : "CONNEXION"
+    
 
 }

@@ -122,3 +122,24 @@ form{
   width: 14vw;
   margin-left: 23%;
 }
+
+.lang_btn{
+  position: absolute;
+  right: 9%;
+  top: 9%;
+}
+
+mat-menu{
+  display: flex;
+  flex-direction: column;
+}
+
+.choose_lang{
+  display: flex;
+  align-items: center;
+  gap: 9%;
+}
+.flag{
+  width: 30px;
+  height: 30px;
+}

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../services/auth.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,9 +13,11 @@ import { AuthService } from '../services/auth.service';
 export class AuthComponent implements OnInit {
 
   form !: FormGroup;
+  error_msg : string;
 
-
-  constructor( private authService: AuthService , private snackbar : MatSnackBar) { }
+  constructor( private translate : TranslateService, private authService: AuthService , private snackbar : MatSnackBar , private sharedService: SharedService) { 
+    this.error_msg = this.translate.instant('Please fill all the fields');
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -27,11 +31,16 @@ export class AuthComponent implements OnInit {
     // check if form is empty
 
     if (!this.form.invalid) {
-      this.authService.login(this.form.value);
+      this.authService.login(this.form.value);  
     }else{
-      this.snackbar.open('Please fill all the fields', 'close', {
-        duration: 4000,
+      this.error_msg = this.translate.instant('Please fill all the fields');
+      this.snackbar.open(this.error_msg, 'close', {
+        duration: 3000,
       });
     }
+  }
+
+  changeLanguage(lang: string) { 
+    this.sharedService.changeLanguage(lang);
   }
 }
