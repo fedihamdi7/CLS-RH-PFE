@@ -12,6 +12,7 @@
     <div class="side">
       <button mat-raised-button routerLinkActive="active" routerLink="/employee/work" >{{ "Work Certifications" | translate}}<mat-icon class="side_nav_icons" style="color: #7137AC;">text_snippet</mat-icon></button>
       <button mat-raised-button routerLinkActive="active" routerLink="/employee/internship" >{{ "Internship Certifications" | translate}}<mat-icon class="side_nav_icons" style="color: #AC3737">text_snippet</mat-icon> </button>
+      <button mat-raised-button routerLinkActive="active" routerLink="/employee/leave" >{{ "Request Leave" | translate}}<mat-icon class="side_nav_icons" style="color: #AC3737">text_snippet</mat-icon> </button>
     
       <mat-accordion>
         <mat-expansion-panel hideToggle>
@@ -28,24 +29,7 @@
 
 
 
-    <!-- <mat-accordion>
-      <mat-expansion-panel hideToggle routerLinkActive="active">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Work Certification <mat-icon class="work_icon">text_snippet</mat-icon>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <a routerLink="/employee/work"> <button mat-button style="margin: 10px;">See All</button> </a>
-      </mat-expansion-panel>
-      <mat-expansion-panel hideToggle routerLinkActive="active">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Inernship Certification <mat-icon class="intern_icon">text_snippet</mat-icon>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-         <a routerLink="/employee/internship"> <button mat-button style="margin: 10px;">See All</button></a>
-      </mat-expansion-panel>
-    </mat-accordion> -->
+ 
 
     <div class="bottom_nav">
       <a routerLink="profile" matTooltip="View Profile"><img src="../../assets/avatar.png" alt="" class="user"> </a>

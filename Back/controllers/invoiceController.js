@@ -3,7 +3,6 @@ const moment = require('moment');
 const Supplier = require("../models/supplier");
 const { default: mongoose } = require("mongoose");
 exports.addInvoice = (req, res) => {
-    console.log(req.body);
     let newInvoice = new Invoice();
     newInvoice.supplier = req.body.supplier;
     newInvoice.date = moment(req.body.date).format('YYYY-MM-DD[T00:00:00.000Z]');

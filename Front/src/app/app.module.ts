@@ -18,6 +18,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ProfileComponent } from './employee/profile/profile.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from './admin/admin.module';
+import { LeaveComponent } from './employee/leave/leave.component';
+import { AddLeaveComponent } from './employee/leave/add-leave/add-leave.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { HttpLoaderFactory } from './admin/admin.module';
     CertifComponent,
     AuthComponent,
     NotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    LeaveComponent,
+    AddLeaveComponent
   ],
   imports: [
     BrowserModule,

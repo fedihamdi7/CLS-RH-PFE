@@ -48,8 +48,7 @@ export class InvoicesService {
     data.append('payment_method', invoice.payment_method);
     data.append('amount', invoice.amount);
     data.append('Amount_excluding_taxes', invoice.Amount_excluding_taxes);
-    // log data 
-    console.log(data.get('pdf'));    
+   
     
     return this.http.post(`${this.url}addInvoice`, data);
   }

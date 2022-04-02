@@ -50,3 +50,13 @@ export interface requestTableEmployee {
     sent_date: string;
     status: string;
 }
+
+export interface leavesEmployeeTable{
+    n? : number;
+    sent_date?: string;
+    leave_start_date?: string;
+    leave_end_date?: string;
+    leave_days?: number;
+    status?: string;
+    type? : string;
+}

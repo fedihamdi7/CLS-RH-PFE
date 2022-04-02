@@ -25,7 +25,7 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['n','name', 'email', 'phone', 'address', 'contract_start_date','contract_end_date', 'all_contracts', 'all_invoices','actions'];
   dataSource = new MatTableDataSource<SuppliersTable>(ELEMENT_DATA);
 
-  constructor( private suppliersService : SuppliersService , public dialog: MatDialog , private snackBar : MatSnackBar) { }
+  constructor( private suppliersService : SuppliersService , public dialog: MatDialog) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -75,10 +75,6 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
       height : '60vh',
       data: {id : id}
     });
-    //on close dialog
-    // this.dialog.afterAllClosed.subscribe(() => {
-    //   this.snackBar.open('Contract added successfully', 'close', {duration: 3000});
-    // });
   }
   onAddInvoice(id : String){
     this.dialog.open(AddInvoiceComponent, {
@@ -86,10 +82,6 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
       height : '50vh',
       data: {id : id}
     });
-    //on close dialog
-    // this.dialog.afterAllClosed.subscribe(() => {
-    //   this.snackBar.open('Contract added successfully', 'close', {duration: 3000});
-    // });
   }
  
   applyFilter(event: Event) {
