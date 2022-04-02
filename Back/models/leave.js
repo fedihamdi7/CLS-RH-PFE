@@ -8,7 +8,7 @@ const LeaveSchema = new mongoose.Schema({
     leave_end_date: {type : String, required: false},
     leave_days: {type : Number, required: false},
     type: {type : String,enum: ["Sick", "Casual","Maternity","Paternity","Bereavement","Compensatory"], required: false},
-    status: {type :String ,enum: ["in progress", "done", "declined"], required: false , default: 'in progress'},
+    status: {type :String , required: false , default: 'in progress'},
     file : {type : String, required: false},
 
 });

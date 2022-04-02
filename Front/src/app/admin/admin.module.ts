@@ -26,6 +26,8 @@ import { AddUserComponent } from './users/add-user/add-user.component';
 import { AddSupplierComponent } from './suppliers/add-supplier/add-supplier.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LeavesComponent } from './leaves/leaves.component';
+import { ActionLeaveComponent } from './leaves/action-leave/action-leave.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,6 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddUserComponent,
     AddSupplierComponent,
     DashboardComponent,
+    LeavesComponent,
+    ActionLeaveComponent,
 
   ],
   imports: [

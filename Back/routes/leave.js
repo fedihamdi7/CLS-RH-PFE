@@ -21,4 +21,5 @@ router.post('/addLeave',multer({storage:storage}).single("file"),(req,res,next)=
 router.get('/getAllLeaves',leaveController.getAllLeaves);
 router.get('/getLeavesById/:id',leaveController.getLeavesById);
 router.get('/getLeavesByUserId/:id',leaveController.getLeavesByUserId);
+router.put('/updateStatus/:id',leaveController.updateStatus)
 module.exports =router;

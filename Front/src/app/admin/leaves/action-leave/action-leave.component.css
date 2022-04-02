@@ -1,0 +1,19 @@
+.id{
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+mat-divider{
+    margin: 3% 0;
+}
+
+.infos{
+    margin-top: 6%;
+}
+.buttons{
+    display: flex;
+    gap: 3%;
+}
+button{
+    width: 18%;
+}

@@ -32,7 +32,9 @@ export class LeaveService {
 
     return this.http.post(this.url+"/addLeave",data);
   }
-  addLeaveNoFile(leave : Leave) {
-    return this.http.post(this.url+"/addLeaveNoFile",leave);
+
+  updateStatus(status : string , id : string) {
+    return this.http.put(this.url+"/updateStatus/"+id,{status:status});
+
   }
 }

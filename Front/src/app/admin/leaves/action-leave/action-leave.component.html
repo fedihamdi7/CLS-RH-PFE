@@ -1,0 +1,18 @@
+<h3> {{"Leave Request N°"|translate}} <span class="id">{{leave._id}}</span></h3>
+<div class="infos">
+    {{"Employee Name"}} : <span>{{leave.from.lastName}} {{leave.from.firstName}}</span>
+    <mat-divider></mat-divider>
+    {{"Leave Start Date"}} : <span>{{leave.leave_start_date | date :"fullDate"}}</span>
+    <mat-divider></mat-divider>
+    {{"Leave End Date"}} : <span>{{leave.leave_end_date | date :"fullDate"}}</span>
+    <mat-divider></mat-divider>
+    {{"Leave Days"}} : <span>{{leave.leave_days}}</span>
+    <mat-divider></mat-divider>
+    {{"Leave Type"}} : <span>{{leave.type}}</span>
+</div>
+<mat-divider></mat-divider>
+
+<div class="buttons">
+    <button mat-raised-button color="primary" (click)="updateStatus('accepted',leave._id)">{{"Accept"|translate}}</button>
+    <button mat-raised-button color="warn" (click)="updateStatus('declined',leave._id)">{{"Decline"|translate}}</button>
+</div>

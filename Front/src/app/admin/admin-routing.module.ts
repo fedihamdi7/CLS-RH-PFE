@@ -13,6 +13,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-details.component';
 import { SupplierInvoicesComponent } from './suppliers/supplier-invoices/supplier-invoices.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LeavesComponent } from './leaves/leaves.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
     {path:'contracts/:id',component:ContractDetailsComponent},
     {path:'invoices',component:InvoicesComponent},
     {path:'invoices/:id',component:InvoicesDetailsComponent},
+    {path:'leaves',component:LeavesComponent},
 
 
 

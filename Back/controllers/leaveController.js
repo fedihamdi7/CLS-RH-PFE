@@ -1,6 +1,6 @@
 const Leave = require('../models/leave');
 const moment = require('moment');
-
+const mongoose = require('mongoose');
 exports.addLeave = (req, res) => {
     const start = moment(req.body.leave_start_date);
     const end = moment(req.body.leave_end_date);
@@ -52,4 +52,15 @@ exports.getLeavesByUserId = (req, res) => {
             res.status(200).send(leaves);
         }
     }).populate('from','firstName lastName');
+}
+
+exports.updateStatus = (req, res) => {
+    console.log(req.body);
+    Leave.findOneAndUpdate({_id:req.params.id},{status:req.body.status},(err,leave)=>{
+        if(err){
+            res.status(500).send({message:err.message});
+        }else{
+            res.status(200).send({updated:true});
+        }
+    })
 }
