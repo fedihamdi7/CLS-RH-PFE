@@ -9,7 +9,8 @@ import { LeaveService } from 'src/app/services/leave.service';
   styleUrls: ['./action-leave.component.css']
 })
 export class ActionLeaveComponent implements OnInit {
-
+  zoom : number = 1;
+  zoomed : boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : {id:string} ,
     public dialogRef: MatDialogRef<ActionLeaveComponent>, 
@@ -19,9 +20,9 @@ export class ActionLeaveComponent implements OnInit {
   
   leave:any = {};
   id : string= this.data.id;
-
+  zoomClass : string = "zoomIn";
   ngOnInit(): void {
-    this.leaveService.getLeavesById(this.id).subscribe((res:any) => { 
+    this.leaveService.getLeavesById(this.id).subscribe((res:any) => {    
       this.leave = res;
     });
   }
@@ -31,6 +32,19 @@ export class ActionLeaveComponent implements OnInit {
       this.matSnack.open("Leave Updated", 'close', {duration: 3000});
       this.dialogRef.close();
     });
+  }
+  changeZoom(){
+    if (!this.zoomed) {
+      this.zoom = this.zoom + 0.3;
+      this.zoomed = true;
+      this.zoomClass = "zoomOut";
+
+    }else{
+      this.zoom = this.zoom - 0.3;
+      this.zoomed = false;
+      this.zoomClass = "zoomIn";
+  
+    }
   }
 
 

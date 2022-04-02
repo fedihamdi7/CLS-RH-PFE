@@ -33,7 +33,7 @@ export class LeavesComponent implements OnInit , AfterViewInit{
   }
 
   getLeaves(){
-    this.leaveService.getAllLeaves().subscribe((res:any) => {
+    this.leaveService.getAllLeaves().subscribe((res:any) => {      
       this.dataSource.data = res.map((res:any, index:number) => {
         return {
           id : res._id,
@@ -54,7 +54,7 @@ export class LeavesComponent implements OnInit , AfterViewInit{
 
   onClickAction(id: string){
     this.matDialog.open(ActionLeaveComponent,{
-      width : '700px',
+      width : '1200px',
       data: {id : id}
     });
     this.matDialog.afterAllClosed.subscribe(() => {
