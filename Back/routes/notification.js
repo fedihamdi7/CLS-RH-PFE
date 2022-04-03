@@ -1,5 +1,6 @@
 const moment = require("moment");
 const Contract = require("../models/contract");
+const mail  = require("../mail/mail");
 function notify() {
   let currentDate = new Date();
   Contract.find({}, (err, contracts) => {
@@ -10,10 +11,11 @@ function notify() {
       {
         if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
           console.log("email sent!!");
+          mail.sendNotif(contract);
           
         }
       }
     }
-  });
+  }).populate("supplier");
 }
 module.exports = notify;
