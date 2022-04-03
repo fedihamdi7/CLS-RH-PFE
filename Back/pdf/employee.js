@@ -10,7 +10,6 @@ exports.create = (req, fileName, res) =>{
     date_out = req.body.date_out == "Present" ? "Present" : moment(req.body.date_out).format('DD/MM/YYYY');
     job_title = req.body.job_title || '##Job Title##';
     department = req.body.department || '##Department##';
-  console.log(req.body.type);
     
     saveToPath = "../assets/certifications/";
     //delete file if exist

@@ -3,18 +3,18 @@ const path = require('path');
 const fs = require('fs');
 
 exports.workTemplate = (firstName,lastName,cin,date_in,date_out,job_title,department,pdfFile,type) => {
-    
     var today = new Date();
     var todayFormat = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
     logoPath = path.join(__dirname,'../assets/cls.jfif');
     signature = path.join(__dirname,'../assets/signature.jpg');
-
+    var title;
+    var writeType;
     if (type == "work"){
-      writeType = "a été salarié (e)";
-      title = "ATTESTATION DE TRAVAIL";
+      var writeType = "a été salarié (e)";
+      var title = "ATTESTATION DE TRAVAIL";
     } else if (type == "internship"){
-      writeType ="a effectué un stage";
-      title = "ATTESTATION DE STAGE";
+      var writeType ="a effectué un stage";
+      var title = "ATTESTATION DE STAGE";
     }
     
     var doc = new PDFDocument();

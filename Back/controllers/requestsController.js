@@ -47,9 +47,8 @@ exports.getRequestById = (req, res, next) => {
 }
 
 exports.updateStatus = (req, res, next) => {
-
     PDFAdmin.create(req);
-    Request.findOneAndUpdate({_id:req.params.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
+    Request.findOneAndUpdate({_id:req.body.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
         if(err) return res.status(404).json({message: "Request not found"})
         else {
             mail.sendToEmployee(request.from);
@@ -60,7 +59,6 @@ exports.updateStatus = (req, res, next) => {
 }
 
 exports.preview = (req, res, next) => {
-    // console.log(req.body);
     PDFAdmin.create(req);
     return res.status(200).json(req.body.file)
 }

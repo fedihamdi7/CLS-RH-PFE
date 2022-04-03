@@ -29,6 +29,7 @@ export class ValidateReqComponent implements OnInit {
   path : string = "http://localhost:3000/assets/certifications/";
   file : string = null;
   sender : string = null;
+  type : string;
   constructor(  private route: ActivatedRoute,
                 private router : Router , 
                 private reqService : RequestsService, 
@@ -43,6 +44,7 @@ export class ValidateReqComponent implements OnInit {
   initializeView(){
     this.reqService.getRequest(this.id);
     this.reqSub = this.reqService.oneReqUpdateListener().subscribe((req : Request) =>{
+      this.type = req[0].type;
       this.sender= req[0].from._id;      
       this.pdf =this.path + req[0].file;
       this.file = req[0].file;
@@ -71,7 +73,8 @@ export class ValidateReqComponent implements OnInit {
       job_title : this.form.get('job_title')?.value,
       department : this.form.get('department')?.value,
       file : this.file,
-      user_id : this.sender
+      user_id : this.sender,
+      type : this.type
     }).subscribe((res : string) => {  
       this.pdf= this.path + res;
       this.isLoading = false;
@@ -79,9 +82,7 @@ export class ValidateReqComponent implements OnInit {
   }
 
   validate(){
-    let user:User = this.sharedService.getUserFromLocalStorage();
-    let user_id = user._id;
-    this.http.post('http://localhost:3000/api/request/updateStatus/'+this.id,{
+    this.http.post('http://localhost:3000/api/request/updateStatus/'+this.sender,{
       status : "done",
       id : this.id,
       firstName : this.form.get('firstName')?.value,
@@ -92,7 +93,9 @@ export class ValidateReqComponent implements OnInit {
       job_title : this.form.get('job_title')?.value,
       department : this.form.get('department')?.value,
       file : this.file,
-      user_id : user_id
+      user_id : this.sender,
+      type : this.type
+
     }).subscribe((res: {message : String , file : string}) => {
       this.pdf= this.path + res.file;
       this.snackbar.open("Request updated", "Close", {

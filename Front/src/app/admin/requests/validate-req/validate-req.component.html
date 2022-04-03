@@ -37,7 +37,7 @@
       <div class="col">
         <mat-form-field appearance="fill" style="width:100%;">
           <mat-label>{{ "Date Out" | translate}}</mat-label>
-          <input matInput formControlName="date_out" [matDatepicker]="pickerOut">
+          <input matInput formControlName="date_out" [matDatepicker]="pickerOut" required="false">
           <mat-datepicker-toggle matSuffix [for]="pickerOut"></mat-datepicker-toggle>
           <mat-datepicker #pickerOut></mat-datepicker>
         </mat-form-field>
@@ -56,8 +56,8 @@
       </mat-form-field>
     </div>
 
-    <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">{{ "Preview" | translate}}</button>
-    <button mat-raised-button [color]="'primary'" type="button" (click)="validate()" [disabled]="!form.valid">{{ "Validate" | translate}}</button>
+    <button class="submit" mat-raised-button [color]="'primary'" type="submit" >{{ "Preview" | translate}}</button>
+    <button mat-raised-button [color]="'primary'" type="button" (click)="validate()" >{{ "Validate" | translate}}</button>
 </form>
   </div>
 
