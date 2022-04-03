@@ -17,7 +17,7 @@
       <mat-datepicker #picker_expires_at></mat-datepicker>
     </mat-form-field>
 
-    <input type="file" matTooltip="Choose Contract file" title>
+    <input type="file" (change)="onImagePicked($event)" matTooltip="Choose Contract file" title>
 
   </div>
 

@@ -1,14 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Request } from 'src/app/models/request.model';
-import { User } from 'src/app/models/user.model';
 import { RequestsService } from 'src/app/services/requests.service';
-import { SharedService } from 'src/app/services/shared.service';
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -35,7 +33,6 @@ export class ValidateReqComponent implements OnInit {
                 private reqService : RequestsService, 
                 private http:HttpClient, 
                 private snackbar: MatSnackBar , 
-                private sharedService: SharedService
               ) { }
   ngOnInit(): void {
     this.initializeView();

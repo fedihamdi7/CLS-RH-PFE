@@ -28,6 +28,7 @@ export class AddContractComponent implements OnInit {
       number_of_slices : new FormControl(null),
       payment_each_slice : new FormControl(null),
       method : new FormControl(null),
+      pdf : new FormControl(null),
     });
   }
 
@@ -61,6 +62,15 @@ export class AddContractComponent implements OnInit {
     );
 
   }
+
+  onImagePicked(event: Event){
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({pdf: file});
+    this.form.get('pdf').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+  }
+
   onTabChange(){
     this.form.get('payment_date').setValue(null);
     this.form.get('payment_amount').setValue(null);

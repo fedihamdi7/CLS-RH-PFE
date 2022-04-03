@@ -55,7 +55,6 @@ exports.getLeavesByUserId = (req, res) => {
 }
 
 exports.updateStatus = (req, res) => {
-    console.log(req.body);
     Leave.findOneAndUpdate({_id:req.params.id},{status:req.body.status},(err,leave)=>{
         if(err){
             res.status(500).send({message:err.message});

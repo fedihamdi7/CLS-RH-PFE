@@ -23,7 +23,7 @@ export class SuppliersService {
   }
 
   getContractBySupplierId(id: string){
-    return this.http.get(`${this.url}getContractBySupplierId/${id}`);
+    return this.http.get(`${environment.api_URL}/api/contract/getContractBySupplierId/${id}`);
   }
 
   suppliersUpdateListener(){
