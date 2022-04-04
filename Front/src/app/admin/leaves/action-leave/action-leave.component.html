@@ -1,7 +1,7 @@
 <h3> {{"Leave Request N°"|translate}} <span class="id">{{leave._id}}</span></h3>
 <div class="container">
   <div class="infos">
-    {{"Employee Name"}} : <span>{{leave.from.lastName}} {{leave.from.firstName}}</span>
+    {{"Employee Name"}} : <span>{{lastName}} {{firstName}}</span>
     <mat-divider></mat-divider>
     {{"Leave Start Date"}} : <span>{{leave.leave_start_date | date :"fullDate"}}</span>
     <mat-divider></mat-divider>
@@ -20,7 +20,7 @@
   </div>
   <mat-divider [vertical]="true"></mat-divider>
   <div class="certif">
-    <pdf-viewer *ngIf="leave.file; else noFile " [class]="zoomClass" [src]="'http://localhost:3000/assets/leaves/5wl_laL55_VJ0qI87mFAK-certificat.pdf'" [render-text]="false"
+    <pdf-viewer *ngIf="leave.file; else noFile " [class]="zoomClass" [src]="path" [render-text]="false"
       [original-size]="false" [show-borders]="true" [zoom]="zoom" style="width: 700px; height: 400px" (click)="changeZoom()"></pdf-viewer>
     <ng-template class="noFile" #noFile>
         <img class="noFile" src="../../../../assets/no-file.png" alt="">
