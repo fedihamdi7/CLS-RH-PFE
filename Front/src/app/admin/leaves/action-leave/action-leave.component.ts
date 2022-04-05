@@ -12,6 +12,7 @@ export class ActionLeaveComponent implements OnInit {
   zoom : number = 1;
   zoomed : boolean = false;
   path : string ="http://localhost:3000/assets/leaves/";
+  file_type : string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : {id:string} ,
     public dialogRef: MatDialogRef<ActionLeaveComponent>, 
@@ -25,10 +26,13 @@ export class ActionLeaveComponent implements OnInit {
   id : string= this.data.id;
   zoomClass : string = "zoomIn";
   ngOnInit(): void {
-    this.leaveService.getLeavesById(this.id).subscribe((res:any) => {    
+    this.leaveService.getLeavesById(this.id).subscribe((res:any) => {
       this.lastName = res.from.lastName;
       this.firstName = res.from.firstName;
-      this.path = this.path + res.file;
+      if (res.file) {
+        this.path = this.path + res.file.name;
+        this.file_type = res.file.type;
+      }
       this.leave = res;
     });
   }

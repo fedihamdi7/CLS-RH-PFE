@@ -2,6 +2,8 @@ const Leave = require('../models/leave');
 const moment = require('moment');
 const mongoose = require('mongoose');
 exports.addLeave = (req, res) => {
+    //get file extension
+    
     const start = moment(req.body.leave_start_date);
     const end = moment(req.body.leave_end_date);
     days_count = end.diff(start, 'days')+1;
@@ -13,7 +15,18 @@ exports.addLeave = (req, res) => {
     newLeave.leave_days = days_count;
     newLeave.type = req.body.type;
     if (req.file) {
-        newLeave.file = req.file.filename;
+        let fileExtension = req.file.originalname.split('.').pop();
+        if (fileExtension === 'pdf') {
+            newLeave.file = {
+                type: 'pdf',
+                name: req.file.filename
+            }
+        }else{
+            newLeave.file = {
+                type: 'img',
+                name: req.file.filename
+            }
+        }
     }
     newLeave.save((err, leave) => {
         if (err) {

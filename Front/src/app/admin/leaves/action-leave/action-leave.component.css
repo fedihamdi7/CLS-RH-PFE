@@ -14,6 +14,12 @@ pdf-viewer{
 .infos{
     margin-top: 0%;
     margin-left: 1%;
+    width: 35vw;
+}
+.infos_noFile{
+    margin-top: 0%;
+    margin-left: 1%;
+    width: 23vw;
 }
 .buttons{
     display: flex;
@@ -26,8 +32,8 @@ button{
     display: flex;
     flex-direction: row;
     margin-top: 5%;
-    justify-content: space-between;
 }
+
 
 .zoomIn{
     cursor: zoom-in;
@@ -35,6 +41,12 @@ button{
 .zoomOut{
     cursor: zoom-out;
 }
+
 .noFile{
-    margin-left: -43%;
+    margin-left: 66%;
+}
+
+.certif_img{
+    width: 77%;
+    margin-left: 12%;
 }
