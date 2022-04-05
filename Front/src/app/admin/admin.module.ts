@@ -29,6 +29,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LeavesComponent } from './leaves/leaves.component';
 import { ActionLeaveComponent } from './leaves/action-leave/action-leave.component';
 
+import {ImageModule} from 'primeng/image';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -58,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   ],
   imports: [
+    ImageModule,
     NgxChartsModule,
     CommonModule,
     AdminRoutingModule,

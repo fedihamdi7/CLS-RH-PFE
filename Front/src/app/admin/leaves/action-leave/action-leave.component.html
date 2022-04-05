@@ -2,15 +2,15 @@
 {{"Leaves Days Left : "}} {{leaves_left}}
 <div class="container">
   <div [ngClass]="{'infos_noFile' : !leave.file , 'infos' : leave.file} ">
-    {{"Employee Name"}} : <span>{{lastName}} {{firstName}}</span>
+    <span class="label"> {{"Employee Name"}} </span> : <span>{{lastName}} {{firstName}}</span>
     <mat-divider></mat-divider>
-    {{"Leave Start Date"}} : <span>{{leave.leave_start_date | date :"fullDate"}}</span>
+    <span class="label"> {{"Leave Start Date"}} </span> : <span>{{leave.leave_start_date | date :"fullDate"}}</span>
     <mat-divider></mat-divider>
-    {{"Leave End Date"}} : <span>{{leave.leave_end_date | date :"fullDate"}}</span>
+    <span class="label"> {{"Leave End Date"}} </span> : <span>{{leave.leave_end_date | date :"fullDate"}}</span>
     <mat-divider></mat-divider>
-    {{"Leave Days"}} : <span>{{leave.leave_days}}</span>
+    <span class="label"> {{"Leave Days"}} </span> : <span>{{leave.leave_days}}</span>
     <mat-divider></mat-divider>
-    {{"Leave Type"}} : <span>{{leave.type}}</span>
+    <span class="label"> {{"Leave Type"}} </span> : <span>{{leave.type}}</span>
     <mat-divider></mat-divider>
     <div class="buttons">
       <button mat-raised-button style="background-color: green; color: white;"
@@ -25,8 +25,8 @@
     <pdf-viewer *ngIf="leave.file && file_type == 'pdf' " [class]="zoomClass" [src]="path" [render-text]="false"
       [original-size]="false" [show-borders]="true" [zoom]="zoom" style="width: 700px; height: 400px" (click)="changeZoom()"></pdf-viewer>
     
-    <img class="certif_img"  *ngIf="leave.file && file_type == 'img' " [src]="path" alt="">
-    
+    <!-- <img class="certif_img"  *ngIf="leave.file && file_type == 'img' " [src]="path" alt=""> -->
+    <p-image *ngIf="leave.file && file_type == 'img' " [src]="path" alt="Image" width="600" height="400" [preview]="true"></p-image>
     <div *ngIf="!leave.file" class="noFile">
         <img  src="../../../../assets/no-file.png" alt="">
     </div>
