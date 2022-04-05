@@ -88,7 +88,21 @@
     "Please enter password" : "Veuillez entrer un mot de passe",
     "Please login to access your account" : "Veuillez vous connecter pour accéder à votre compte",
     "Welcome Back!" : "Bienvenue !",
-    "LOGIN" : "CONNEXION"
-    
+    "LOGIN" : "CONNEXION",
+    "Leaves" : "Congés",
+    "Leave" : "Congé",
+    "Leave Request N°" : "Demande de congé N°",
+    "Leaves Days Left : " : "Congés restants : ",
+    "Employee Name" : "Nom de l'employé",
+    "Leave Start Date" : "Date de début du congé",
+    "Leave End Date" : "Date de fin du congé",
+    "Leave Type" : "Type de congé",
+    "Leave Days" : "Nombre de jours de congé",
+    "Select Type" : "Sélectionner un type",
+    "Please Choose a type" : "Veuillez choisir un type",
+    "SUBMIT" : "SOUMETTRE",
+    "Accept" : "Accepter",
+    "Decline" : "Refuser"
+
 
 }
