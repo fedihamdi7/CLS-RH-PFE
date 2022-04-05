@@ -11,4 +11,5 @@ export interface Leave{
     type ?: string;
     file ?: string;
     leaves_left ?: number;
+    note?: string;
 }

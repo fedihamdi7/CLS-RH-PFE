@@ -96,7 +96,8 @@ exports.updateStatus = (req, res) => {
                 Leave.findOneAndUpdate({
                     _id: req.params.id
                 }, {
-                    status: req.body.status
+                    status: req.body.status,
+                    note : req.body.note
                 }, (err, leave) => {
                     if (err) {
                         res.status(500).send({

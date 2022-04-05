@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LeaveService } from 'src/app/services/leave.service';
+import { ActionLeaveDialogComponent } from '../action-leave-dialog/action-leave-dialog.component';
 
 @Component({
   selector: 'app-action-leave',
@@ -15,11 +17,13 @@ export class ActionLeaveComponent implements OnInit {
   file_type : string;
   leaves_left : number;
   user_id : string;
+  form : FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : {id:string} ,
     public dialogRef: MatDialogRef<ActionLeaveComponent>, 
     private matSnack: MatSnackBar,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private matDialog : MatDialog
     ) { }
   
   leave:any = {};
@@ -28,6 +32,9 @@ export class ActionLeaveComponent implements OnInit {
   id : string= this.data.id;
   zoomClass : string = "zoomIn";
   ngOnInit(): void {
+    this.form = new FormGroup({
+      note : new FormControl(null)
+    });
     this.leaveService.getLeavesById(this.id).subscribe((res:any) => {
       this.lastName = res.from.lastName;
       this.firstName = res.from.firstName;
@@ -42,11 +49,28 @@ export class ActionLeaveComponent implements OnInit {
   }
 
   updateStatus(status: string, id :string , leave_days?:number){
-    this.leaveService.updateStatus(status, id,leave_days,this.user_id).subscribe((res:any) => {
-      this.matSnack.open("Leave Updated", 'close', {duration: 3000});
-      this.dialogRef.close();
-    });
+    if (status == "declined"){
+      this.matDialog.open(ActionLeaveDialogComponent,{
+        width : "500px",
+        data : {
+          status : status,
+          id : id,
+          leave_days : leave_days,
+          user_id : this.user_id
+        }
+      })
+      this.matDialog.afterAllClosed.subscribe(() => {
+        this.dialogRef.close();
+      })
+    }else{
+      this.leaveService.updateStatus(status, id,leave_days,this.user_id).subscribe((res:any) => {
+        this.matSnack.open("Leave Updated", 'close', {duration: 3000});
+        this.dialogRef.close();
+      });
+    }
   }
+
+  
   changeZoom(){
     if (!this.zoomed) {
       this.zoom = this.zoom + 0.3;
@@ -60,6 +84,5 @@ export class ActionLeaveComponent implements OnInit {
   
     }
   }
-
 
 }

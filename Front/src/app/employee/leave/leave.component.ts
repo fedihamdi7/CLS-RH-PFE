@@ -19,9 +19,10 @@ const ELEMENT_DATA: leavesEmployeeTable[] = [];
   styleUrls: ['./leave.component.css']
 })
 export class LeaveComponent implements OnInit ,AfterViewInit{
-  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','status'];
+  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','note','status'];
   dataSource = new MatTableDataSource<leavesEmployeeTable>(ELEMENT_DATA);
   leaves_left:number;
+  isNote : boolean = false;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -60,7 +61,8 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
           sent_date: res.sent_date,
           status: res.status,
           type: res.type,
-          leave_days : res.leave_days
+          leave_days : res.leave_days,
+          note : res.note
         }
       });
      }

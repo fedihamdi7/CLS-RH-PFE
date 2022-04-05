@@ -30,6 +30,7 @@ import { LeavesComponent } from './leaves/leaves.component';
 import { ActionLeaveComponent } from './leaves/action-leave/action-leave.component';
 
 import {ImageModule} from 'primeng/image';
+import { ActionLeaveDialogComponent } from './leaves/action-leave-dialog/action-leave-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     LeavesComponent,
     ActionLeaveComponent,
+    ActionLeaveDialogComponent,
 
   ],
   imports: [

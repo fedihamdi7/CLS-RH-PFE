@@ -14,6 +14,7 @@ const LeaveSchema = new mongoose.Schema({
         type : {type: String , enum: ["pdf","img"]},
         name : {type: String},
     },
+    note: {type : String, required: false},
 
 });
 
