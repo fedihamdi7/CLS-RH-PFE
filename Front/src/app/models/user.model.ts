@@ -11,6 +11,7 @@ export interface User {
 	department: string;
 	password: string;
 	type: string;
+	leaves_left: number;
 	__v: number;
 }
 

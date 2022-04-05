@@ -22,7 +22,7 @@ export class LeaveService {
     return this.http.get(this.url+"/getLeavesByUserId/"+id);
   }
 
-  addLeave(leave : Leave) {
+  addLeave(leave : any) {
     const data = new FormData();
     data.append('file', leave.file);
     data.append('from', leave.from);

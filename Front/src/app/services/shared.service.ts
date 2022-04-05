@@ -28,6 +28,11 @@ export class SharedService {
   getLanguageFromLocalStorage(){
     return localStorage.getItem('lang');
   }
+  UPDATE_LEAVES_LEFT_IN_LOCAL_STORAGE(leaves_left: number){
+    let user = this.getUserFromLocalStorage();
+    user.leaves_left = leaves_left;
+    this.putUserInLocalStorage(user);
+  }
 
   changeLanguage(lang: string){
     this.translateService.use(lang);

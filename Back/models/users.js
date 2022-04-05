@@ -21,6 +21,7 @@ const UserSchema = mongoose.Schema({
     required: true,
     default: "employee",
   },
+  leaves_left: { type: Number, required: true, default: 40 },
 });
 
 //Pre Save Hook. Used to hash the password

@@ -21,6 +21,7 @@ const ELEMENT_DATA: leavesEmployeeTable[] = [];
 export class LeaveComponent implements OnInit ,AfterViewInit{
   displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','status'];
   dataSource = new MatTableDataSource<leavesEmployeeTable>(ELEMENT_DATA);
+  leaves_left:number;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -39,7 +40,8 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
 
   getRequests(){
     this.leaveService.getLeavesByUserId(this.userLocal._id).subscribe( (leaves:Leave[]) =>{
-     
+     if (leaves) {
+      this.leaves_left = leaves[0]?.from.leaves_left;     
       this.dataSource.data = leaves.map((res:Leave,index:number) =>{
         return {
           n: index + 1,
@@ -49,12 +51,16 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
           leave_days : res.leave_days
         }
       });
+     }
     });
   }
 
   showPrompt(){
     this.dialog.open(AddLeaveComponent,{
       width: '700px',
+      data: {
+        leaves_left: this.leaves_left
+      }
     });
     this.dialog.afterAllClosed.subscribe(() => {
       this.getRequests();
