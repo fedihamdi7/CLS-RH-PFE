@@ -69,7 +69,7 @@ exports.getLeavesById = (req, res) => {
         } else {
             res.status(200).send(leave);
         }
-    }).populate('from', 'firstName lastName');
+    }).populate('from', 'firstName lastName leaves_left');
 }
 
 exports.getLeavesByUserId = (req, res) => {
@@ -87,19 +87,46 @@ exports.getLeavesByUserId = (req, res) => {
 }
 
 exports.updateStatus = (req, res) => {
-    Leave.findOneAndUpdate({
-        _id: req.params.id
-    }, {
-        status: req.body.status
-    }, (err, leave) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message
+    if (req.body.status == 'declined') {
+        User.findOne({
+            _id : req.body.user_id
+        },(err, user) => {
+            user.leaves_left = user.leaves_left + req.body.leaves_days_count;
+            user.save((err, user) => {
+                Leave.findOneAndUpdate({
+                    _id: req.params.id
+                }, {
+                    status: req.body.status
+                }, (err, leave) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: err.message
+                        });
+                    } else {
+                        res.status(200).send({
+                            updated: true
+                        });
+                    }
+                })
             });
-        } else {
-            res.status(200).send({
-                updated: true
-            });
-        }
-    })
+        });
+    }
+    else{
+        Leave.findOneAndUpdate({
+            _id: req.params.id
+        }, {
+            status: req.body.status
+        }, (err, leave) => {
+            if (err) {
+                res.status(500).send({
+                    message: err.message
+                });
+            } else {
+                res.status(200).send({
+                    updated: true
+                });
+            }
+        });
+    }
+    
 }

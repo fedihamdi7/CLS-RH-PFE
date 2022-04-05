@@ -13,6 +13,8 @@ export class ActionLeaveComponent implements OnInit {
   zoomed : boolean = false;
   path : string ="http://localhost:3000/assets/leaves/";
   file_type : string;
+  leaves_left : number;
+  user_id : string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data : {id:string} ,
     public dialogRef: MatDialogRef<ActionLeaveComponent>, 
@@ -29,6 +31,8 @@ export class ActionLeaveComponent implements OnInit {
     this.leaveService.getLeavesById(this.id).subscribe((res:any) => {
       this.lastName = res.from.lastName;
       this.firstName = res.from.firstName;
+      this.leaves_left = res.from.leaves_left;
+      this.user_id = res.from._id;
       if (res.file) {
         this.path = this.path + res.file.name;
         this.file_type = res.file.type;
@@ -37,8 +41,8 @@ export class ActionLeaveComponent implements OnInit {
     });
   }
 
-  updateStatus(status: string, id :string){
-    this.leaveService.updateStatus(status, id).subscribe((res:any) => {
+  updateStatus(status: string, id :string , leave_days?:number){
+    this.leaveService.updateStatus(status, id,leave_days,this.user_id).subscribe((res:any) => {
       this.matSnack.open("Leave Updated", 'close', {duration: 3000});
       this.dialogRef.close();
     });

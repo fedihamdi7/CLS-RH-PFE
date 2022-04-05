@@ -33,8 +33,8 @@ export class LeaveService {
     return this.http.post(this.url+"/addLeave",data);
   }
 
-  updateStatus(status : string , id : string) {
-    return this.http.put(this.url+"/updateStatus/"+id,{status:status});
+  updateStatus(status : string , id : string , leaves_days_count?:number,user_id?:string) {
+    return this.http.put(this.url+"/updateStatus/"+id,{status:status,leaves_days_count:leaves_days_count,user_id:user_id});
 
   }
 }

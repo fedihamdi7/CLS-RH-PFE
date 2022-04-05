@@ -1,4 +1,5 @@
 <h3> {{"Leave Request N°"|translate}} <span class="id">{{leave._id}}</span></h3>
+{{"Leaves Days Left : "}} {{leaves_left}}
 <div class="container">
   <div [ngClass]="{'infos_noFile' : !leave.file , 'infos' : leave.file} ">
     {{"Employee Name"}} : <span>{{lastName}} {{firstName}}</span>
@@ -15,7 +16,7 @@
       <button mat-raised-button style="background-color: green; color: white;"
         (click)="updateStatus('accepted',leave._id)">{{"Accept"|translate}}</button>
       <button mat-raised-button style="background-color: rgb(97, 4, 4); color: white;"
-        (click)="updateStatus('declined',leave._id)">{{"Decline"|translate}}</button>
+        (click)="updateStatus('declined',leave._id ,leave.leave_days)">{{"Decline"|translate}}</button>
     </div>
   </div>
   <mat-divider [vertical]="true"></mat-divider>

@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 import { LeaveService } from 'src/app/services/leave.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
-
+import {EmployeeService} from '../../services/employee.service';
 
 const ELEMENT_DATA: leavesEmployeeTable[] = [];
 
@@ -26,7 +26,12 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   userLocal :User = this.sharedService.getUserFromLocalStorage();
-  constructor(private sharedService: SharedService , private leaveService :LeaveService ,public dialog: MatDialog) { }
+  constructor(
+              private sharedService: SharedService , 
+              private leaveService :LeaveService ,
+              public dialog: MatDialog,
+              private employeeService : EmployeeService
+              ){}
   
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -35,14 +40,21 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
   }
 
   ngOnInit(): void {
+    this.updateLeavesInLocalstorage();
     this.getRequests();
   }
 
+  updateLeavesInLocalstorage(){
+    this.employeeService.getEmployeeById().subscribe( (data:User) =>{
+      this.sharedService.UPDATE_LEAVES_LEFT_IN_LOCAL_STORAGE(data.leaves_left);
+    });
+  }
+  
   getRequests(){
     this.leaveService.getLeavesByUserId(this.userLocal._id).subscribe( (leaves:Leave[]) =>{
-     if (leaves) {
-      this.leaves_left = leaves[0]?.from.leaves_left;     
-      this.dataSource.data = leaves.map((res:Leave,index:number) =>{
+      if (leaves) {
+        this.leaves_left = leaves[0]?.from.leaves_left;    
+        this.dataSource.data = leaves.map((res:Leave,index:number) =>{
         return {
           n: index + 1,
           sent_date: res.sent_date,
@@ -63,6 +75,7 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
       }
     });
     this.dialog.afterAllClosed.subscribe(() => {
+      this.updateLeavesInLocalstorage();
       this.getRequests();
     });
   }
