@@ -10,6 +10,7 @@ import { LeaveService } from 'src/app/services/leave.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
 import {EmployeeService} from '../../services/employee.service';
+import { NoteComponent } from './note/note.component';
 
 const ELEMENT_DATA: leavesEmployeeTable[] = [];
 
@@ -19,7 +20,7 @@ const ELEMENT_DATA: leavesEmployeeTable[] = [];
   styleUrls: ['./leave.component.css']
 })
 export class LeaveComponent implements OnInit ,AfterViewInit{
-  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','note','status'];
+  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','status'];
   dataSource = new MatTableDataSource<leavesEmployeeTable>(ELEMENT_DATA);
   leaves_left:number;
   isNote : boolean = false;
@@ -67,6 +68,15 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
       });
      }
     });
+  }
+
+  showNote(note:string){
+    this.dialog.open(NoteComponent,{
+      width: '500px',
+      data: {
+        note: note
+      }
+    })
   }
 
   showPrompt(){

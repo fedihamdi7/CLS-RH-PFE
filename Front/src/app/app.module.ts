@@ -20,6 +20,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from './admin/admin.module';
 import { LeaveComponent } from './employee/leave/leave.component';
 import { AddLeaveComponent } from './employee/leave/add-leave/add-leave.component';
+import { NoteComponent } from './employee/leave/note/note.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AddLeaveComponent } from './employee/leave/add-leave/add-leave.componen
     NotFoundComponent,
     ProfileComponent,
     LeaveComponent,
-    AddLeaveComponent
+    AddLeaveComponent,
+    NoteComponent
   ],
   imports: [
     BrowserModule,
