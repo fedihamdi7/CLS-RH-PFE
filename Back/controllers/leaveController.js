@@ -1,6 +1,8 @@
 const Leave = require('../models/leave');
 const User = require('../models/users');
 const moment = require('moment');
+const PDFAdmin = require('../pdf/adminValidation');
+
 exports.addLeave = (req, res) => {
     const start = moment(req.body.leave_start_date);
     const end = moment(req.body.leave_end_date);
@@ -113,6 +115,7 @@ exports.updateStatus = (req, res) => {
         });
     }
     else{
+        PDFAdmin.acceptLeave(req);
         Leave.findOneAndUpdate({
             _id: req.params.id
         }, {

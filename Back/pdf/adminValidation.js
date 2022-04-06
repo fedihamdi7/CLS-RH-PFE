@@ -4,6 +4,7 @@ const moment = require('moment');
 const User = require('../models/users');
 const path = require('path');
 const pdfTemplates = require('./templates');
+const leave = require('../models/leave');
 
 
 exports.create = (req) =>{
@@ -42,4 +43,13 @@ exports.create = (req) =>{
       }catch(err){
         console.error('MakePDF ERROR: ' + err.message);
       }
+}
+
+exports.acceptLeave = (req) =>{
+  leave.findById(req.params.id,(err,leave)=>{
+    let start = moment(leave.leave_start_date).format('DD/MM/YYYY');  
+    let end = moment(leave.leave_end_date).format('DD/MM/YYYY');  
+    pdfTemplates.leaveTemplate(leave.from.firstName,leave.from.lastName,leave.from.cin,leave.from.job_title,leave.from.department,leave.leave_days,start,end,req.params.id);
+  }).populate('from');
+
 }

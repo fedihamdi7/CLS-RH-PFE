@@ -11,7 +11,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { AddLeaveComponent } from './add-leave/add-leave.component';
 import {EmployeeService} from '../../services/employee.service';
 import { NoteComponent } from './note/note.component';
-
+import * as file from 'file-saver';
 const ELEMENT_DATA: leavesEmployeeTable[] = [];
 
 @Component({
@@ -20,7 +20,7 @@ const ELEMENT_DATA: leavesEmployeeTable[] = [];
   styleUrls: ['./leave.component.css']
 })
 export class LeaveComponent implements OnInit ,AfterViewInit{
-  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','status'];
+  displayedColumns: string[] = ['n', 'sent_date', 'type','leave_days','status','download'];
   dataSource = new MatTableDataSource<leavesEmployeeTable>(ELEMENT_DATA);
   leaves_left:number;
   isNote : boolean = false;
@@ -63,7 +63,8 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
           status: res.status,
           type: res.type,
           leave_days : res.leave_days,
-          note : res.note
+          note : res.note,
+          certificate : res.certificate
         }
       });
      }
@@ -96,4 +97,7 @@ export class LeaveComponent implements OnInit ,AfterViewInit{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  download(path: string){
+    file.saveAs('http://localhost:3000/assets/leaves/accepted/'+path, `attestation_de_congé.pdf`);
+  }
 }

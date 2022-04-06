@@ -12,4 +12,5 @@ export interface Leave{
     file ?: string;
     leaves_left ?: number;
     note?: string;
+    certificate?: string;
 }

@@ -15,6 +15,7 @@ const LeaveSchema = new mongoose.Schema({
         name : {type: String},
     },
     note: {type : String, required: false},
+    certificate : {type : String, required: false},
 
 });
 
