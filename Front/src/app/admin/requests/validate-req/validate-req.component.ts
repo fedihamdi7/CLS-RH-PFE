@@ -99,7 +99,7 @@ export class ValidateReqComponent implements OnInit {
         duration: 3000
       });
       this.router.navigate(['/admin/requests']);
-      this.reqService.getRequestsNotifications();
+      // this.reqService.getRequestsNotifications();
     });
   }
 

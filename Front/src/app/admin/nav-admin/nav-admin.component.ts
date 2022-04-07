@@ -22,10 +22,10 @@ export class NavAdminComponent implements OnInit,OnDestroy {
     let user :User = this.sharedService.getUserFromLocalStorage();
     this.firstName = user.firstName;
     this.lastName = user.lastName;
-    this.requestService.getRequestsNotifications();
-      this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : number) => {      
-      this.notification = data;         
-    });
+    // this.requestService.getRequestsNotifications();
+    //   this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : number) => {      
+    //   this.notification = data;         
+    // });
   }
 
 
