@@ -33,6 +33,7 @@ import {ImageModule} from 'primeng/image';
 import { ActionLeaveDialogComponent } from './leaves/action-leave-dialog/action-leave-dialog.component';
 import { DateAdapter } from '@angular/material/core';
 import { CustomDateAdapter } from './adapter/custom-date-adapter';
+import { EditUserComponent } from './users/edit-user/edit-user.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LeavesComponent,
     ActionLeaveComponent,
     ActionLeaveDialogComponent,
+    EditUserComponent,
 
   ],
   imports: [

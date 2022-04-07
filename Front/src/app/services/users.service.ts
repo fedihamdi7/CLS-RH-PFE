@@ -29,4 +29,12 @@ export class UsersService {
     return this.users.asObservable();
   }
 
+  getEmployeeById(id: string){
+    return this.http.get(`${this.url}getEmployeeById/${id}`);
+  }
+
+  updateEmployee(id: string, user: any){
+    return this.http.put(`${this.url}editUser/${id}`, user);
+  }
+
 }

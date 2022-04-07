@@ -1,5 +1,5 @@
 const User = require('../models/users');
-
+const moment = require('moment');
 exports.getEmployees = (req, res, next) => {
     User.find({type: 'employee'}, (err, employee)=>{
         if (err) return res.status(401).json({msg:'no employees yet'})
@@ -16,6 +16,16 @@ exports.getEmployeeById = (req, res, next) => {
 
 exports.updateEmployeeProfile = (req, res, next) => {
     User.findByIdAndUpdate(req.params.id, req.body, (err, employee)=>{
+        if (err) return res.status(401).json({update : false})
+        else return res.status(200).json({updated : true})
+    })
+}
+
+exports.editUser = (req, res, next) => {
+    if (req.body.date_in) req.body.date_in = moment(req.body.date_in).format('YYYY-MM-DD[T00:00:00.000Z]');
+    if (req.body.date_out) req.body.date_out = moment(req.body.date_out).format('YYYY-MM-DD[T00:00:00.000Z]');
+
+    User.findByIdAndUpdate(req.params.id, req.body, (err, user)=>{
         if (err) return res.status(401).json({update : false})
         else return res.status(200).json({updated : true})
     })
