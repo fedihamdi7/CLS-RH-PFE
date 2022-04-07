@@ -3,7 +3,7 @@
 <form [formGroup]="form" (submit)="onSubmit()">
 
   <div class="row">
-    <mat-form-field appearance="fill" class="col">
+    <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Date" | translate}}</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -11,7 +11,7 @@
     </mat-form-field>
 
     
-    <mat-form-field appearance="fill" class="col">
+    <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Payment Status" | translate}}</mat-label>
       <mat-select formControlName="payment_status">
         <mat-option value="paid">{{ "Paid" | translate}}</mat-option>
@@ -20,7 +20,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="col">
+    <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Payment Methode" | translate}}</mat-label>
       <mat-select formControlName="payment_method">
         <mat-option value="cash">{{ "Cash" | translate}}</mat-option>
@@ -28,12 +28,12 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="col">
+    <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Payment Amount" | translate}}</mat-label>
       <input matInput formControlName="amount">
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="col">
+    <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Amount Excluding Taxes" | translate}}</mat-label>
       <input matInput formControlName="Amount_excluding_taxes">
     </mat-form-field>

@@ -22,7 +22,7 @@
           <div class="card-body">
             <h4 class="card-title border-bottom">{{"Pie Chart By Year" | translate}}</h4>
             <form [formGroup]="formByYear" *ngIf="formByYear">
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                 <mat-label>{{"Select Year" | translate}}</mat-label>
                 <mat-select (selectionChange)="onSelectYear()" formControlName="year">
                   <mat-option *ngFor="let year of years" [value]="year">
@@ -47,7 +47,7 @@
           <div class="card-body">
             <h4 class="card-title border-bottom">{{"Pie Chart By Range" | translate}}</h4>
             <form [formGroup]="formByRange" (ngSubmit)="rangeChanged()">
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                 <mat-label>{{'Enter a date range' | translate}}</mat-label>
                 <mat-date-range-input [rangePicker]="picker" disabled>
                   <input matStartDate formControlName="start" placeholder="Start date">
@@ -74,7 +74,7 @@
           <div class="card-body">
             <h4 class="card-title border-bottom">{{"Pie Chart By Supplier" | translate}}</h4>
             <form [formGroup]="formBySupplier" *ngIf="formBySupplier">
-              <mat-form-field appearance="fill">
+              <mat-form-field appearance="outline">
                 <mat-label>{{"Select Supplier" | translate}}</mat-label>
                 <mat-select (selectionChange)="onSelectSupplier()" formControlName="suppControl">
                   <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">

@@ -8,6 +8,7 @@ import { userTable } from 'src/app/models/tables.model';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
 import { AddUserComponent } from './add-user/add-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 
@@ -21,7 +22,7 @@ const ELEMENT_DATA: userTable[] = [];
 })
 export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in'];
+  displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in','action'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
   private usersSub :Subscription | undefined;
@@ -47,6 +48,7 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
       //for each employee map the data and push in the dataSource
       this.dataSource.data = users.map((user:User, index:number) => {
         return {
+          id : user._id,
           n : index + 1,
           first_name: user.firstName,
           last_name: user.lastName,
@@ -58,9 +60,17 @@ export class UsersComponent implements OnInit, OnDestroy, AfterViewInit {
 
     });
   }
-  onSubmit(){
-    
-
+  onEdit(id:string){
+    this.dialog.open(EditUserComponent,{
+      width: '700px',
+      height : 'auto',
+      data : {
+        id : id
+      }
+    })
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getUsers();
+    })
   }
 
   showForm(){

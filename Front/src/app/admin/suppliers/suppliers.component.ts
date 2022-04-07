@@ -72,7 +72,7 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
   onAddContract(id : String){
     this.dialog.open(AddContractComponent, {
       width: '700px',
-      height : '60vh',
+      height : '65vh',
       data: {id : id}
     });
   }

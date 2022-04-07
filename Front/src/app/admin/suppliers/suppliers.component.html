@@ -4,7 +4,7 @@
 <div class="container">
   <mat-form-field appearance="standard" class="filter">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Type Name..." #input>
+    <input matInput (keyup)="applyFilter($event)" #input>
   </mat-form-field>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDisableClear matSortActive="position" matSortDirection="asc">
 
