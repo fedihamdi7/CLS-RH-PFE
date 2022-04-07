@@ -4,7 +4,7 @@ h2{
   }
 .chart{
     background-color: #ffffff;
-    padding: 4% 0 0 2%;
+    padding: 4% 0 0 6%;
     height: 42vh;
 
     /* border-radius: 28px; */
@@ -16,7 +16,19 @@ mat-tab-group{
     position: absolute;
     top: 9%;
     left: 11%;
+    background-color: white;
+    border-radius: 25px;
 }
+
 .sumbit{
     margin-left: 20px;
+}
+
+.card-body{
+    position: relative;
+}
+form{
+    position: absolute;
+    right: 7%;
+    top: -11%;
 }
