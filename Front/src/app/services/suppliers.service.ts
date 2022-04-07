@@ -29,4 +29,12 @@ export class SuppliersService {
   suppliersUpdateListener(){
     return this.suppliers.asObservable();
   }
+
+  getSupplierById(id: string){
+    return this.http.get(`${this.url}getSupplierById/${id}`);
+  }
+
+  updateSupplier(id:string,supplier: Supplier){
+    return this.http.put(`${this.url}updateSupplier/${id}`,supplier);
+  }
 }

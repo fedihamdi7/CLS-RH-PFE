@@ -69,6 +69,17 @@ export class SuppliersComponent implements OnInit, AfterViewInit {
     });
   }
 
+  onEditSupplier(id : String){
+    this.dialog.open(AddSupplierComponent, {
+      width: '700px',
+      height : 'auto',
+      data: {id : id}
+    });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getSuppliers();
+    });
+  }
+
   onAddContract(id : String){
     this.dialog.open(AddContractComponent, {
       width: '700px',

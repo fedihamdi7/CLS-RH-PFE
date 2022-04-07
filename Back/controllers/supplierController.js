@@ -16,9 +16,11 @@ exports.getSupplierById = (req, res) => {
 }
 
 exports.updateSupplier = (req, res) => {
+    if (req.body.contract_start_date) req.body.contract_start_date = moment(req.body.contract_start_date).format('YYYY-MM-DD[T00:00:00.000Z]');
+    if (req.body.contract_end_date) req.body.contract_end_date = moment(req.body.contract_end_date).format('YYYY-MM-DD[T00:00:00.000Z]');
     Supplier.findByIdAndUpdate(req.params.id, req.body, (err, supplier)=>{
-        if (err) return res.status(404)
-        else res.status(200).json({message : "Supplier updated"})
+        if (err) return res.status(404).json({update : false})
+        else res.status(200).json({updated:true})
     });
 }
 
