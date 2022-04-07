@@ -1,8 +1,9 @@
 const http = require("http");
 const app = require("./app");
-const Contract = require("./models/contract");
 const notify = require("./routes/notification");
-const moment = require("moment");
+const leaveController = require("./controllers/leaveController");
+const cron = require("node-cron");
+
 require("dotenv").config();
 // set the application port
 const normalizePort = (val) => {
@@ -50,7 +51,10 @@ server.on("listening", () => {
   const address = server.address();
   const bind = typeof address === "string" ? "pipe " + address : "port " + port;
   console.log("Listening on " + bind);
-
+  // schedule cron job in the first day of january
+  cron.schedule("0 0 0 1 1 *", () => {
+    leaveController.resetDaysCount();
+  });
   notify();
   setInterval(() => {
     notify();

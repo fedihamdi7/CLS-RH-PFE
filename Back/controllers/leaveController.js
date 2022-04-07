@@ -134,3 +134,27 @@ exports.updateStatus = (req, res) => {
     }
     
 }
+
+
+exports.resetDaysCount= () => {
+    //check if this day is first of january then update all users leaves_left to 40
+    let today = new Date();
+    let firstOfJanuary = new Date(today.getFullYear(), 0, 1);
+    if (today.getDate() == firstOfJanuary.getDate() && today.getMonth() == 0) {
+        User.find({}, (err, users) => {
+            users.forEach(user => {
+                // if user type is employee then update his leaves_left to 40
+                if (user.type == 'employee') {
+                    user.leaves_left = 40;
+                    user.save((err, user) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+        });
+    }
+    
+
+}
