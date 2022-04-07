@@ -12,6 +12,7 @@ const supplierRouter = require('./routes/supplier');
 const contractRouter = require('./routes/contract');
 const invoiceRouter = require('./routes/invoice');
 const leaveRouter = require('./routes/leave');
+const statsRouter = require('./routes/stats');
 //connecting to database
 mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
     useNewUrlParser: true,
@@ -37,5 +38,6 @@ app.use('/api/supplier',supplierRouter);
 app.use('/api/contract',contractRouter);
 app.use('/api/invoice',invoiceRouter);
 app.use('/api/leave',leaveRouter);
+app.use('/api/stats',statsRouter);
 
 module.exports = app;

@@ -13,9 +13,9 @@ h2{
 
 mat-tab-group{
     width: 70%;
-    position: absolute;
-    top: 9%;
-    left: 11%;
+    position: relative;
+    margin-top: 0%;
+    margin-left: 11%;
     background-color: white;
     border-radius: 25px;
 }
@@ -31,4 +31,24 @@ form{
     position: absolute;
     right: 7%;
     top: -11%;
+}
+
+.example-card {
+    width: fit-content;
+    border-radius: 17px;
+    margin-left: 3%;
+    margin-top: 2%;
+    background: linear-gradient(127deg, #1993b9 17.82%, rgb(0 55 104 / 81%) 84.13%);
+    box-shadow: 15px 8px 20px 0px rgb(0 0 0 / 35%);
+    color: white;
+    height: fit-content;
+}
+mat-card-title{
+    margin-left: -21px;
+    font-size: 15px !important;
+}  
+.count{
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
 }

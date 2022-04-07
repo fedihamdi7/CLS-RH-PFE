@@ -113,7 +113,13 @@
     "Pie Chart By Supplier" : "Graphique en camembert par fournisseur",
     "Select Year" : "Sélectionner une année",
     "Enter a date range" : "Entrer une plage de dates",
-    "Select Supplier" : "Sélectionner un fournisseur"
+    "Select Supplier" : "Sélectionner un fournisseur",
+    "USERS" : "UTILISATEURS",
+    "INVOICES" : "FACTURES",
+    "CONTRACTS" : "CONTRATS",
+    "LEAVES" : "CONGES",
+    "SUPPLIERS" : "FOURNISSEURS",
+    "REQUESTS" : "DEMANDES"
 
 
 }

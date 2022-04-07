@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,8 +22,14 @@ export class DashboardComponent implements OnInit {
   dataTotal =[];
   dataBySupplier = [];
   suppliers = [];
+  stats ={};
 
-  constructor(private dashboardService : DashboardService , private snackbar: MatSnackBar , private supplierService: SuppliersService) { }
+
+  constructor(  private dashboardService : DashboardService ,
+                private snackbar: MatSnackBar , 
+                private supplierService: SuppliersService,
+                private http : HttpClient
+              ) { }
   
   ngOnInit(): void {
     // get 15 last years from current year
@@ -66,6 +73,10 @@ export class DashboardComponent implements OnInit {
           }
         })
         
+      });
+
+      this.http.get('http://localhost:3000/api/stats').subscribe((stats:any) =>{
+        this.stats = stats;        
       });
   }
 

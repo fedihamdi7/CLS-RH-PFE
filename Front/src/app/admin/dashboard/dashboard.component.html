@@ -92,3 +92,24 @@
     </div>
   </mat-tab>
 </mat-tab-group>
+
+<div style="display: flex;">
+  <mat-card *ngFor="let stat of stats | keyvalue" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar [ngSwitch]="stat.key">
+        <mat-icon *ngSwitchCase="'CONTRACTS'">bookmark</mat-icon>
+        <mat-icon *ngSwitchCase="'INVOICES'">receipt</mat-icon>
+        <mat-icon *ngSwitchCase="'LEAVES'">work_off</mat-icon>
+        <mat-icon *ngSwitchCase="'REQUESTS'">text_snippet</mat-icon>
+        <mat-icon *ngSwitchCase="'SUPPLIERS'">local_shipping</mat-icon>
+        <mat-icon *ngSwitchCase="'USERS'">supervised_user_circle</mat-icon>
+      </div>
+      <mat-card-title>{{stat.key|translate}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="count">
+        {{stat.value}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
