@@ -11,7 +11,7 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./admin-profile.component.css']
 })
 export class AdminProfileComponent implements OnInit {
-
+  isLoading : boolean = true;
   constructor(private employeeService : EmployeeService ,private matSnackbar :MatSnackBar , private dialogRef: MatDialogRef<AdminProfileComponent> , private sharedService :SharedService) { }
   form : FormGroup;
 
@@ -27,6 +27,7 @@ export class AdminProfileComponent implements OnInit {
         department : new FormControl(data.department),
         password : new FormControl(),
       });
+      this.isLoading = false;
     });
   }
 
