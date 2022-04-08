@@ -56,9 +56,10 @@
       </mat-form-field>
     </div>
 
-    <button class="submit" mat-raised-button [color]="'primary'" type="submit" >{{ "Preview" | translate}}</button>
+    <button class="submit" mat-raised-button [color]="'primary'" type="submit" >{{ "Preview" | translate}} <img class="preview-icon" src="../../../../assets/view.png" alt=""></button>
     <button mat-raised-button [color]="'primary'" type="button" (click)="validate()" >{{ "Validate" | translate}}</button>
-</form>
+    <p class="note">{{"Note : Previewing the file will not validate it."|translate}}</p>
+  </form>
   </div>
 
 

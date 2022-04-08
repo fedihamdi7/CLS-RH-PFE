@@ -1,4 +1,40 @@
 <h2> {{"Dashboard" | translate}} </h2>
+
+<div class="cards">
+  <!-- <mat-card *ngFor="let stat of stats | keyvalue" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar [ngSwitch]="stat.key">
+        <mat-icon *ngSwitchCase="'CONTRACTS'">bookmark</mat-icon>
+        <mat-icon *ngSwitchCase="'INVOICES'">receipt</mat-icon>
+        <mat-icon *ngSwitchCase="'LEAVES'">work_off</mat-icon>
+        <mat-icon *ngSwitchCase="'REQUESTS'">text_snippet</mat-icon>
+        <mat-icon *ngSwitchCase="'SUPPLIERS'">local_shipping</mat-icon>
+        <mat-icon *ngSwitchCase="'USERS'">supervised_user_circle</mat-icon>
+      </div>
+      <mat-card-title>{{stat.key|translate}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="count">
+        {{stat.value}}
+      </p>
+    </mat-card-content>
+  </mat-card> -->
+  <div *ngFor="let stat of stats | keyvalue" class="card-container">
+    <div class="left">
+      <h3>{{stat.key|translate}}</h3>
+      <p class="value">{{stat.value}}</p>
+    </div>
+    <div [ngSwitch]="stat.key">
+      <img src="../../../assets/icons/user.png" *ngSwitchCase="'USERS'">
+      <img src="../../../assets/icons/contract.png" *ngSwitchCase="'CONTRACTS'">
+      <img src="../../../assets/icons/invoice.png" *ngSwitchCase="'INVOICES'">
+      <img src="../../../assets/icons/certificate.png" *ngSwitchCase="'REQUESTS'">
+      <img src="../../../assets/icons/truck.png" *ngSwitchCase="'SUPPLIERS'">
+      <!-- <img src="../../../assets/icons/leave.png" *ngSwitchCase="'LEAVES'"> -->
+    </div>
+  </div>
+</div>
+
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="{{'Total' | translate}}">
     <div class="chart">
@@ -7,7 +43,7 @@
           <div class="card-body">
             <h4 class="card-title border-bottom">{{"Pie Chart Of All Time" | translate}}</h4>
             <ngx-charts-advanced-pie-chart [results]="dataTotal" [gradient]="false" [scheme]="'cool'"
-              [view]="[1000,200]">
+              [view]="[1000,200]" [label]="'Total(DT)'">
             </ngx-charts-advanced-pie-chart>
           </div>
         </div>
@@ -93,23 +129,4 @@
   </mat-tab>
 </mat-tab-group>
 
-<div style="display: flex;">
-  <mat-card *ngFor="let stat of stats | keyvalue" class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar [ngSwitch]="stat.key">
-        <mat-icon *ngSwitchCase="'CONTRACTS'">bookmark</mat-icon>
-        <mat-icon *ngSwitchCase="'INVOICES'">receipt</mat-icon>
-        <mat-icon *ngSwitchCase="'LEAVES'">work_off</mat-icon>
-        <mat-icon *ngSwitchCase="'REQUESTS'">text_snippet</mat-icon>
-        <mat-icon *ngSwitchCase="'SUPPLIERS'">local_shipping</mat-icon>
-        <mat-icon *ngSwitchCase="'USERS'">supervised_user_circle</mat-icon>
-      </div>
-      <mat-card-title>{{stat.key|translate}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p class="count">
-        {{stat.value}}
-      </p>
-    </mat-card-content>
-  </mat-card>
-</div>
+
