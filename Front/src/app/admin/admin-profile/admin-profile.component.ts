@@ -25,6 +25,7 @@ export class AdminProfileComponent implements OnInit {
         cin : new FormControl(data.cin),
         job_title : new FormControl(data.job_title),
         department : new FormControl(data.department),
+        password : new FormControl(),
       });
     });
   }

@@ -39,7 +39,7 @@ export class EmployeeService {
   }
 
   updateProfile(data :any){
-    return this.http.post(`${this.url}updateEmployeeProfile/${this.userLocal._id}`,data,{headers:this.headers});    
+    return this.http.put(`${this.url}updateEmployeeProfile/${this.userLocal._id}`,data,{headers:this.headers});    
   }
 
 

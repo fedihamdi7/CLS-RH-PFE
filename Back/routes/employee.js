@@ -22,7 +22,7 @@ router.get('/getEmployees', EmployeeController.getEmployees);
 //Get  employee by id
 router.get('/getEmployeeById/:id', EmployeeController.getEmployeeById);
 // update employee profile
-router.post('/updateEmployeeProfile/:id', EmployeeController.updateEmployeeProfile);
+router.put('/updateEmployeeProfile/:id', EmployeeController.updateEmployeeProfile);
 // edit user
 router.put('/editUser/:id', EmployeeController.editUser);
 module.exports = router;
