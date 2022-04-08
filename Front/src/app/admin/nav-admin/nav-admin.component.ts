@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
-import { RequestsService } from 'src/app/services/requests.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
   selector: 'app-nav-admin',
@@ -11,24 +13,28 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./nav-admin.component.css']
 })
 export class NavAdminComponent implements OnInit,OnDestroy {
-  firstName : String;
-  lastName : String;
+
   notification : number;
+  name: string;
   private subsription_notification : Subscription; 
-  constructor(private sharedService : SharedService, private requestService : RequestsService) { }
+  constructor(private sharedService : SharedService, private matDialog : MatDialog,private employeeService :EmployeeService) { }
 
   ngOnInit(): void {
     this.sharedService.initializeAppLanguage();
-    let user :User = this.sharedService.getUserFromLocalStorage();
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
-    // this.requestService.getRequestsNotifications();
-    //   this.subsription_notification= this.requestService.notificationUpdateListener().subscribe( (data : number) => {      
-    //   this.notification = data;         
-    // });
+    // let user :User = this.sharedService.getUserFromLocalStorage();
+    // this.firstName = user.firstName;
+    // this.lastName = user.lastName;
+    this.employeeService.userUpdateListener().subscribe( (data:string) =>{     
+      this.name=data;
+    });
   }
 
-
+  EditProfile(){
+    this.matDialog.open(ProfileComponent,{
+      width : '700px',
+      height : 'auto',
+    });
+  }
   changeLanguage(lang: string) {
     this.sharedService.changeLanguage(lang);
   }

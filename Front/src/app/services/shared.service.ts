@@ -33,6 +33,18 @@ export class SharedService {
     user.leaves_left = leaves_left;
     this.putUserInLocalStorage(user);
   }
+  UPDATE_USER_IN_LOCAL_STORAGE(user: User){
+    let userLocal = this.getUserFromLocalStorage();
+    userLocal.firstName = user.firstName;
+    userLocal.lastName = user.lastName;
+    userLocal.email = user.email;
+    userLocal.phone = user.phone;
+    userLocal.cin = user.cin;
+    userLocal.job_title = user.job_title;
+    userLocal.department = user.department;
+    //put user in local storage
+    this.putUserInLocalStorage(userLocal);
+  }
 
   changeLanguage(lang: string){
     this.translateService.use(lang);

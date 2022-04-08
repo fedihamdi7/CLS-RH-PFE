@@ -32,8 +32,8 @@
     </div>
 
     <div class="bottom_nav">
-      <img src="../../../assets/avatar.png" alt="" class="user">
-      <span>{{ firstName }} {{lastName}}</span>
+      <img src="../../../assets/avatar.png" alt="" class="user" (click)="EditProfile()" matTooltip="{{'Edit Profile'|translate}}">
+      <span>{{ name }}</span>
       <button (click)="logout()"><mat-icon class="logout">exit_to_app</mat-icon></button>
     </div>
 

@@ -68,6 +68,7 @@ a{
   height: 50px;
   border-radius: 50%;
   user-select: none;
+  cursor: pointer;
 }
 span{
   color: white;
