@@ -6,13 +6,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-admin-profile',
+  templateUrl: './admin-profile.component.html',
+  styleUrls: ['./admin-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class AdminProfileComponent implements OnInit {
 
-  constructor(private employeeService : EmployeeService ,private matSnackbar :MatSnackBar , private dialogRef: MatDialogRef<ProfileComponent> , private sharedService :SharedService) { }
+  constructor(private employeeService : EmployeeService ,private matSnackbar :MatSnackBar , private dialogRef: MatDialogRef<AdminProfileComponent> , private sharedService :SharedService) { }
   form : FormGroup;
 
   ngOnInit(): void {

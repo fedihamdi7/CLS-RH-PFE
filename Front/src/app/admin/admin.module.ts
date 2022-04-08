@@ -34,7 +34,7 @@ import { ActionLeaveDialogComponent } from './leaves/action-leave-dialog/action-
 import { DateAdapter } from '@angular/material/core';
 import { CustomDateAdapter } from './adapter/custom-date-adapter';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
-import { ProfileComponent } from './profile/profile.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -63,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActionLeaveComponent,
     ActionLeaveDialogComponent,
     EditUserComponent,
-    ProfileComponent,
+    AdminProfileComponent,
 
   ],
   imports: [

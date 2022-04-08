@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { SharedService } from 'src/app/services/shared.service';
-import { ProfileComponent } from '../profile/profile.component';
+import { AdminProfileComponent } from '../admin-profile/admin-profile.component';
 
 @Component({
   selector: 'app-nav-admin',
@@ -30,7 +30,7 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   }
 
   EditProfile(){
-    this.matDialog.open(ProfileComponent,{
+    this.matDialog.open(AdminProfileComponent,{
       width : '700px',
       height : 'auto',
     });
