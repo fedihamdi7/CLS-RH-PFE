@@ -2,10 +2,11 @@ form{
   background-color: rgb(255, 255, 255);
   padding: 2%;
   width: 41vw;
-  height: 47vh;
+  height: 55vh;
   border-radius: 21px;
   margin-top: 10%;
   margin-left: 4%;
+  position: relative;
 }
 
 .row {
@@ -22,9 +23,9 @@ h4{
   margin: 3px;
 }
 .submit{
+  position: absolute;
   width: 22%;
-  margin-top: 5%;
-  margin-left: 4%;
+  bottom: 9%;
 }
 mat-tab-group{
   position: relative;
@@ -36,8 +37,8 @@ mat-tab-group{
 }
 .note{
   position: absolute;
-  bottom: 26%;
-  right: 46%;
+  bottom: 3%;
+  right: 3%;
   color: red;
   font-size: 13px;
 }
