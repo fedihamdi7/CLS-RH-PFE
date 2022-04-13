@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const User = require("../models/users");
 exports.sendToAdmin = (req, res, next) => {
-  console.log(req.body)
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
