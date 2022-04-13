@@ -36,6 +36,8 @@ export class ActionLeaveComponent implements OnInit {
       note : new FormControl(null)
     });
     this.leaveService.getLeavesById(this.id).subscribe((res:any) => {
+      console.log(res);
+      
       this.lastName = res.from.lastName;
       this.firstName = res.from.firstName;
       this.leaves_left = res.from.leaves_left;

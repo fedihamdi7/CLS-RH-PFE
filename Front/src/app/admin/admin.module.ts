@@ -35,6 +35,7 @@ import { DateAdapter } from '@angular/material/core';
 import { CustomDateAdapter } from './adapter/custom-date-adapter';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActionLeaveDialogComponent,
     EditUserComponent,
     AdminProfileComponent,
+    NotificationsComponent,
 
   ],
   imports: [

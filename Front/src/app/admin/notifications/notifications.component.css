@@ -1,0 +1,17 @@
+.cards-container{
+    display: flex;
+    grid-gap: 18px;
+    flex-direction: row;
+    margin: 2%;
+    flex-wrap: wrap;
+}
+.card{
+    width: 20vw;
+}
+.card-content{
+    margin-right: 15%;
+}
+
+mat-card-actions{
+    margin-bottom: -12px !important;
+}
