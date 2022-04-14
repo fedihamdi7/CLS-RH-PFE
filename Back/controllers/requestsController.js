@@ -42,9 +42,16 @@ exports.getRequest = (req, res, next) => {
 }
 
 exports.getAllRequests = (req, res, next) => {
-    Request.find({}, (err, request)=>{
+    Request.find({status: 'in progress'}, (err, request)=>{
         if (err) return res.status(500)
         else res.status(200).json({request})
+    }).populate('from')
+}
+
+exports.getArchivedRequests = (req, res, next) => {
+    Request.find({status: 'done'}, (err, request)=>{
+        if (err) return res.status(500)
+        else res.status(200).json(request)
     }).populate('from')
 }
 

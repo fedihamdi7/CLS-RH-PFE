@@ -27,6 +27,10 @@ export class RequestsService {
   requestsUpdateListener(){
     return this.requests.asObservable();
   }
+
+  getArchivedRequests(){
+    return this.http.get(`${this.url}getArchivedRequests`);
+  }
   
   ///////////// ONE REQUEST ///////////////
   getRequest(id:string){

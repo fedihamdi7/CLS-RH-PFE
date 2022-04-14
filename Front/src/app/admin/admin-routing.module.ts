@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavesComponent } from './leaves/leaves.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { LeaveArchiveComponent } from './leaves/leave-archive/leave-archive.component';
+import { RequestsArchiveComponent } from './requests/requests-archive/requests-archive.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path:'notifications',component:NotificationsComponent},
     {path:'dashboard',component:DashboardComponent},
     {path:'requests',component:RequestsComponent},
+    {path:'requests/requests-archive',component:RequestsArchiveComponent},
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},
     {path:'suppliers',component:SuppliersComponent},
