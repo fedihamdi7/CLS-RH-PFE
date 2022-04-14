@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Request } from 'src/app/models/request.model';
 import { RequestsService } from 'src/app/services/requests.service';
+import ls from 'localstorage-slim';
 
 declare var require: any
 const FileSaver = require('file-saver');
@@ -19,6 +20,7 @@ const FileSaver = require('file-saver');
   }]
 })
 export class ValidateReqComponent implements OnInit {
+  token : string = ls.get('id_token', { decrypt: true });
   isLoading : boolean = true;
   id: string = this.route.snapshot.paramMap.get('id');;
   reqSub : Subscription;
@@ -72,7 +74,7 @@ export class ValidateReqComponent implements OnInit {
       file : this.file,
       user_id : this.sender,
       type : this.type
-    }).subscribe((res : string) => {  
+    },{headers:{Authorization: `jwt ${this.token}`}}).subscribe((res : string) => {  
       this.pdf= this.path + res;
       this.isLoading = false;
     });
@@ -93,7 +95,7 @@ export class ValidateReqComponent implements OnInit {
       user_id : this.sender,
       type : this.type
 
-    }).subscribe((res: {message : String , file : string}) => {
+    },{headers:{Authorization: `jwt ${this.token}`}}).subscribe((res: {message : String , file : string}) => {
       this.pdf= this.path + res.file;
       this.snackbar.open("Request updated", "Close", {
         duration: 3000

@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { SuppliersService } from 'src/app/services/suppliers.service';
+import ls from 'localstorage-slim';
 
 @Component({
   selector: 'app-dashboard',
@@ -74,8 +75,9 @@ export class DashboardComponent implements OnInit {
         })
         
       });
+      let token : string = ls.get('id_token', { decrypt: true });
 
-      this.http.get('http://localhost:3000/api/stats').subscribe((stats:any) =>{
+      this.http.get('http://localhost:3000/api/stats',{headers: {Authorization: `jwt ${token}`}}).subscribe((stats:any) =>{
         this.stats = stats;        
       });
   }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 // Angular Material Modules
 import { MaterialModule } from './material/material.module';
@@ -21,6 +21,7 @@ import { HttpLoaderFactory } from './admin/admin.module';
 import { LeaveComponent } from './employee/leave/leave.component';
 import { AddLeaveComponent } from './employee/leave/add-leave/add-leave.component';
 import { NoteComponent } from './employee/leave/note/note.component';
+import { AuthInterceptor } from './interceptors/auth-interceptor.interceptor';
 
 
 @NgModule({
@@ -53,7 +54,13 @@ import { NoteComponent } from './employee/leave/note/note.component';
       }
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptor,
+      multi : true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
