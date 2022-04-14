@@ -57,8 +57,22 @@ exports.addLeave = (req, res) => {
 
 }
 
+exports.getArchivedLeaves = (req, res) => {
+    //get leaves where status is not in progress
+    Leave.find({status: {$ne: 'in progress'}}, (err, leaves) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message
+            });
+        } else {
+            res.status(200).send(leaves);
+        }
+    }).populate('from', 'firstName lastName');
+
+}
+
 exports.getAllLeaves = (req, res) => {
-    Leave.find({}, (err, leaves) => {
+    Leave.find({status: 'in progress'}, (err, leaves) => {
         if (err) {
             res.status(500).send({
                 message: err.message

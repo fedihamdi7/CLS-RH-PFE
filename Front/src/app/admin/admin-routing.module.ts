@@ -15,6 +15,7 @@ import { SupplierInvoicesComponent } from './suppliers/supplier-invoices/supplie
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavesComponent } from './leaves/leaves.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { LeaveArchiveComponent } from './leaves/leave-archive/leave-archive.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path:'invoices',component:InvoicesComponent},
     {path:'invoices/:id',component:InvoicesDetailsComponent},
     {path:'leaves',component:LeavesComponent},
+    {path:'leaves/leaves-archives',component:LeaveArchiveComponent},
 
 
 

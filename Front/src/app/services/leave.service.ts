@@ -14,6 +14,10 @@ export class LeaveService {
     return this.http.get(this.url+"/getAllLeaves");
   }
 
+  getArchivedLeaves(){
+    return this.http.get(this.url+"/getArchivedLeaves");
+  }
+
   getLeavesById(id:string){
     return this.http.get(this.url+"/getLeavesById/"+id);
   }

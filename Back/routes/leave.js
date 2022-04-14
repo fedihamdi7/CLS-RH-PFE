@@ -19,6 +19,7 @@ const storage = multer.diskStorage({
 
 router.post('/addLeave',multer({storage:storage}).single("file"),(req,res,next)=>{leaveController.addLeave(req,res,next);});
 router.get('/getAllLeaves',leaveController.getAllLeaves);
+router.get('/getArchivedLeaves',leaveController.getArchivedLeaves);
 router.get('/getLeavesById/:id',leaveController.getLeavesById);
 router.get('/getLeavesByUserId/:id',leaveController.getLeavesByUserId);
 router.put('/updateStatus/:id',leaveController.updateStatus)
