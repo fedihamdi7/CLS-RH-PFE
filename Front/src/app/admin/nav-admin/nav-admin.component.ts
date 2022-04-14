@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user.model';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { AdminProfileComponent } from '../admin-profile/admin-profile.component';
 
@@ -16,17 +15,24 @@ export class NavAdminComponent implements OnInit,OnDestroy {
 
   notification : number;
   name: string;
-  private subsription_notification : Subscription; 
-  constructor(private sharedService : SharedService, private matDialog : MatDialog,private employeeService :EmployeeService) { }
+  supscription : Subscription;
+  constructor(private sharedService : SharedService, private matDialog : MatDialog,private employeeService :EmployeeService ,private notificationsService : NotificationsService) { }
 
   ngOnInit(): void {
     this.sharedService.initializeAppLanguage();
-    // let user :User = this.sharedService.getUserFromLocalStorage();
-    // this.firstName = user.firstName;
-    // this.lastName = user.lastName;
-    this.employeeService.userUpdateListener().subscribe( (data:string) =>{     
+    this.employeeService.userUpdateListener().subscribe( (data:string) =>{
       this.name=data;
     });
+
+    
+    this.supscription = this.notificationsService.notificationCountUpdateListener().subscribe( (data:number) =>{
+      this.notification = data;
+    });
+    setInterval(()=>{
+      this.supscription = this.notificationsService.notificationCountUpdateListener().subscribe( (data:number) =>{
+        this.notification = data;
+      });
+    },10000);
   }
 
   EditProfile(){
@@ -43,6 +49,6 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subsription_notification.unsubscribe();
+    this.supscription.unsubscribe();
   }
 }

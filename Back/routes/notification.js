@@ -1,6 +1,7 @@
 const moment = require("moment");
 const Contract = require("../models/contract");
 const mail  = require("../mail/mail");
+const notification = require("../models/notification");
 function notify() {
   let currentDate = new Date();
   Contract.find({}, (err, contracts) => {
@@ -10,9 +11,14 @@ function notify() {
       if (new Date(ContractExpires_at).getFullYear()-currentDate.getFullYear() == 0)
       {
         if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
-          console.log("email sent!!");
+          const notificationQuery = new notification();
+          notificationQuery.details = {
+            supplier_name : contract.supplier.name,
+          }
+          notificationQuery.type = 'contract';
+          notificationQuery.link = contract._id;
+          notificationQuery.save();
           mail.sendNotif(contract);
-          
         }
       }
     }

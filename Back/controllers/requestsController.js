@@ -3,10 +3,11 @@ const mail = require ('../mail/mail');
 const Request = require('../models/request');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
+const notification = require('../models/notification');
 
 
 
-exports.addRequest = (req, res, next) => {
+exports.addRequest = async (req, res, next)  => {
     user = req.user;
     query = new Request();
     query.from=user._id;
@@ -18,9 +19,17 @@ exports.addRequest = (req, res, next) => {
     fileName = 'attestation'+'-'+unique_number+'-'+req.body._id+'.pdf';
     PDFEmployee.create(req,fileName);
     query.file=fileName;
-    query.save();
+    await query.save();
     req.body.query=query;
     mail.sendToAdmin(req);
+    const notificationQuery = new notification();
+    const fullName = req.body.firstName + ' ' + req.body.lastName;
+    notificationQuery.details = {
+        user_name : fullName
+    }
+    notificationQuery.type = 'document';
+    notificationQuery.link = query._id;
+    notificationQuery.save();
     res.json({ success: true, message: 'profile ', query})
 }
 

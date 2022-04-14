@@ -14,10 +14,12 @@ import { InvoicesDetailsComponent } from './invoices/invoices-details/invoices-d
 import { SupplierInvoicesComponent } from './suppliers/supplier-invoices/supplier-invoices.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LeavesComponent } from './leaves/leaves.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
   {path: '', component: NavAdminComponent, children:[
+    {path:'notifications',component:NotificationsComponent},
     {path:'dashboard',component:DashboardComponent},
     {path:'requests',component:RequestsComponent},
     {path:'requests/:id',component:ValidateReqComponent},

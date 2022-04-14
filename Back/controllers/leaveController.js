@@ -2,6 +2,7 @@ const Leave = require('../models/leave');
 const User = require('../models/users');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
+const notification = require('../models/notification');
 
 exports.addLeave = (req, res) => {
     const start = moment(req.body.leave_start_date);
@@ -39,6 +40,12 @@ exports.addLeave = (req, res) => {
                         added: false
                     });
                 } else {
+                    const notificationQuery = new notification();
+                    notificationQuery.details.user_name = user.firstName + ' ' + user.lastName;
+                    notificationQuery.details.days = days_count;
+                    notificationQuery.link = leave._id;
+                    notificationQuery.type = 'leave';
+                    notificationQuery.save();
                     res.status(200).send({
                         added: true
                     });
