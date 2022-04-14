@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const contractController = require('../controllers/contractController')
 const path = require('path');
+const passport = require('passport');
 
 
 const storage = multer.diskStorage({
@@ -17,9 +18,9 @@ const storage = multer.diskStorage({
     }
 });
 
-router.post('/addContract',multer({storage:storage}).single("pdf"),(req,res,next)=>{contractController.addContract(req,res,next);});
-router.put('/updateContract/:id',contractController.updateContract)
-router.get('/getAllContracts',contractController.getAllContracts)
-router.get('/getContractById/:id',contractController.getContractById)
-router.get('/getContractBySupplierId/:id',contractController.getContractBySupplierId)
+router.post('/addContract',passport.authenticate('jwt', { session: false }),multer({storage:storage}).single("pdf"),(req,res,next)=>{contractController.addContract(req,res,next);});
+router.put('/updateContract/:id',passport.authenticate('jwt', { session: false }),contractController.updateContract)
+router.get('/getAllContracts',passport.authenticate('jwt', { session: false }),contractController.getAllContracts)
+router.get('/getContractById/:id',passport.authenticate('jwt', { session: false }),contractController.getContractById)
+router.get('/getContractBySupplierId/:id',passport.authenticate('jwt', { session: false }),contractController.getContractBySupplierId)
 module.exports =router;

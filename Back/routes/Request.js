@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const RequestController = require('../controllers/requestsController');
+const passport = require('passport');
 
 
 // Get all requests
-router.get('/getAllRequests/',RequestController.getAllRequests);
+router.get('/getAllRequests/',passport.authenticate('jwt', { session: false }),RequestController.getAllRequests);
 //Get Archived requests
-router.get('/getArchivedRequests/',RequestController.getArchivedRequests);
+router.get('/getArchivedRequests/',passport.authenticate('jwt', { session: false }),RequestController.getArchivedRequests);
 // Get request by id
-router.get('/getRequestById/:id', RequestController.getRequestById);
+router.get('/getRequestById/:id', passport.authenticate('jwt', { session: false }),RequestController.getRequestById);
 // Update Status
-router.post('/updateStatus/:id', RequestController.updateStatus);
+router.post('/updateStatus/:id', passport.authenticate('jwt', { session: false }),RequestController.updateStatus);
 // Previw PDF 
-router.post('/preview/', RequestController.preview);
+router.post('/preview/',passport.authenticate('jwt', { session: false }), RequestController.preview);
 // get requests still in porgress
-router.get('/getRequestsInProgress', RequestController.getRequestsInProgress);
+router.get('/getRequestsInProgress', passport.authenticate('jwt', { session: false }),RequestController.getRequestsInProgress);
 
 module.exports = router;

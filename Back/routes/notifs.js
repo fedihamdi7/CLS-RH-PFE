@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const notificationController = require('../controllers/notificationsController');
+const passport = require('passport');
 
-router.get('/getAllNotifications', notificationController.getAllNotifications);
-router.delete('/deleteNotification/:id', notificationController.deleteNotification);
+router.get('/getAllNotifications',passport.authenticate('jwt', { session: false }), notificationController.getAllNotifications);
+router.delete('/deleteNotification/:id',passport.authenticate('jwt', { session: false }), notificationController.deleteNotification);
 module.exports = router;

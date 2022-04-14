@@ -12,18 +12,18 @@ const EmployeeController = require('../controllers/employeeController');
 //Login
 router.post('/login', AuthController.login);
 //Registration
-router.post('/register', AuthController.register);
+router.post('/register',passport.authenticate('jwt', { session: false }), AuthController.register);
 //Add Request
 router.post('/addRequest', passport.authenticate('jwt', { session: false }), RequestController.addRequest);
 //Get all requests
 router.get('/getRequest/:type', passport.authenticate('jwt', { session: false }), RequestController.getRequest);
 //Get  all employees
-router.get('/getEmployees', EmployeeController.getEmployees);
+router.get('/getEmployees',passport.authenticate('jwt', { session: false }), EmployeeController.getEmployees);
 //Get  employee by id
-router.get('/getEmployeeById/:id', EmployeeController.getEmployeeById);
+router.get('/getEmployeeById/:id',passport.authenticate('jwt', { session: false }), EmployeeController.getEmployeeById);
 // update employee profile
-router.put('/updateEmployeeProfile/:id', EmployeeController.updateEmployeeProfile);
+router.put('/updateEmployeeProfile/:id',passport.authenticate('jwt', { session: false }), EmployeeController.updateEmployeeProfile);
 // edit user
-router.put('/editUser/:id', EmployeeController.editUser);
+router.put('/editUser/:id',passport.authenticate('jwt', { session: false }), EmployeeController.editUser);
 module.exports = router;
 

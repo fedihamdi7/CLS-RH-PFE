@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
+const passport = require('passport');
 
 
 const invoiceController = require('../controllers/invoiceController')
@@ -18,12 +19,12 @@ const storage = multer.diskStorage({
 });
 
 
-router.post('/addInvoice',multer({storage:storage}).single("pdf"),(req,res,next)=>{invoiceController.addInvoice(req,res,next);})
-router.get('/getAllInvoices',invoiceController.getAllInvoices)
-router.get('/getInvoiceById/:id',invoiceController.getInvoiceById)
-router.get('/getInvoiceBySupplierId/:id',invoiceController.getInvoiceBySupplierId)
-router.get('/InvoicesStatistiques',invoiceController.InvoicesStatistiques)
-router.get('/InvoicesStatistiquesByDateRange/:minDate/:maxDate',invoiceController.InvoicesStatistiquesByDateRange)
-router.get('/InvoicesStatistiquesByYear/:year',invoiceController.InvoicesStatistiquesByYear)
-router.get('/StatsBySupplier/:id',invoiceController.StatsBySupplier)
+router.post('/addInvoice',passport.authenticate('jwt', { session: false }),multer({storage:storage}).single("pdf"),(req,res,next)=>{invoiceController.addInvoice(req,res,next);})
+router.get('/getAllInvoices',passport.authenticate('jwt', { session: false }),invoiceController.getAllInvoices)
+router.get('/getInvoiceById/:id',passport.authenticate('jwt', { session: false }),invoiceController.getInvoiceById)
+router.get('/getInvoiceBySupplierId/:id',passport.authenticate('jwt', { session: false }),invoiceController.getInvoiceBySupplierId)
+router.get('/InvoicesStatistiques',passport.authenticate('jwt', { session: false }),invoiceController.InvoicesStatistiques)
+router.get('/InvoicesStatistiquesByDateRange/:minDate/:maxDate',passport.authenticate('jwt', { session: false }),invoiceController.InvoicesStatistiquesByDateRange)
+router.get('/InvoicesStatistiquesByYear/:year',passport.authenticate('jwt', { session: false }),invoiceController.InvoicesStatistiquesByYear)
+router.get('/StatsBySupplier/:id',passport.authenticate('jwt', { session: false }),invoiceController.StatsBySupplier)
 module.exports =router;

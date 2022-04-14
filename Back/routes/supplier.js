@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const SupplierController = require('../controllers/supplierController');
+const passport = require('passport');
 
 // Get all suppliers
-router.get('/getAllSuppliers/', SupplierController.getAllSuppliers);
+router.get('/getAllSuppliers/', passport.authenticate('jwt', { session: false }),SupplierController.getAllSuppliers);
 // Get supplier by id
-router.get('/getSupplierById/:id', SupplierController.getSupplierById);
+router.get('/getSupplierById/:id', passport.authenticate('jwt', { session: false }),SupplierController.getSupplierById);
 // Update supplier
-router.put('/updateSupplier/:id', SupplierController.updateSupplier);
+router.put('/updateSupplier/:id', passport.authenticate('jwt', { session: false }),SupplierController.updateSupplier);
 // Add supplier
-router.post('/addSupplier/', SupplierController.addSupplier);
+router.post('/addSupplier/', passport.authenticate('jwt', { session: false }),SupplierController.addSupplier);
 // delete supplier
-router.delete('/deleteSupplier/:id', SupplierController.deleteSupplier);
+router.delete('/deleteSupplier/:id', passport.authenticate('jwt', { session: false }),SupplierController.deleteSupplier);
 
 
 module.exports = router;
