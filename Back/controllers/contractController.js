@@ -1,5 +1,6 @@
 const Contract = require("../models/contract");
 const moment = require("moment");
+const today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
 
 
 exports.addContract = (req, res) => {
@@ -45,8 +46,19 @@ exports.addContract = (req, res) => {
     });
   });
 };
+
+exports.getExpiredContracts = (req, res) => {
+  Contract.find({expires_at : {$lte : today}},(err,contracts)=>{
+    if(!contracts){
+      return res.status(404).json({
+        message: "Contract not found"
+      });
+    }
+    return res.status(200).json(contracts);
+  }).populate("supplier");
+}
 exports.getAllContracts = (req, res) => {
-  Contract.find((err, contracts) => {
+  Contract.find({expires_at : {$gte : today}},(err, contracts) => {
     if (!contracts) {
       console.log(err);
     }

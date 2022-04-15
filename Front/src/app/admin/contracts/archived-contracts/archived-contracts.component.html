@@ -1,5 +1,4 @@
-<h2> {{ "Contracts" | translate}}  </h2>
-<button mat-raised-button color="primary" routerLink="archived-contracts" class="add-btn" > {{ "Archives" | translate}}</button>
+<h2> {{ "Archived Contracts" | translate}}  </h2>
 
 <div class="container">
   <div class="example-loading-shade" *ngIf="isLoadingResults">
@@ -41,7 +40,7 @@
 
   <ng-container matColumnDef="details" >
     <th mat-header-cell *matHeaderCellDef > {{ "Details" | translate}} </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink="{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink="../{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

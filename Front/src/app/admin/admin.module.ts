@@ -39,6 +39,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { LeaveArchiveComponent } from './leaves/leave-archive/leave-archive.component';
 import { RequestsArchiveComponent } from './requests/requests-archive/requests-archive.component';
 import { ArchivedSuppliersComponent } from './suppliers/archived-suppliers/archived-suppliers.component';
+import { ArchivedContractsComponent } from './contracts/archived-contracts/archived-contracts.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LeaveArchiveComponent,
     RequestsArchiveComponent,
     ArchivedSuppliersComponent,
+    ArchivedContractsComponent,
 
   ],
   imports: [

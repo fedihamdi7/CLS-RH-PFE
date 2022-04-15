@@ -14,6 +14,9 @@ export class ContractsService {
   getAllContracts (){
     return this.http.get(`${this.url}getAllContracts`);
   }
+  getExpiredContracts(){
+    return this.http.get(`${this.url}getExpiredContracts`);
+  }
   getContractById (id : string){
     return this.http.get( `${this.url}getContractById/` +id);
   }

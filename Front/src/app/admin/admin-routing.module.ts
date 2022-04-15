@@ -18,6 +18,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { LeaveArchiveComponent } from './leaves/leave-archive/leave-archive.component';
 import { RequestsArchiveComponent } from './requests/requests-archive/requests-archive.component';
 import { ArchivedSuppliersComponent } from './suppliers/archived-suppliers/archived-suppliers.component';
+import { ArchivedContractsComponent } from './contracts/archived-contracts/archived-contracts.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
     {path:'suppliers/invoices/:id',component:SupplierInvoicesComponent},
     {path:'suppliers/addContract', component:AddContractComponent},
     {path:'contracts',component:ContractsComponent},
+    {path:'contracts/archived-contracts',component:ArchivedContractsComponent},
     {path:'contracts/:id',component:ContractDetailsComponent},
     {path:'invoices',component:InvoicesComponent},
     {path:'invoices/:id',component:InvoicesDetailsComponent},
