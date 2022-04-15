@@ -1,6 +1,6 @@
-<div class="cards-container">
+  <!--<div class="cards-container">
 
-  <mat-card class="card" *ngFor="let notification of notifications">
+ <mat-card class="card" *ngFor="let notification of notifications">
     <div *ngIf="notification.type == 'document'" style="margin: 0;padding: 0;">
       <mat-card-title-group>
         <mat-card-title>{{'Document Request'| translate}}</mat-card-title>
@@ -44,6 +44,39 @@
         <button mat-button (click)="DeleteNotification(notification._id)">{{"Delete" | translate}}</button>
       </mat-card-actions>
     </div>
-  </mat-card>
+  </mat-card> 
+</div>-->
+<h2 class="title"> {{'Notifications'|translate}} </h2>
 
-</div>
+  <div class="container">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let notification of notifications">
+        <mat-expansion-panel-header *ngIf="notification.type == 'document'">
+          <mat-panel-title>{{'Document Request'| translate}}</mat-panel-title>
+          <mat-panel-description>{{notification.date | date:'mediumDate'}}<mat-icon class="side_nav_icons" style="color: rgb(97, 27, 211);">text_snippet</mat-icon></mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel-header *ngIf="notification.type == 'leave'">
+          <mat-panel-title>{{'Leave Request'| translate}}</mat-panel-title>
+          <mat-panel-description>{{notification.date | date:'mediumDate'}}<mat-icon class="side_nav_icons" style="color: rgb(175, 13, 148);">work_off</mat-icon></mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel-header *ngIf="notification.type == 'contract'">
+          <mat-panel-title>{{'Contract Expiring Soon'| translate}}</mat-panel-title>
+          <mat-panel-description>{{notification.date | date:'mediumDate'}}<mat-icon class="side_nav_icons" style="color: rgb(107, 11, 35);">bookmark</mat-icon></mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <span *ngIf="notification.type == 'document'"> You have a leave request from <b>{{notification.details.user_name}} </b></span>
+        <span  *ngIf="notification.type == 'leave'">You have a leave request from <b>{{notification.details.user_name}} </b> for <b>{{notification.details.days}}</b> days</span>
+        <span *ngIf="notification.type == 'contract'" > The contract with <b> {{notification.details.supplier_name}} </b> will expire soon </span>
+        <br>
+        <br>
+        <button mat-raised-button routerLink="../requests/{{notification.link}}" *ngIf="notification.type == 'document'" color="primary">{{"View" | translate}}</button>
+        <button mat-raised-button *ngIf="notification.type == 'leave'" color="primary" (click)="onClickAction(notification.link)">View</button>
+        <button mat-raised-button *ngIf="notification.type == 'contract'" routerLink="../contracts/{{notification.link}}">View</button>
+
+
+
+        <button mat-raised-button (click)="DeleteNotification(notification._id)" color="warn"
+          style="margin-left: 2%;">{{"Delete" | translate}}</button>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
