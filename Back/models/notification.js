@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 
 let isLeave , isDocument,isContract = false
-let today = moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]');
+let today = moment(Date.now());
 
 const NotificationSchema = new mongoose.Schema({
     details: {
@@ -11,7 +11,7 @@ const NotificationSchema = new mongoose.Schema({
         supplier_name : {type:String,required:isContract},
     },
     type :{type:String,enum:["leave","document","contract"],required:true},
-    date :{type:String,required:true,default:today},
+    date :{type:Date,required:true,default:today},
     link :{type:String,required:true},
     seen :{type:Boolean,required:true, default:false},
 });
