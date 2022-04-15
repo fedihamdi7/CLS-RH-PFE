@@ -1,7 +1,4 @@
-<h2> {{ "Suppliers" | translate}} </h2>
-<button mat-raised-button color="primary" class="add-btn" routerLink="archived-suppliers"> {{ "Archive" | translate}}</button>
-<button mat-raised-button color="accent" class="add-btn" style="margin-right: 6%;" (click)="showForm()"> {{ "Add Supplier" | translate}}</button>
-
+<h2> {{ "Archived Suppliers" | translate}} </h2>
 <div class="container">
   <mat-form-field appearance="standard" class="filter">
     <mat-label>Filter</mat-label>
@@ -50,33 +47,12 @@
   <!-- all contracts Column -->
   <ng-container matColumnDef="all_contracts" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "All Contract" | translate}} </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink="contracts/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink="../contracts/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
   <!-- all invoices Column -->
   <ng-container matColumnDef="all_invoices" >
     <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "All Invoices" | translate}} </th>
-    <td mat-cell *matCellDef="let element"> <a routerLink="invoices/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
-  </ng-container>
-  <!-- action Column -->
-  <ng-container matColumnDef="actions" >
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "Action" | translate}} </th>
-    <td mat-cell *matCellDef="let element">  
-      <button mat-mini-fab color="primary" [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
-      <mat-menu #menu="matMenu">
-        <button (click)="onAddInvoice(element._id)" mat-menu-item>
-          <mat-icon>add</mat-icon>
-          <span> {{"Add Invoice" | translate}} </span>
-        </button>
-        <button mat-menu-item (click)="onAddContract(element._id)">
-          <mat-icon>add</mat-icon>
-          <span>{{"Add Contract" | translate}}</span>
-        </button>
-        <button mat-menu-item (click)="onEditSupplier(element._id)">
-          <mat-icon>edit</mat-icon>
-          <span>{{"Edit Supplier" | translate}}</span>
-        </button>
-      </mat-menu> 
-    </td>
+    <td mat-cell *matCellDef="let element"> <a routerLink="../invoices/{{element._id}}" > <button mat-mini-fab color="primary"><mat-icon>info</mat-icon></button> </a> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

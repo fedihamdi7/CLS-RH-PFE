@@ -18,6 +18,10 @@ export class SuppliersService {
       this.suppliers.next(data.suppliers);
     });
   }
+
+  getExpiredSuppliers(){
+    return this.http.get(`${this.url}getExpiredSuppliers`);
+  }
   addSupplier(supplier : Supplier){
     return this.http.post(`${this.url}addSupplier`,supplier);
   }

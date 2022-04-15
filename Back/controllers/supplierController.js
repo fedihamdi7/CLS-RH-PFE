@@ -2,9 +2,18 @@ const Supplier = require('../models/supplier')
 const moment = require('moment');
 
 exports.getAllSuppliers = (req, res) => {
-    Supplier.find({}, (err, suppliers)=>{
+    const today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+    Supplier.find({contract_end_date: {$gte: today}}, (err, suppliers)=>{
         if (err) return res.status(500)
         else res.status(200).json({suppliers})
+    });
+}
+
+exports.getExpiredSuppliers = (req, res) => {
+    const today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+    Supplier.find({contract_end_date: {$lte: today}}, (err, suppliers)=>{
+        if (err) return res.status(500)
+        else res.status(200).json(suppliers)
     });
 }
 

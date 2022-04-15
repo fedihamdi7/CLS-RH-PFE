@@ -5,6 +5,8 @@ const passport = require('passport');
 
 // Get all suppliers
 router.get('/getAllSuppliers/', passport.authenticate('jwt', { session: false }),SupplierController.getAllSuppliers);
+// Get expired suppliers
+router.get('/getExpiredSuppliers/', passport.authenticate('jwt', { session: false }),SupplierController.getExpiredSuppliers);
 // Get supplier by id
 router.get('/getSupplierById/:id', passport.authenticate('jwt', { session: false }),SupplierController.getSupplierById);
 // Update supplier
