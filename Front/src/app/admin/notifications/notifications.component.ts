@@ -43,4 +43,15 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
+  ClearNotifications(){
+    this.notificationsService.clearNotifications().subscribe(()=>{
+      this.getAllNotifications();
+      this.notificationsService.getNotificationCount();
+      this.matSnackBar.open('Notifications Cleared Successfully','close',{
+        duration : 2000
+      });
+    });
+  }
+
+  
 }

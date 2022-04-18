@@ -27,4 +27,7 @@ export class NotificationsService {
     this.getNotificationCount();
     return this.notificationCount.asObservable();
   }
+  clearNotifications(){
+    return this.http.delete(this.url+'deleteAllNotifications');
+  }
 }

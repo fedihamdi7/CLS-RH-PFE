@@ -26,3 +26,7 @@ h2{
 mat-card-actions{
   margin-bottom: -12px !important;
 }
+.add-btn{
+  position: absolute;
+  right: 11%;
+}
