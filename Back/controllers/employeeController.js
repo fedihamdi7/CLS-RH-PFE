@@ -25,23 +25,14 @@ exports.getEmployeeById = (req, res, next) => {
 }
 
 exports.updateEmployeeProfile = (req, res, next) => {
-    if (req.body.password == null) {
-        User.findOne({_id : req.params.id}, (err, employee) => {
-            employee.first_name = req.body.first_name;
-            employee.last_name = req.body.last_name;
-            employee.email = req.body.email;
-            employee.phone = req.body.phone;
-            employee.cin = req.body.cin;
-            employee.job_title = req.body.job_title;
-            employee.department = req.body.department;
-            employee.save((err, employee) => {
+    if (!req.body.password ) {
+        User.findByIdAndUpdate({_id : req.params.id},req.body, (err, employee) => {
                 if (err) return res.status(401).json({
-                    update: false
+                    updated: false
                 })
                 else return res.status(200).json({
                     updated: true
                 })
-            })
         })
 
     } else {
@@ -57,7 +48,7 @@ exports.updateEmployeeProfile = (req, res, next) => {
                 req.body.password = hash;
                 User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
                     if (err) return res.status(401).json({
-                        update: false
+                        updated: false
                     })
                     else return res.status(200).json({
                         updated: true
