@@ -33,6 +33,14 @@ exports.addRequest = async (req, res, next)  => {
     res.json({ success: true, message: 'profile ', query})
 }
 
+exports.getMyRequests = (req, res, next) => {
+    Request.find({from:req.params.id},(err,request)=>{
+        if (err) return res.status(401).json({msg:" you dont have any request"})
+        else res.status(200).json(request)
+        //reverse order of request 
+    }).sort({sent_date: -1})
+
+}
 exports.getRequest = (req, res, next) => {
     user = req.user;
     Request.find({from:user._id, type : req.params.type},(err,request)=>{
