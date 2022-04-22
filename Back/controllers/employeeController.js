@@ -72,3 +72,17 @@ exports.editUser = (req, res, next) => {
         })
     })
 }
+
+exports.updateDeviceId = (req, res, next) => {
+    // update device id of user
+    User.findByIdAndUpdate(req.params.userId, {
+        device_id: req.body.device_id
+    }, (err, user) => {
+        if (err) return res.status(401).json({
+            updated: false
+        })
+        else return res.status(200).json({
+            updated: true
+        })
+    });
+}

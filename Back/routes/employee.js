@@ -27,5 +27,8 @@ router.get('/getEmployeeById/:id',passport.authenticate('jwt', { session: false 
 router.put('/updateEmployeeProfile/:id',passport.authenticate('jwt', { session: false }), EmployeeController.updateEmployeeProfile);
 // edit user
 router.put('/editUser/:id',passport.authenticate('jwt', { session: false }), EmployeeController.editUser);
+
+// update device id 
+router.put('/updateDeviceId/:userId',passport.authenticate('jwt', { session: false }), EmployeeController.updateDeviceId);
 module.exports = router;
 

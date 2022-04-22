@@ -3,7 +3,7 @@ const User = require('../models/users');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
 const notification = require('../models/notification');
-
+const pushNotificationController = require('./push-notification.Controller');
 exports.addLeave = (req, res) => {
     const start = moment(req.body.leave_start_date);
     const end = moment(req.body.leave_end_date);
@@ -59,7 +59,11 @@ exports.addLeave = (req, res) => {
 
 exports.getArchivedLeaves = (req, res) => {
     //get leaves where status is not in progress
-    Leave.find({status: {$ne: 'in progress'}}, (err, leaves) => {
+    Leave.find({
+        status: {
+            $ne: 'in progress'
+        }
+    }, (err, leaves) => {
         if (err) {
             res.status(500).send({
                 message: err.message
@@ -72,7 +76,9 @@ exports.getArchivedLeaves = (req, res) => {
 }
 
 exports.getAllLeaves = (req, res) => {
-    Leave.find({status: 'in progress'}, (err, leaves) => {
+    Leave.find({
+        status: 'in progress'
+    }, (err, leaves) => {
         if (err) {
             res.status(500).send({
                 message: err.message
@@ -112,15 +118,16 @@ exports.getLeavesByUserId = (req, res) => {
 exports.updateStatus = (req, res) => {
     if (req.body.status == 'declined') {
         User.findOne({
-            _id : req.body.user_id
-        },(err, user) => {
+            _id: req.body.user_id
+        }, (err, user) => {
+            pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A Leave request has been declined. Please check the application for reasons."}, res);
             user.leaves_left = user.leaves_left + req.body.leaves_days_count;
             user.save((err, user) => {
                 Leave.findOneAndUpdate({
                     _id: req.params.id
                 }, {
                     status: req.body.status,
-                    note : req.body.note
+                    note: req.body.note
                 }, (err, leave) => {
                     if (err) {
                         res.status(500).send({
@@ -134,30 +141,34 @@ exports.updateStatus = (req, res) => {
                 })
             });
         });
-    }
-    else{
-        PDFAdmin.acceptLeave(req);
-        Leave.findOneAndUpdate({
-            _id: req.params.id
-        }, {
-            status: req.body.status
-        }, (err, leave) => {
-            if (err) {
-                res.status(500).send({
-                    message: err.message
-                });
-            } else {
-                res.status(200).send({
-                    updated: true
-                });
-            }
+    } else {
+        User.findOne({
+            _id: req.body.user_id
+        }, (err, user) => {
+            pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A Leave request has been accepted."}, res);
+            PDFAdmin.acceptLeave(req);
+            Leave.findOneAndUpdate({
+                _id: req.params.id
+            }, {
+                status: req.body.status
+            }, (err, leave) => {
+                if (err) {
+                    res.status(500).send({
+                        message: err.message
+                    });
+                } else {
+                    res.status(200).send({
+                        updated: true
+                    });
+                }
+            });
         });
     }
-    
+
 }
 
 
-exports.resetDaysCount= () => {
+exports.resetDaysCount = () => {
     //check if this day is first of january then update all users leaves_left to 40
     let today = new Date();
     let firstOfJanuary = new Date(today.getFullYear(), 0, 1);
@@ -176,6 +187,6 @@ exports.resetDaysCount= () => {
             });
         });
     }
-    
+
 
 }

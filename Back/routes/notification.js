@@ -11,14 +11,14 @@ function notify() {
       if (new Date(ContractExpires_at).getFullYear()-currentDate.getFullYear() == 0)
       {
         if(new Date(ContractExpires_at).getMonth()-currentDate.getMonth()<=2){
-          const notificationQuery = new notification();
-          notificationQuery.details = {
-            supplier_name : contract.supplier.name,
-          }
-          notificationQuery.type = 'contract';
-          notificationQuery.link = contract._id;
-          notificationQuery.save();
-          mail.sendNotif(contract);
+          // const notificationQuery = new notification();
+          // notificationQuery.details = {
+          //   supplier_name : contract.supplier.name,
+          // }
+          // notificationQuery.type = 'contract';
+          // notificationQuery.link = contract._id;
+          // notificationQuery.save();
+          // mail.sendNotif(contract);
         }
       }
     }
