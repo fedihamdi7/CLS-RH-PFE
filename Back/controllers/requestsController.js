@@ -4,6 +4,7 @@ const Request = require('../models/request');
 const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
 const notification = require('../models/notification');
+const pushNotificationController = require('./push-notification.Controller');
 
 
 
@@ -72,6 +73,8 @@ exports.getRequestById = (req, res, next) => {
 
 exports.updateStatus = (req, res, next) => {
     PDFAdmin.create(req);
+    pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A document you requested is ready to be downloaded."}, res);
+
     Request.findOneAndUpdate({_id:req.body.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
         if(err) return res.status(404).json({message: "Request not found"})
         else {
