@@ -3,51 +3,51 @@
     <form [formGroup]="form" *ngIf="form" (submit)="onSubmit()">
         <div class="row">
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Last Name</mat-label>
+                <mat-label>{{'Last Name'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="lastName">
             </mat-form-field>
 
             <mat-form-field class="col" appearance="outline">
-                <mat-label>First Name</mat-label>
+                <mat-label>{{'First Name'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="firstName" >
             </mat-form-field>
         </div>
 
         <div class="row">
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>{{'Email'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="email">
             </mat-form-field>
             
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Password</mat-label>
+                <mat-label>{{'Password'|translate}}</mat-label>
                 <input matInput type="password" autocomplete="off" formControlName="password">
             </mat-form-field>
         </div>
         <div class="row">
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Phone</mat-label>
+                <mat-label>{{'Phone'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="phone">
             </mat-form-field>
             <mat-form-field class="col" appearance="outline">
-                <mat-label>CIN</mat-label>
+                <mat-label>{{'CIN'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="cin">
             </mat-form-field>
         </div>
         
         <div class="row">
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Job Title</mat-label>
+                <mat-label>{{'Job Title'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="job_title">
             </mat-form-field>
 
             <mat-form-field class="col" appearance="outline">
-                <mat-label>Department</mat-label>
+                <mat-label>{{'Department'|translate}}</mat-label>
                 <input matInput autocomplete="off" formControlName="department">
             </mat-form-field>
         </div>
 
-        <button mat-raised-button type="submit" color="primary">Submit</button>
+        <button mat-raised-button type="submit" color="primary">{{'Submit'|translate}}</button>
     </form>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

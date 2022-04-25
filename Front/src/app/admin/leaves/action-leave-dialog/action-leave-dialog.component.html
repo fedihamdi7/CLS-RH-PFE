@@ -2,7 +2,7 @@
 
 <form (submit)="onSubmit()" [formGroup]="form">
   <mat-form-field appearance="outline">
-    <mat-label>Reason</mat-label>
+    <mat-label>{{'Reason(s)'|translate}}</mat-label>
     <textarea rows="7" matInput formControlName="note" required></textarea>
   </mat-form-field>
   <button mat-raised-button type="submit" color="primary" [disabled]="!form.valid">{{"SUBMIT" | translate}} </button>

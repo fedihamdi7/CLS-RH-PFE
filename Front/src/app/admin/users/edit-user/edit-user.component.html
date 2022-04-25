@@ -1,35 +1,35 @@
 <form (submit)="onSubmit()" [formGroup]="form" *ngIf="form">
   <div class="row">
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Last Name</mat-label>
+      <mat-label>{{'Last Name'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="lastName">
     </mat-form-field>
 
     <mat-form-field class="col" appearance="outline">
-      <mat-label>First Name</mat-label>
+      <mat-label>{{'First Name'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="firstName">
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Email</mat-label>
+      <mat-label>{{'Email'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="email">
     </mat-form-field>
 
     <mat-form-field class="col" appearance="outline">
-      <mat-label>CIN</mat-label>
+      <mat-label>{{'CIN'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="cin">
     </mat-form-field>
   </div>
 
   <div class="row">
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Phone</mat-label>
+      <mat-label>{{'Phone'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="phone">
     </mat-form-field>
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Leaves Left</mat-label>
+      <mat-label>{{'Leaves Left'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="leaves_left">
     </mat-form-field>
   </div>
@@ -51,12 +51,12 @@
 
   <div class="row">
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Job Title</mat-label>
+      <mat-label>{{'Job Title'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="job_title">
     </mat-form-field>
 
     <mat-form-field class="col" appearance="outline">
-      <mat-label>Department</mat-label>
+      <mat-label>{{'Department'|translate}}</mat-label>
       <input matInput autocomplete="off" formControlName="department">
     </mat-form-field>
   </div>

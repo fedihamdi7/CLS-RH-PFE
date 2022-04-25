@@ -16,16 +16,16 @@
         </mat-icon></button>
       <mat-menu #menu="matMenu" class="custom">
 
-        <button *ngIf="notifications.length !== 0" matTooltip="Delete All notifications" class="clear-notifs" mat-raised-button (click)="ClearNotifications();$event.stopPropagation()"> <mat-icon style="color: rgb(173, 10, 10);" >delete</mat-icon> Clear Notifications</button>
+        <button *ngIf="notifications.length !== 0" matTooltip="{{'Delete All notifications'|translate}}" class="clear-notifs" mat-raised-button (click)="ClearNotifications();$event.stopPropagation()"> <mat-icon style="color: rgb(173, 10, 10);" >delete</mat-icon> {{'Clear Notifications'|translate}}</button>
     
-        <button *ngIf="notifications.length == 0" mat-menu-item class="item-btn-no-notifications"> No notifications
+        <button *ngIf="notifications.length == 0" mat-menu-item class="item-btn-no-notifications"> {{ "No Notifications" | translate}}
         </button>
   
         <button *ngFor="let notif of notifications" mat-menu-item class="item-btn">
           <div class="item" *ngIf="notif.type == 'document'" (click)="onClickNotificationDocument(notif.link, notif._id)">
             <div class="first-area">
               <h2 class="item-title"> {{'Document Request'| translate}}</h2>
-              <p class="item-subtitle"> You have a document request from <b>{{notif.details.user_name}} </b></p>
+              <p class="item-subtitle"> {{'You have a document request from' | translate}} <b>{{notif.details.user_name}} </b></p>
               <p class="item-date">⌚{{notif.date | date:'mediumDate'}} <mat-icon (click)="DeleteNotification(notif._id) ; $event.stopPropagation()"
                 style="color: rgb(173, 10, 10);" matTooltip="Delete notification">delete</mat-icon>
             </p>
@@ -37,8 +37,8 @@
 
           <div class="item" *ngIf="notif.type == 'contract'" (click)="onClickNotificationContract(notif.link, notif._id)">
             <div class="first-area">
-              <h2 class="item-title"> Contract is expiring soon</h2>
-              <p class="item-subtitle">The contract with <b> {{notif.details.supplier_name}} </b> will expire soon</p>
+              <h2 class="item-title"> {{'Contract is expiring soon' | translate}}</h2>
+              <p class="item-subtitle">{{'The contract with'|translate}} <b> {{notif.details.supplier_name}} </b> {{'will expire soon'|translate}}</p>
               <p class="item-date">⌚{{notif.date | date:'mediumDate'}} <mat-icon (click)="DeleteNotification(notif._id) ; $event.stopPropagation()"
                   style="color: rgb(173, 10, 10);" matTooltip="Delete notification">delete</mat-icon>
               </p>
@@ -50,8 +50,8 @@
 
           <div class="item" *ngIf="notif.type == 'leave'" (click)="onClickAction(notif.link, notif._id) ; $event.stopPropagation()">
             <div class="first-area">
-              <h2 class="item-title"> Leave Request</h2>
-              <p class="item-subtitle">You have a leave request from <b>{{notif.details.user_name}} </b> for <b>{{notif.details.days}}</b> day(s)</p>
+              <h2 class="item-title"> {{'Leave Request'|translate}}</h2>
+              <p class="item-subtitle">{{'You have a leave request from'|translate}} <b>{{notif.details.user_name}} </b> {{'for'|translate}} <b>{{notif.details.days}}</b> {{'day(s)' | translate}}</p>
               <p class="item-date">⌚{{notif.date | date:'mediumDate'}} <mat-icon (click)="DeleteNotification(notif._id) ; $event.stopPropagation()"
                 style="color: rgb(173, 10, 10);" matTooltip="Delete notification">delete</mat-icon>
             </p>
