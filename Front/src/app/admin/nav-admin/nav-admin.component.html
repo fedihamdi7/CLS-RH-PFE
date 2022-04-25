@@ -22,7 +22,7 @@
         </button>
   
         <button *ngFor="let notif of notifications" mat-menu-item class="item-btn">
-          <div class="item" *ngIf="notif.type == 'document'" routerLink="requests/{{notif.link}}">
+          <div class="item" *ngIf="notif.type == 'document'" (click)="onClickNotificationDocument(notif.link, notif._id)">
             <div class="first-area">
               <h2 class="item-title"> {{'Document Request'| translate}}</h2>
               <p class="item-subtitle"> You have a document request from <b>{{notif.details.user_name}} </b></p>
@@ -35,7 +35,7 @@
             </div>
           </div>
 
-          <div class="item" *ngIf="notif.type == 'contract'" routerLink="contracts/{{notif.link}}">
+          <div class="item" *ngIf="notif.type == 'contract'" (click)="onClickNotificationContract(notif.link, notif._id)">
             <div class="first-area">
               <h2 class="item-title"> Contract is expiring soon</h2>
               <p class="item-subtitle">The contract with <b> {{notif.details.supplier_name}} </b> will expire soon</p>
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <div class="item" *ngIf="notif.type == 'leave'" (click)="onClickAction(notif.link) ; $event.stopPropagation()">
+          <div class="item" *ngIf="notif.type == 'leave'" (click)="onClickAction(notif.link, notif._id) ; $event.stopPropagation()">
             <div class="first-area">
               <h2 class="item-title"> Leave Request</h2>
               <p class="item-subtitle">You have a leave request from <b>{{notif.details.user_name}} </b> for <b>{{notif.details.days}}</b> day(s)</p>

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
@@ -19,7 +20,7 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   notification : number;
   name: string;
   supscription : Subscription;
-  constructor(private sharedService : SharedService,private matSnackBar : MatSnackBar, private matDialog : MatDialog,private employeeService :EmployeeService ,private notificationsService : NotificationsService) { }
+  constructor(private sharedService : SharedService,private router : Router,private matSnackBar : MatSnackBar, private matDialog : MatDialog,private employeeService :EmployeeService ,private notificationsService : NotificationsService) { }
 
   ngOnInit(): void {
     this.getAllNotifications();
@@ -42,13 +43,14 @@ export class NavAdminComponent implements OnInit,OnDestroy {
       this.notification = data;
     });
   }
-  onClickAction(id: string){   
+  onClickAction(link: string , id :string){   
     this.matDialog.open(ActionLeaveComponent,{
       width : '1200px',
-      data: {id : id}
+      data: {id : link}
     });
     this.matDialog.afterAllClosed.subscribe(() => {
       this.getNotificationCount();
+      this.DeleteNotification(id);
     })  
   }
 
@@ -58,15 +60,21 @@ export class NavAdminComponent implements OnInit,OnDestroy {
     });
   }
 
+  onClickNotificationContract(link: string , id:string){
+    this.router.navigate(["admin/contracts/"+link]);
+    this.DeleteNotification(id);
+  }
+  onClickNotificationDocument(link: string , id:string){
+    this.router.navigate(["admin/requests/"+link]);
+    this.DeleteNotification(id);
+  }
+
   DeleteNotification(id:string){
     this.notificationsService.deleteNotification(id).subscribe(()=>{
       this.getAllNotifications();
       this.notificationsService.getNotificationCount();
-      this.matSnackBar.open('Notification Deleted Successfully','close',{
-        duration : 2000
-      });
+      this.getNotificationCount();
     });
-    this.getNotificationCount();
 
   }
 
