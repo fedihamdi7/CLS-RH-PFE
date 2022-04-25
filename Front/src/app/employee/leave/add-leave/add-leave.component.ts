@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LeaveService } from 'src/app/services/leave.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -11,6 +11,8 @@ import { SharedService } from 'src/app/services/shared.service';
   styleUrls: ['./add-leave.component.css']
 })
 export class AddLeaveComponent implements OnInit {
+  minDate: Date;
+  maxDate: Date;
   leaves_left: number = this.sharedService.getUserFromLocalStorage().leaves_left;
   form : FormGroup;
   constructor(private leaveService: LeaveService ,
@@ -32,6 +34,10 @@ export class AddLeaveComponent implements OnInit {
       type : new FormControl(null,[Validators.required]),
       file : new FormControl(null)
     });
+
+    //get today date and make it minDate
+    let today = new Date();
+    this.minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
   }
 
 
@@ -74,6 +80,6 @@ export class AddLeaveComponent implements OnInit {
     this.form.patchValue({file: file});
     this.form.get('file').updateValueAndValidity();
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file);    
   }
 }

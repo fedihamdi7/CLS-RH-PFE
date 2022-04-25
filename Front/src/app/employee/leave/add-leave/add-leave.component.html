@@ -6,7 +6,7 @@
   <div class="col">
     <mat-form-field appearance="fill" style="width:100%;">
       <mat-label>{{ "Leave start date" | translate}}</mat-label>
-      <input matInput formControlName="leave_start_date" [matDatepicker]="pickerIn" required>
+      <input matInput [min]="minDate" formControlName="leave_start_date" [matDatepicker]="pickerIn" required>
       <mat-datepicker-toggle matSuffix [for]="pickerIn"></mat-datepicker-toggle>
       <mat-datepicker #pickerIn></mat-datepicker>
     </mat-form-field>
@@ -14,7 +14,7 @@
   <div class="col">
     <mat-form-field appearance="fill" style="width:100%;">
       <mat-label>{{ "Leave end date" | translate}}</mat-label>
-      <input matInput formControlName="leave_end_date" [matDatepicker]="pickerOut" required>
+      <input matInput [min]="minDate" formControlName="leave_end_date" [matDatepicker]="pickerOut" required>
       <mat-datepicker-toggle matSuffix [for]="pickerOut"></mat-datepicker-toggle>
       <mat-datepicker #pickerOut></mat-datepicker>
     </mat-form-field>
