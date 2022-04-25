@@ -86,3 +86,17 @@ exports.updateDeviceId = (req, res, next) => {
         })
     });
 }
+
+exports.removeDeviceId = (req, res, next) => {
+    // remove device id of user
+    User.findByIdAndUpdate(req.params.userId, {
+        device_id: null
+    }, (err, user) => {
+        if (err) return res.status(401).json({
+            updated: false
+        })
+        else return res.status(200).json({
+            updated: true
+        })
+    });
+}

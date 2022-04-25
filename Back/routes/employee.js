@@ -30,5 +30,6 @@ router.put('/editUser/:id',passport.authenticate('jwt', { session: false }), Emp
 
 // update device id 
 router.put('/updateDeviceId/:userId',passport.authenticate('jwt', { session: false }), EmployeeController.updateDeviceId);
+router.put('/removeDeviceId/:userId',passport.authenticate('jwt', { session: false }), EmployeeController.removeDeviceId);
 module.exports = router;
 

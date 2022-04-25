@@ -5,7 +5,7 @@ const moment = require('moment');
 const PDFAdmin = require('../pdf/adminValidation');
 const notification = require('../models/notification');
 const pushNotificationController = require('./push-notification.Controller');
-
+const User = require('../models/users');
 
 
 exports.addRequest = async (req, res, next)  => {
@@ -73,16 +73,17 @@ exports.getRequestById = (req, res, next) => {
 
 exports.updateStatus = (req, res, next) => {
     PDFAdmin.create(req);
-    pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A document you requested is ready to be downloaded."}, res);
-
-    Request.findOneAndUpdate({_id:req.body.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
-        if(err) return res.status(404).json({message: "Request not found"})
-        else {
-            mail.sendToEmployee(request.from);
-           // console.log(request)
-            return res.status(200).json({message : "Request updated" , file : req.body.file})
-        }
-    })
+    User.findOne({_id:req.body.user_id}, (err, user)=>{
+        pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A document you requested is ready to be downloaded."}, res);
+        Request.findOneAndUpdate({_id:req.body.id}, {status:req.body.status, done_date : moment(Date.now()).format('YYYY-MM-DD[T00:00:00.000Z]') }, (err, request)=>{
+            if(err) return res.status(404).json({message: "Request not found"})
+            else {
+                mail.sendToEmployee(request.from);
+               // console.log(request)
+                return res.status(200).json({message : "Request updated" , file : req.body.file})
+            }
+        })
+    });
 }
 
 exports.preview = (req, res, next) => {
