@@ -102,3 +102,57 @@ span{
   align-items: center;
   padding: 2% 5%;
 }
+::ng-deep .custom { 
+  position: absolute;
+  left: 17.2%;
+  top: -7%;
+  width: 428px;
+  max-width: 500px !important;
+  height: auto;
+  max-height: 90% !important;
+}
+
+.item-btn{
+  height: 100px;
+  border-bottom: 1px solid #80808059;
+}
+.item-btn-no-notifications {
+  height: 50px;
+  border-bottom: 1px solid #80808059;
+}
+
+.item{
+  display: flex;
+}
+
+.first-area{
+  display: flex;
+  flex-direction: column;
+  /* gap: 23px; */
+}
+h2{
+  font-size : 14px;
+  margin: 0;
+  margin-bottom: -5%;
+}
+
+.item-subtitle{
+  font-size: 13px;
+  margin: 0;
+  width: 335px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.second-area{
+  margin-left: 10%;
+}
+
+.item-date{
+  margin-top: -7%;
+}
+
+.clear-notifs{
+  float: right;
+  margin: 2%;
+}
