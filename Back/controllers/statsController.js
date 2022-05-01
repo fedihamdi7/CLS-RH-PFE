@@ -26,3 +26,32 @@ exports.getStats = (req, res) => {
             })
     })
 }
+
+exports.getRequestsStats = (req, res) => {
+    //get leaves count 
+    Leave.countDocuments({}, (err, leaveCount) => {
+        //get requests where type is work count
+        request.countDocuments({type: 'work'}, (err, workCount) => {
+            //get requests where type is internship count
+            request.countDocuments({type: 'internship'}, (err, internshipCount) => {
+                res.status(200).json({
+                    LEAVES : leaveCount,
+                    WORK : workCount,
+                    INTERNSHIP : internshipCount
+                })
+            });
+        });
+    });
+}
+
+exports.getGenderStats = (req, res) => {
+    // get users count where gender is male
+    User.countDocuments({gender : 'male'}, (err,maleCount)=>{
+        User.countDocuments({gender: 'female'},(err,femaleCount)=>{
+            res.status(200).json({
+                male: maleCount,
+                female : femaleCount
+            })
+        })
+    })
+}

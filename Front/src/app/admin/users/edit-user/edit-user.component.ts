@@ -28,6 +28,7 @@ export class EditUserComponent implements OnInit {
         email: new FormControl(user.email),
         cin: new FormControl(user.cin),
         date_in: new FormControl(user.date_in),
+        gender : new FormControl(user.gender),
         date_out: new FormControl(user.date_out),
         job_title: new FormControl(user.job_title),
         department: new FormControl(user.department),

@@ -16,6 +16,7 @@ const UserSchema = mongoose.Schema({
   department: { type:String, required: true},
   password: { type: String, required: true },
   device_id: { type: String, required: false },
+  gender : {type : String , required: false},
   type: {
     type: String,
     enum: ["internship","employee", "admin"],

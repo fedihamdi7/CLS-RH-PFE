@@ -15,10 +15,24 @@
       <mat-label>{{ "Email" | translate}}</mat-label>
       <input matInput formControlName="email" type="email" >
     </mat-form-field>
-    <mat-form-field appearance="outline" style="width: 100%;">
-      <mat-label>{{ "Password" | translate}}</mat-label>
-      <input matInput formControlName="password" type="password" >
-    </mat-form-field>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>{{ "Password" | translate}}</mat-label>
+          <input matInput formControlName="password" type="password" >
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" class="col" style="width: 100%;">
+          <mat-label>{{ "Gender" | translate}}</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="male">{{ "Male" | translate}}</mat-option>
+            <mat-option value="female">{{ "Female" | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    
     <div class="row">
     <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Phone Number" | translate}}</mat-label>

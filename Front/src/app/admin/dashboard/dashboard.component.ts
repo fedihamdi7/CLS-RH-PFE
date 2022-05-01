@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { SuppliersService } from 'src/app/services/suppliers.service';
 import ls from 'localstorage-slim';
+import { LegendPosition } from '@swimlane/ngx-charts';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +25,22 @@ export class DashboardComponent implements OnInit {
   dataTotal =[];
   dataBySupplier = [];
   suppliers = [];
-  stats ={};
+  stats : {USERS: string , CONTRACTS: string , INVOICES: string , REQUESTS: string , SUPPLIERS : string} ={
+    USERS: '0',
+    CONTRACTS: '0',
+    INVOICES: '0',
+    REQUESTS: '0',
+    SUPPLIERS: '0'
+  };
+  requestsStats : any= {};
 
+  gender = [];
+
+  below : LegendPosition.Below;
+  customColors = [
+    {name : 'Male' , value : '#394DBA'},
+    {name : 'Female' , value : '#B039BA'},
+  ];
 
   constructor(  private dashboardService : DashboardService ,
                 private snackbar: MatSnackBar , 
@@ -76,8 +92,18 @@ export class DashboardComponent implements OnInit {
         
       });
       let token : string = ls.get('id_token', { decrypt: true });
+      this.http.get(environment.api_URL+'/api/stats/requestsStats',{headers: {Authorization: `jwt ${token}`}}).subscribe((res : any) => {
+        this.requestsStats = res;
+      });
 
-      this.http.get('http://localhost:3000/api/stats',{headers: {Authorization: `jwt ${token}`}}).subscribe((stats:any) =>{
+      this.http.get(environment.api_URL+'/api/stats/genderStats',{headers: {Authorization: `jwt ${token}`}}).subscribe((res : any) => {
+        this.gender = [
+          {name : "Male" , value : res.male},
+          {name : "Female" , value : res.female}
+        ];
+      });
+
+      this.http.get(environment.api_URL+'/api/stats',{headers: {Authorization: `jwt ${token}`}}).subscribe((stats:any) =>{
         this.stats = stats;        
       });
   }
