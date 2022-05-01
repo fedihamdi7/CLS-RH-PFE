@@ -58,7 +58,7 @@ server.on("listening", () => {
   notify();
   setInterval(() => {
     notify();
-  }, 300000);
+  }, 86400000);
 });
 
 // make server listen on port
