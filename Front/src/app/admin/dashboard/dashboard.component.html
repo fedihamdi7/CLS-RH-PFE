@@ -1,6 +1,6 @@
   <div class="dashboard">
       <div class="header">
-          <h1>Dashboard</h1>
+          <h1>{{"Dashboard" | translate}}</h1>
       </div>
       <div class="first-area">
           <div class="charts">
@@ -107,14 +107,14 @@
       <div class="second-area">
 
           <div class="general-numbers">
-              <h3>General Numbers</h3>
+              <h3>{{"General Numbers" | translate}}</h3>
               <div class="cards" *ngIf="stats">
                   <div class="card">
                       <div class="left-card">
                           <img src="../../../assets/icons/dashboard/people.png" alt="">
                       </div>
                       <div class="right-card">
-                          <p class="card-title">USERS</p>
+                          <p class="card-title">{{"USERS" | translate}}</p>
                           <p class="card-stats">{{stats.USERS}}</p>
                       </div>
                   </div>
@@ -123,7 +123,7 @@
                           <img src="../../../assets/icons/dashboard/contract.png" alt="">
                       </div>
                       <div class="right-card">
-                          <p class="card-title">CONTRACTS</p>
+                          <p class="card-title">{{"CONTRACTS" | translate}}</p>
                           <p class="card-stats">{{stats.CONTRACTS}}</p>
                       </div>
                   </div>
@@ -132,7 +132,7 @@
                           <img src="../../../assets/icons/dashboard/invoice.png" alt="">
                       </div>
                       <div class="right-card">
-                          <p class="card-title">INVOICES</p>
+                          <p class="card-title">{{"INVOICES" | translate}}</p>
                           <p class="card-stats">{{stats.INVOICES}}</p>
                       </div>
                   </div>
@@ -141,7 +141,7 @@
                           <img src="../../../assets/icons/dashboard/license.png" alt="">
                       </div>
                       <div class="right-card">
-                          <p class="card-title">CERTIFICATIONS</p>
+                          <p class="card-title">{{"CERTIFICATIONS" | translate}}</p>
                           <p class="card-stats">{{stats.REQUESTS}}</p>
                       </div>
                   </div>
@@ -150,7 +150,7 @@
                           <img src="../../../assets/icons/dashboard/factory.png" alt="">
                       </div>
                       <div class="right-card">
-                          <p class="card-title">SUPPLIERS</p>
+                          <p class="card-title">{{"SUPPLIERS" | translate}}</p>
                           <p class="card-stats">{{stats.SUPPLIERS}}</p>
                       </div>
                   </div>
@@ -158,18 +158,18 @@
           </div>
 
           <div class="requests">
-              <h3 class="title">Requests</h3>
+              <h3 class="title">{{"Requests" | translate}}</h3>
               <div class="requests-list">
                   <div class="request-item">
-                      <span id="first">Leaves</span>
+                      <span id="first">{{"Leaves" | translate}}</span>
                       <span id="second">{{requestsStats.LEAVES}}</span>
                   </div>
                   <div class="request-item">
-                      <span id="first">Internship Certifications</span>
+                      <span id="first">{{"Internship Certifications" | translate}}</span>
                       <span id="second">{{requestsStats.INTERNSHIP}}</span>
                   </div>
                   <div class="request-item">
-                      <span id="first">Work Certifications</span>
+                      <span id="first">{{"Work Certifications" | translate}}</span>
                       <span id="second">{{requestsStats.WORK}}</span>
                   </div>
               </div>
