@@ -13,6 +13,7 @@ export interface User {
 	type: string;
 	leaves_left: number;
 	__v: number;
+	gender? :string;
 }
 
 export interface Login {
