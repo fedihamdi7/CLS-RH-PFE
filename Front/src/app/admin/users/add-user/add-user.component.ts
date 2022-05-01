@@ -30,6 +30,7 @@ export class AddUserComponent implements OnInit {
       date_in: new FormControl(null, [Validators.required]),
       date_out: new FormControl(null),
       job_title : new FormControl(null, [Validators.required]),
+      gender : new FormControl(null, [Validators.required]),
       department : new FormControl(null, [Validators.required])
 
     });

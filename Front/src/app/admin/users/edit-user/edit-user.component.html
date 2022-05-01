@@ -35,6 +35,16 @@
   </div>
 
   <div class="row">
+      <mat-form-field appearance="outline" class="col">
+        <mat-label>{{ "Gender" | translate}}</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="male">{{ "Male" | translate}}</mat-option>
+          <mat-option value="female">{{ "Female" | translate}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div class="row">
     <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Date In" | translate}}</mat-label>
       <input matInput formControlName="date_in" [matDatepicker]="pickerIn">
