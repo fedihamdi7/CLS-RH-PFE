@@ -29,7 +29,7 @@ export class AuthService {
           this.router.navigate(['/admin']);
         }
         else if (res.user.type == 'employee') {
-          this.router.navigate(['/employee']);
+          this.router.navigate(['/employee/work']);
         }
         this.authStatusListener.next(true);
         this.typeListener.next(res.user.type);

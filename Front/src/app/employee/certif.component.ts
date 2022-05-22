@@ -11,6 +11,7 @@ import { Request, Requests } from '../models/request.model';
 import { Employee } from '../models/employee.model';
 import { requestTableEmployee } from '../models/tables.model';
 import * as file from 'file-saver';
+import { SharedService } from '../services/shared.service';
 
 
 const ELEMENT_DATA: requestTableEmployee[] = [];
@@ -26,7 +27,7 @@ export class CertifComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['n', 'sent_date', 'status','download'];
   dataSource = new MatTableDataSource<requestTableEmployee>(ELEMENT_DATA);
   certifType : string ;
-  constructor(private snackbar: MatSnackBar ,private employeeService : EmployeeService ,private route: ActivatedRoute, private requestService : RequestsService , private router : Router) { }
+  constructor(private snackbar: MatSnackBar,private sharedService : SharedService ,private employeeService : EmployeeService ,private route: ActivatedRoute, private requestService : RequestsService , private router : Router) { }
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -37,6 +38,8 @@ export class CertifComponent implements OnInit , AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.sharedService.initializeAppLanguage();
+
     //get route
     this.route.params.subscribe(params => {
       if (params.type != "work" && params.type != "internship") {

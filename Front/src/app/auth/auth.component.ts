@@ -20,6 +20,7 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sharedService.initializeAppLanguage();
     this.form = new FormGroup({
       email : new FormControl(null, [Validators.required , Validators.email] ),
       password : new FormControl(null, [Validators.required , Validators.minLength(6)])
