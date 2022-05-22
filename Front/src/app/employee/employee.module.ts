@@ -15,6 +15,7 @@ import { AddLeaveComponent } from './leave/add-leave/add-leave.component';
 import { LeaveComponent } from './leave/leave.component';
 import { NoteComponent } from './leave/note/note.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     LeaveComponent,
     AddLeaveComponent,
     NoteComponent,
-    CertifComponent
+    CertifComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,

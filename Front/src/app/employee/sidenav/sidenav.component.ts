@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee.service';
-import { SharedService } from '../services/shared.service';
+import { EmployeeService } from '../../services/employee.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-sidenav',

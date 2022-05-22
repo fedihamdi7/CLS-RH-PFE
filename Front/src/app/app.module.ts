@@ -9,9 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Components
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthComponent } from './auth/auth.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -23,8 +20,6 @@ import { SharedService } from './services/shared.service';
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
-    AuthComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -33,7 +28,6 @@ import { SharedService } from './services/shared.service';
     AppRoutingModule,
     HttpClientModule,
     PdfViewerModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
     TranslateModule.forRoot({

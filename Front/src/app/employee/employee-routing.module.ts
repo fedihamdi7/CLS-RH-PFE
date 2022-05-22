@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { IsEmployeeGuard } from '../guards/is-employee.guard';
-import { SidenavComponent } from '../sidenav/sidenav.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { CertifComponent } from './certif.component';
 import { LeaveComponent } from './leave/leave.component';
 import { ProfileComponent } from './profile/profile.component';
