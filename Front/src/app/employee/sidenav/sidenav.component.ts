@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { EmployeeService } from '../../services/employee.service';
 import { SharedService } from '../../services/shared.service';
 
@@ -11,9 +12,10 @@ export class SidenavComponent implements OnInit {
   firstName : String;
   lastName : String;
   panelOpenState = false;
-  constructor( private sharedService:SharedService ,  private employeeService :EmployeeService ) { }
+  constructor( private sharedService:SharedService ,  private employeeService :EmployeeService , private titleService : Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('CLS');
     this.employeeService.userUpdateListener().subscribe( (data:string) =>{
       this.firstName = data;
     });

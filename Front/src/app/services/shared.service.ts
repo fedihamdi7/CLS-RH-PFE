@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import ls from 'localstorage-slim';
@@ -8,7 +9,7 @@ import { User } from '../models/user.model';
 })
 export class SharedService {
 
-  constructor(private router:Router , private translateService : TranslateService) { }
+  constructor(private titleService : Title,private router:Router , private translateService : TranslateService) { }
   lang = "en-US";
 
   putTokenInLocalStorage(token : string){
@@ -64,6 +65,7 @@ export class SharedService {
   logout(){
     localStorage.removeItem('id_token');
     localStorage.removeItem('user');
+    this.titleService.setTitle('CLS');
     this.router.navigate(['/']);
   }
 }

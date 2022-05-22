@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -20,7 +21,8 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   notification : number;
   name: string;
   supscription : Subscription;
-  constructor(private sharedService : SharedService,private router : Router,private matSnackBar : MatSnackBar, private matDialog : MatDialog,private employeeService :EmployeeService ,private notificationsService : NotificationsService) { }
+  constructor(private titleService : Title,private sharedService : SharedService,private router : Router,private matSnackBar : MatSnackBar, private matDialog : MatDialog,private employeeService :EmployeeService ,private notificationsService : NotificationsService) { }
+  interval : any;
 
   ngOnInit(): void {
     this.getAllNotifications();
@@ -32,15 +34,20 @@ export class NavAdminComponent implements OnInit,OnDestroy {
     
     this.getNotificationCount();
 
-    setInterval(()=>{
+    this.interval = setInterval(()=>{
       this.getNotificationCount();
-    },10000);
+    },2000);
 
   }
 
   getNotificationCount(){
     this.supscription = this.notificationsService.notificationCountUpdateListener().subscribe( (data:number) =>{
       this.notification = data;
+      if(this.notification > 0){
+        this.titleService.setTitle('('+this.notification+')'+' CLS');
+      }else{
+        this.titleService.setTitle('CLS');
+      }
     });
   }
   onClickAction(link: string , id :string){   
@@ -107,9 +114,11 @@ export class NavAdminComponent implements OnInit,OnDestroy {
   }
   logout(){
     this.sharedService.logout();
+    this.ngOnDestroy();
   }
 
   ngOnDestroy(){
+    clearInterval(this.interval);
     this.supscription.unsubscribe();
   }
 }
