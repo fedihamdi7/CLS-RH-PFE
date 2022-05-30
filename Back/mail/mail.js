@@ -25,8 +25,8 @@ exports.sendToAdmin = (req, res, next) => {
   transporter.use("compile", hbs(handlebarOptions));
 
   let mailOptions = {
-    from: "cls.rh.2022@gmail.com", // TODO: email sender
-    to: "aminos.bo.12@gmail.com", // TODO: email receiver
+    from: "cls.rh.2022@gmail.com",
+    to: "aminos.bo.12@gmail.com",
     subject: "New Document Request",
     template: "index",
     context: {
@@ -66,8 +66,8 @@ exports.sendToEmployee = (req, res, next) => {
           transporter.use("compile", hbs(handlebarOptions));
         
           let mailOptions = {
-            from: "cls.rh.2022@gmail.com", // TODO: email sender
-            to: user.email, // TODO: email receiver
+            from: "cls.rh.2022@gmail.com", 
+            to: user.email, 
             subject: "Your Request's status has been updated",
             template: "employee",
             context: {
