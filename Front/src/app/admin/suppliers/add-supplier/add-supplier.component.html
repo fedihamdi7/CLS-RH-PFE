@@ -15,7 +15,7 @@
 
   <mat-form-field appearance="outline" style="width: 100%;">
     <mat-label>{{ "Phone" | translate}}</mat-label>
-    <input matInput formControlName="phone" type="number">
+    <input matInput formControlName="phone" type="text">
     <mat-error *ngIf="form.get('phone').errors">
       {{ "Phone should be 8 digits" | translate}}
     </mat-error>

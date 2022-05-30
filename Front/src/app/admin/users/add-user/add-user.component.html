@@ -36,11 +36,17 @@
     <div class="row">
     <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "Phone Number" | translate}}</mat-label>
-      <input matInput formControlName="phone" type="number" min="0" >
+      <input matInput formControlName="phone" type="text">
+      <mat-error *ngIf="form.get('phone').errors">
+        {{ "Phone should be 8 digits" | translate}}
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="col">
       <mat-label>{{ "National ID Card" | translate}}</mat-label>
-      <input matInput formControlName="cin" type="number" min="0">
+      <input matInput formControlName="cin" type="text" >
+      <mat-error *ngIf="form.get('cin').errors">
+        {{ "CIN should be 8 digits" | translate}}
+      </mat-error>
     </mat-form-field>
   </div>
 
@@ -75,5 +81,5 @@
     </mat-form-field>
   </div>
 
-  <button class="submit" mat-raised-button [color]="'primary'" type="submit">{{ "Add User" | translate}}</button>
+  <button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="form.invalid">{{ "Add User" | translate}}</button>
 </form>
