@@ -15,7 +15,8 @@ const leaveRouter = require('./routes/leave');
 const statsRouter = require('./routes/stats');
 const notifsRouter = require('./routes/notifs');
 //connecting to database
-mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
+// mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
+mongoose.connect('mongodb://localhost:27017/CLS-RH', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
