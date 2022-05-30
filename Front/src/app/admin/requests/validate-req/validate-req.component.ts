@@ -105,6 +105,17 @@ export class ValidateReqComponent implements OnInit {
     });
   }
 
+  decline(){
+    this.http.put('http://localhost:3000/api/request/declineRequest/'+this.sender,{
+      id : this.id,
+    },{headers:{Authorization: `jwt ${this.token}`}}).subscribe(res =>{
+      this.snackbar.open("Request declined", "Close", {
+        duration: 3000
+      });
+      this.router.navigate(['/admin/requests']);
+    })
+  }
+
   onSubmit(){
     this.getPDF();
   }

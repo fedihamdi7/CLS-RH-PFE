@@ -58,7 +58,7 @@ exports.getAllRequests = (req, res, next) => {
 }
 
 exports.getArchivedRequests = (req, res, next) => {
-    Request.find({status: 'done'}, (err, request)=>{
+    Request.find({status: {$ne: "in progress"}}, (err, request)=>{
         if (err) return res.status(500)
         else res.status(200).json(request)
     }).populate('from')
@@ -84,6 +84,17 @@ exports.updateStatus = (req, res, next) => {
             }
         })
     });
+}
+
+exports.declineRequest = (req, res, next) => {
+    Request.findOneAndUpdate({_id:req.body.id}, {status:"declined"}, (err, request)=>{
+        if(err) return res.status(404).json({message: "Request not found"})
+        else {
+            pushNotificationController.SendNotificationToDevice({"device_id":user.device_id , "message" : "A document you requested has been declined."}, res);
+            mail.sendToEmployee(request.from);
+            return res.status(200).json({message : "Request updated"})
+        }
+    })
 }
 
 exports.preview = (req, res, next) => {
