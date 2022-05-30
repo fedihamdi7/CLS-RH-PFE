@@ -84,7 +84,7 @@
   display: flex;
   width: 300px;
   height: 80px;
-  overflow: auto;
+  overflow: hidden;
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.15);
   -webkit-box-sizing: border-box;
