@@ -13,8 +13,9 @@ import { SharedService } from 'src/app/services/shared.service';
 export class AddLeaveComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
-  leaves_left: number = this.sharedService.getUserFromLocalStorage().leaves_left;
+  leaves_left: number;
   form : FormGroup;
+  user_id : string =this.sharedService.getUserFromLocalStorage()._id;
   constructor(private leaveService: LeaveService ,
               private dialogRef : MatDialogRef<AddLeaveComponent> ,
               private snackBar: MatSnackBar,
@@ -28,6 +29,9 @@ export class AddLeaveComponent implements OnInit {
     {value: 'Compensatory', viewValue: 'Compensatory'},
   ];
   ngOnInit(): void {  
+    this.leaveService.getLeavesLeft(this.user_id).subscribe((leavesnumber:{leaves_left : number}) => {
+      this.leaves_left = leavesnumber.leaves_left;
+    });
     this.form = new FormGroup({
       leave_start_date : new FormControl(null,[Validators.required]),
       leave_end_date : new FormControl(null,[Validators.required]),

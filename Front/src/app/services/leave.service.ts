@@ -26,6 +26,10 @@ export class LeaveService {
     return this.http.get(this.url+"/getLeavesByUserId/"+id);
   }
 
+  getLeavesLeft(id : string){
+    return this.http.get(this.url+"/getLeavesLeft/"+id);
+  }
+
   addLeave(leave : any) {
     const data = new FormData();
     data.append('file', leave.file);

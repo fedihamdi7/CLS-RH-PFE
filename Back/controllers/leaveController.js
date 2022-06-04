@@ -101,6 +101,20 @@ exports.getLeavesById = (req, res) => {
     }).populate('from', 'firstName lastName leaves_left');
 }
 
+exports.getLeavesLeft = (req, res) => {
+    User.findById(req.params.id, (err, user) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message
+            });
+        } else {
+            // console.log(user.leaves_left);
+            res.send({leaves_left : user.leaves_left});
+        }
+    });
+}
+
+
 exports.getLeavesByUserId = (req, res) => {
     Leave.find({
         from: req.params.id

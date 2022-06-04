@@ -22,6 +22,7 @@ router.post('/addLeave',passport.authenticate('jwt', { session: false }),multer(
 router.get('/getAllLeaves',passport.authenticate('jwt', { session: false }),leaveController.getAllLeaves);
 router.get('/getArchivedLeaves',passport.authenticate('jwt', { session: false }),leaveController.getArchivedLeaves);
 router.get('/getLeavesById/:id',passport.authenticate('jwt', { session: false }),leaveController.getLeavesById);
+router.get('/getLeavesLeft/:id',passport.authenticate('jwt', { session: false }),leaveController.getLeavesLeft);
 router.get('/getLeavesByUserId/:id',passport.authenticate('jwt', { session: false }),leaveController.getLeavesByUserId);
 router.put('/updateStatus/:id',passport.authenticate('jwt', { session: false }),leaveController.updateStatus)
 module.exports =router;

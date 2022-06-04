@@ -1,5 +1,12 @@
 <h3>{{"Send Request" | translate}} </h3>
-{{"Leaves Days Left : "|translate}} {{leaves_left}}
+<ng-container *ngIf="leaves_left >0; else elseTemplate">
+  {{"Leaves Days Left : "|translate}} {{leaves_left}}
+  
+</ng-container>
+<ng-template #elseTemplate>
+  <span style="color: red; padding-top: 2%;">  {{"You have 0 leaves left"|translate}}</span>
+</ng-template>
+
 <form [formGroup]="form" (submit)="onSubmit()">
 
 <div class="row">
