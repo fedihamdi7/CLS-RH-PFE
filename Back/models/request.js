@@ -8,6 +8,7 @@ const RequestSchema = new mongoose.Schema({
     type: {type : String,enum: ["work", "internship"], required: true},
     status: {type :String ,enum: ["in progress", "done", "declined"], required: true , default: 'in progress'},
     file : {type : String, required: false},
+    // TODO : add reason field
 
 });
 

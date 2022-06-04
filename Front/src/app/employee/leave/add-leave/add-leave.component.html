@@ -33,5 +33,5 @@
     <input type="file" (change)="onFilePicked($event)" matTooltip="{{'Choose Certificat file'|translate}}" [required]="false">
 </div>
 
-<button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid">{{ "SUBMIT" | translate}}</button>
+<button class="submit" mat-raised-button [color]="'primary'" type="submit" [disabled]="!form.valid || leaves_left <= 0">{{ "SUBMIT" | translate}}</button>
 </form>
