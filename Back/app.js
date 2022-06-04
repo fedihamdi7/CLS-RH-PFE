@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 const path = require('path');
 var passport = require('passport')
+require('dotenv').config();
 
 const employeeRouter = require('./routes/employee');
 const requestRouter = require('./routes/Request');
@@ -16,7 +17,7 @@ const statsRouter = require('./routes/stats');
 const notifsRouter = require('./routes/notifs');
 //connecting to database
 // mongoose.connect('mongodb+srv://root:root@cluster0.xe2ma.mongodb.net/CLS-RH', {
-mongoose.connect('mongodb://localhost:27017/CLS-RH', {
+mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

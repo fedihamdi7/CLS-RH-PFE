@@ -18,7 +18,7 @@ function notify() {
           notificationQuery.type = 'contract';
           notificationQuery.link = contract._id;
           notificationQuery.save();
-          // mail.sendNotif(contract);
+           mail.sendNotif(contract);
         }
       }
     }
