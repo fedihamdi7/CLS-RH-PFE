@@ -29,7 +29,7 @@ exports.workTemplate = (firstName,lastName,cin,date_in,date_out,job_title,depart
           .text('', 50, 200)
           .font('Times-Roman', 20)
           .moveDown()
-          .text('Je sousigné Mr. flen el fouleni Gérant de la société CLS,atteste/attestons par la présente que Mr '+lastName +' '+ firstName+' titulaire de la CIN N°'+cin+', '+writeType+' au sein de notre société du '+ date_in +' au '+ date_out +' occupé le post de '+ job_title +' au department '+ department +'.Cette attestation est délivrée à l’intéressé (e) pour servir et valoir ce que de droit.', {
+          .text('Je sousigné le gérant de la société CLS,atteste/attestons par la présente que Mr '+lastName +' '+ firstName+' titulaire de la CIN N°'+cin+', '+writeType+' au sein de notre société du '+ date_in +' au '+ date_out +' occupé le post de '+ job_title +' au department '+ department +'.Cette attestation est délivrée à l’intéressé (e) pour servir et valoir ce que de droit.', {
             width: 500,
             align: 'justify',
             indent: 50,
