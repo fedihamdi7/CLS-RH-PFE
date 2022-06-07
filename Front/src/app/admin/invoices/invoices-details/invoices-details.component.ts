@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Invoice } from 'src/app/models/invoice.model';
 import { InvoicesService } from 'src/app/services/invoices.service';
@@ -11,7 +12,7 @@ import { InvoicesService } from 'src/app/services/invoices.service';
 })
 export class InvoicesDetailsComponent implements OnInit {
 
-  constructor(private invoiceService : InvoicesService , private route : ActivatedRoute) { }
+  constructor(private invoiceService : InvoicesService , private route : ActivatedRoute , private matSnack: MatSnackBar) { }
   invoice_id : string;
   path : string = "http://localhost:3000/assets/invoices/";
   pdf : string;
@@ -30,6 +31,12 @@ export class InvoicesDetailsComponent implements OnInit {
         });
       });
     })
+  }
+
+  onSubmit(){   
+    this.invoiceService.updateInvoice(this.form.value,this.invoice_id).subscribe(()=>{
+      this.matSnack.open("Invoice updated successfully" , "close" , {duration : 2000});
+    });
   }
 
 }

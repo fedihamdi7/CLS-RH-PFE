@@ -207,3 +207,27 @@ exports.StatsBySupplier = (req, res) => {
         return res.status(200).json(invoices);
     });
 }
+
+exports.updateInvoice = (req, res) => {
+    Invoice.findOneAndUpdate({
+        _id: req.params.id
+    }, {
+        $set: {
+            supplier: req.body.supplier,
+            date: req.body.date,
+            payment_status: req.body.payment_status,
+            payment_method: req.body.payment_method,
+            amount: req.body.amount,
+            amount_excluding_taxes: req.body.amount_excluding_taxes,
+        }
+    }, {
+        new: true
+    }, (err, invoice) => {
+        if (!invoice) {
+            return res.status(404).json({
+                message: "invoice not found"
+            });
+        }else{
+            return res.status(200).json({message : "invoice updated"});
+        }});
+}

@@ -30,11 +30,11 @@ export class InvoicesService {
     return this.invoices.asObservable();
   }
 
-  getInvoiceById(id){
+  getInvoiceById(id : string){
     return this.http.get(`${this.url}getInvoiceById/${id}`);
   }
 
-  getInvoicesBySupplierId(id){
+  getInvoicesBySupplierId(id : string){
     return this.http.get(`${this.url}getInvoiceBySupplierId/${id}`);
   }
 
@@ -51,5 +51,9 @@ export class InvoicesService {
    
     
     return this.http.post(`${this.url}addInvoice`, data);
+  }
+
+  updateInvoice(invoice : Invoice , invoice_id: string){
+    return this.http.put(`${this.url}updateInvoice/${invoice_id}`, invoice);
   }
 }

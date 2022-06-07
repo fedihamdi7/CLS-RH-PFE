@@ -27,4 +27,5 @@ router.get('/InvoicesStatistiques',passport.authenticate('jwt', { session: false
 router.get('/InvoicesStatistiquesByDateRange/:minDate/:maxDate',passport.authenticate('jwt', { session: false }),invoiceController.InvoicesStatistiquesByDateRange)
 router.get('/InvoicesStatistiquesByYear/:year',passport.authenticate('jwt', { session: false }),invoiceController.InvoicesStatistiquesByYear)
 router.get('/StatsBySupplier/:id',passport.authenticate('jwt', { session: false }),invoiceController.StatsBySupplier)
+router.put('/updateInvoice/:id',passport.authenticate('jwt', { session: false }),invoiceController.updateInvoice)
 module.exports =router;
