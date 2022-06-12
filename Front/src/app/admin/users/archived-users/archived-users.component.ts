@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,21 +7,16 @@ import { Subscription } from 'rxjs';
 import { userTable } from 'src/app/models/tables.model';
 import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
-import { AddUserComponent } from './add-user/add-user.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
-
-
-
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 const ELEMENT_DATA: userTable[] = [];
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-archived-users',
+  templateUrl: './archived-users.component.html',
+  styleUrls: ['./archived-users.component.css']
 })
-export class UsersComponent implements OnInit,  AfterViewInit {
-
+export class ArchivedUsersComponent implements OnInit {
   displayedColumns: string[] = ['n','first_name', 'last_name', 'job_title', 'email', 'date_in','action'];
   dataSource = new MatTableDataSource<userTable>(ELEMENT_DATA);
   showAddForm : boolean = false;
@@ -42,7 +37,7 @@ export class UsersComponent implements OnInit,  AfterViewInit {
   }
 
   getUsers(){
-    this.usersService.getUsers().subscribe((users : User[]) =>{
+    this.usersService.getArchivedUsers().subscribe((users : User[]) =>{
       //for each employee map the data and push in the dataSource
       this.dataSource.data = users.map((user:User, index:number) => {
         return {
@@ -70,29 +65,12 @@ export class UsersComponent implements OnInit,  AfterViewInit {
       this.getUsers();
     })
   }
-
-  showForm(){
-    // this.showAddForm = true;
-    this.dialog.open(AddUserComponent,{
-      width: '700px',
-      height : 'auto',
-    });
-    this.dialog.afterAllClosed.subscribe(() => {
-      this.getUsers();
-    });
-  }
-  onClickCloseForm(){
-    this.showAddForm = false;
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
-  // ngOnDestroy(): void {
-  //   this.usersSub!.unsubscribe();
 
-  // }
+
 }

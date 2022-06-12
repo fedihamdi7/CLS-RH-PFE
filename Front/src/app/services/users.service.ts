@@ -17,13 +17,11 @@ export class UsersService {
   return this.http.post(`${this.url}register`, user);
 
   }
-
+  getArchivedUsers(){
+    return this.http.get(`${this.url}getArchivedEmployees`);
+  }
   getUsers(){
-    this.http.get(`${this.url}getEmployees`).subscribe(
-      (data : any) => {
-        this.users.next(data.employee);
-      }
-    );
+    return this.http.get(`${this.url}getEmployees`);
   }
   usersUpdateListener(){
     return this.users.asObservable();

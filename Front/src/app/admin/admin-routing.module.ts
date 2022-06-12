@@ -19,6 +19,7 @@ import { LeaveArchiveComponent } from './leaves/leave-archive/leave-archive.comp
 import { RequestsArchiveComponent } from './requests/requests-archive/requests-archive.component';
 import { ArchivedSuppliersComponent } from './suppliers/archived-suppliers/archived-suppliers.component';
 import { ArchivedContractsComponent } from './contracts/archived-contracts/archived-contracts.component';
+import { ArchivedUsersComponent } from './users/archived-users/archived-users.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard',pathMatch:'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
     {path:'requests/requests-archive',component:RequestsArchiveComponent},
     {path:'requests/:id',component:ValidateReqComponent},
     {path:'users',component:UsersComponent},
+    {path:'users/archived-users',component:ArchivedUsersComponent},
     {path:'suppliers',component:SuppliersComponent},
     {path:'suppliers/archived-suppliers',component:ArchivedSuppliersComponent},
     {path:'suppliers/contracts/:id',component:SupplierContractsComponent},

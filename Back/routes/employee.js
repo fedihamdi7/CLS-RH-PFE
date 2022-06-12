@@ -21,6 +21,8 @@ router.get('/getMyRequests/:id', passport.authenticate('jwt', { session: false }
 router.get('/getRequest/:type', passport.authenticate('jwt', { session: false }), RequestController.getRequest);
 //Get  all employees
 router.get('/getEmployees',passport.authenticate('jwt', { session: false }), EmployeeController.getEmployees);
+//Get archived employees
+router.get('/getArchivedEmployees',passport.authenticate('jwt', { session: false }), EmployeeController.getArchivedEmployees);
 //Get  employee by id
 router.get('/getEmployeeById/:id',passport.authenticate('jwt', { session: false }), EmployeeController.getEmployeeById);
 // update employee profile

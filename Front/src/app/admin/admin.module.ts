@@ -42,6 +42,7 @@ import { ArchivedSuppliersComponent } from './suppliers/archived-suppliers/archi
 import { ArchivedContractsComponent } from './contracts/archived-contracts/archived-contracts.component';
 import { ShowFileComponent } from './leaves/show-file/show-file.component';
 import { ShowDocumentComponent } from './requests/show-document/show-document.component';
+import { ArchivedUsersComponent } from './users/archived-users/archived-users.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http , './../../assets/i18n/', '.json');
@@ -78,6 +79,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ArchivedContractsComponent,
     ShowFileComponent,
     ShowDocumentComponent,
+    ArchivedUsersComponent,
 
   ],
   imports: [

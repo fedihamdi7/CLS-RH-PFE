@@ -6,13 +6,48 @@ exports.getEmployees = (req, res, next) => {
     User.find({
         type: 'employee'
     }, (err, employee) => {
+        let today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+        let filteredEmployee = employee.filter(employee => {
+            let date_out = employee.date_out;
+            return date_out > today;
+        })
         if (err) return res.status(401).json({
             msg: 'no employees yet'
         })
-        else return res.status(200).json({
-            employee
-        })
+        else return res.status(200).json(
+            filteredEmployee
+        )
+        // if (err) return res.status(401).json({
+        //     msg: 'no employees yet'
+        // })
+        // else return res.status(200).json({
+        //     employee
+        // })
     })
+}
+
+exports.getArchivedEmployees = (req, res, next) => {
+    // get users where type is employee and date_out is not equal to "Present"
+    User.find({
+        type: 'employee',
+        date_out: {
+            $ne: "Present"
+        }}, (err, employee) => {
+        //filter employee if date_out is less than today
+        let today = moment(new Date()).format('YYYY-MM-DD[T00:00:00.000Z]');
+        let filteredEmployee = employee.filter(employee => {
+            let date_out = employee.date_out;
+            return date_out < today;
+        })
+        if (err) return res.status(401).json({
+            msg: 'no employees yet'
+        })
+        else return res.status(200).json(
+            filteredEmployee
+        )
+    })
+
+
 }
 
 exports.getEmployeeById = (req, res, next) => {
