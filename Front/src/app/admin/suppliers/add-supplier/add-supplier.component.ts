@@ -27,7 +27,7 @@ export class AddSupplierComponent implements OnInit {
         this.form = new FormGroup({
           name : new FormControl(res.supplier.name, Validators.required),
           email : new FormControl(res.supplier.email, [Validators.required, Validators.email]),
-          phone : new FormControl(res.supplier.phone, Validators.required),
+          phone : new FormControl(res.supplier.phone, [Validators.required , Validators.pattern('[0-9]{8}')]),
           address : new FormControl(res.supplier.address, Validators.required),
           contract_start_date : new FormControl(res.supplier.contract_start_date, Validators.required),
           contract_end_date : new FormControl(res.supplier.contract_end_date, Validators.required)

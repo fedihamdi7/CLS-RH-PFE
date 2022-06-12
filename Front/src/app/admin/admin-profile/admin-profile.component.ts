@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -18,13 +18,13 @@ export class AdminProfileComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService.getEmployeeById().subscribe( (data:any) =>{
       this.form = new FormGroup({
-        lastName : new FormControl(data.lastName),
-        firstName : new FormControl(data.firstName),
-        email : new FormControl(data.email),
-        phone : new FormControl(data.phone),
-        cin : new FormControl(data.cin),
-        job_title : new FormControl(data.job_title),
-        department : new FormControl(data.department),
+        lastName : new FormControl(data.lastName, [Validators.required]),
+        firstName : new FormControl(data.firstName, [Validators.required]),
+        email : new FormControl(data.email, [Validators.required, Validators.email]),
+        phone : new FormControl(data.phone, [Validators.required, Validators.pattern('[0-9]{8}')]),
+        cin : new FormControl(data.cin, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+        job_title : new FormControl(data.job_title, [Validators.required]),
+        department : new FormControl(data.department, [Validators.required]),
         password : new FormControl(),
       });
       this.isLoading = false;

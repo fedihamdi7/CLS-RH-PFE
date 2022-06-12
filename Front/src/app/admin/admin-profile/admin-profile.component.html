@@ -16,7 +16,7 @@
         <div class="row">
             <mat-form-field class="col" appearance="outline">
                 <mat-label>{{'Email'|translate}}</mat-label>
-                <input matInput autocomplete="off" formControlName="email">
+                <input matInput autocomplete="off" formControlName="email" readonly>
             </mat-form-field>
             
             <mat-form-field class="col" appearance="outline">
@@ -47,7 +47,7 @@
             </mat-form-field>
         </div>
 
-        <button mat-raised-button type="submit" color="primary">{{'Submit'|translate}}</button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">{{'Submit'|translate}}</button>
     </form>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>
